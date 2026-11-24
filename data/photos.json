@@ -1,0 +1,183 @@
+{
+ "_note": "地點照片出處（build_photos.py 產生）；skip＝人工排除、不配照片的編號",
+ "skip": {
+  "65": "觀光署這張是楊橋公園的水池，廟本身看不清楚，和 66 楊橋公園重複"
+ },
+ "photos": {
+  "1": {
+   "credit": "文化部文化資產局",
+   "url": "https://data.boch.gov.tw/upload/representImageFile/2026-10-07/c9cae3f6-4a83-47ec-8ed0-09dca0d0e749/鹿港三山國王廟01.jpg",
+   "matched": "鹿港三山國王廟"
+  },
+  "2": {
+   "credit": "文化部文化資產局",
+   "url": "https://data.boch.gov.tw/upload/representImageFile/2021-11-10/6b5c09de-392f-4b13-8ad2-af516cdf19cd/鹿港隘門02.jpg",
+   "matched": "鹿港隘門"
+  },
+  "3": {
+   "credit": "文化部文化資產局",
+   "url": "https://data.boch.gov.tw/upload/representImageFile/2021-11-10/a19e5065-6b92-4f4a-a728-e8677e2fde42/鹿港意和行01.jpg",
+   "matched": "鹿港意和行"
+  },
+  "4": {
+   "credit": "文化部文化資產局",
+   "url": "https://data.boch.gov.tw/upload/representImageFile/2021-11-10/596df590-8afa-4d76-8700-1521356bf254/鹿港蔡氏宗祠01.jpg",
+   "matched": "鹿港蔡氏宗祠"
+  },
+  "10": {
+   "credit": "交通部觀光署觀光資訊資料庫",
+   "url": "https://tourism.chcg.gov.tw/upload/27/2024072314311942360.jpg",
+   "matched": "鹿港老街"
+  },
+  "11": {
+   "credit": "文化部文化資產局",
+   "url": "https://data.boch.gov.tw/upload/representImageFile/2021-11-10/b347ec51-6f88-416f-ba87-b62745aba291/鹿港鶴棲別墅01.jpg",
+   "matched": "鹿港鶴棲別墅"
+  },
+  "12": {
+   "credit": "文化部文化資產局",
+   "url": "https://data.boch.gov.tw/upload/representImageFile/2021-11-10/6efdb910-2db5-4fc0-bde2-f1ad34075025/鹿港施進益古厝02.jpg",
+   "matched": "鹿港施進益古厝"
+  },
+  "14": {
+   "credit": "文化部文化資產局",
+   "url": "https://data.boch.gov.tw/upload/representImageFile/2021-11-10/d311e907-c42e-4752-8299-6666f721988e/鹿港街長宿舍01.jpg",
+   "matched": "鹿港街長宿舍"
+  },
+  "16": {
+   "credit": "文化部文化資產局",
+   "url": "https://data.boch.gov.tw/upload/representImageFile/2021-11-10/fbe54626-7a9a-486a-badd-7ac5a2ad34fd/鹿港南靖宮01.jpg",
+   "matched": "鹿港南靖宮"
+  },
+  "17": {
+   "credit": "文化部文化資產局",
+   "url": "https://data.boch.gov.tw/upload/representImageFile/2021-11-10/ea9fb32a-eb3b-4124-b24d-89a00df36364/鹿港玉珍齋01.jpg",
+   "matched": "鹿港玉珍齋"
+  },
+  "19": {
+   "credit": "文化部文化資產局",
+   "url": "https://data.boch.gov.tw/upload/representImageFile/2021-11-10/863c8995-7641-4d4c-a19d-6e9b411df904/鹿港城隍廟01.jpg",
+   "matched": "鹿港城隍廟"
+  },
+  "22": {
+   "credit": "文化部文化資產局",
+   "url": "https://data.boch.gov.tw/upload/representImageFile/2021-11-10/3055e469-63f8-4732-bf3c-cb77c8ad205b/鹿港敬義園紀念碑02.jpg",
+   "matched": "鹿港敬義園紀念碑"
+  },
+  "23": {
+   "credit": "交通部觀光署觀光資訊資料庫",
+   "url": "https://tourism.chcg.gov.tw/upload/27/2024111111520648966.jpg",
+   "matched": "九曲巷"
+  },
+  "24": {
+   "credit": "文化部文化資產局",
+   "url": "https://data.boch.gov.tw/upload/representImageFile/2021-11-10/dfd7d7e1-1f9c-435c-aa85-a48956e43e91/鹿港元昌行01.jpg",
+   "matched": "鹿港元昌行"
+  },
+  "26": {
+   "credit": "文化部文化資產局",
+   "url": "https://data.boch.gov.tw/upload/representImageFile/2021-11-10/c5233d05-f031-4062-bb95-15ddeae7990a/鹿港新祖宮01.jpg",
+   "matched": "鹿港新祖宮"
+  },
+  "31": {
+   "credit": "文化部文化資產局",
+   "url": "https://data.boch.gov.tw/upload/representImageFile/2022-08-08/db7fd902-37bf-4d97-85fe-1fa3be2da502/LINE_ALBUM_鹿港十宜樓_220808_4.jpg",
+   "matched": "鹿港十宜樓"
+  },
+  "32": {
+   "credit": "文化部文化資產局",
+   "url": "https://data.boch.gov.tw/upload/representImageFile/2021-11-10/9110ec0d-e68f-48f0-b80e-f12940d24069/鹿港天后宮01.jpg",
+   "matched": "鹿港天后宮"
+  },
+  "33": {
+   "credit": "交通部觀光署觀光資訊資料庫",
+   "url": "https://tourism.chcg.gov.tw/upload/27/2012041316583585937.jpg",
+   "matched": "永安宮"
+  },
+  "34": {
+   "credit": "文化部文化資產局",
+   "url": "https://data.boch.gov.tw/upload/representImageFile/2021-11-10/2ace713a-2400-4b06-9ed1-0a8565824497/鹿港丁家古厝04.jpg",
+   "matched": "鹿港丁家古厝"
+  },
+  "38": {
+   "credit": "交通部觀光署觀光資訊資料庫",
+   "url": "https://tourism.chcg.gov.tw/upload/27/2016122810032061613.jpg",
+   "matched": "意樓"
+  },
+  "39": {
+   "credit": "交通部觀光署觀光資訊資料庫",
+   "url": "https://tourism.chcg.gov.tw/upload/27/2014120613255474665.jpg",
+   "matched": "甕牆"
+  },
+  "41": {
+   "credit": "文化部文化資產局",
+   "url": "https://data.boch.gov.tw/upload/representImageFile/2026-10-07/eaa4de73-00f7-4bde-86b2-1611e0f8bc87/鹿港日茂行01.jpg",
+   "matched": "鹿港日茂行"
+  },
+  "42": {
+   "credit": "文化部文化資產局",
+   "url": "https://data.boch.gov.tw/upload/representImageFile/2025-11-04/ea68a589-94fe-4d35-9625-74a67ecfbb5a/鹿港鳳山寺01.jpg",
+   "matched": "鹿港鳳山寺"
+  },
+  "43": {
+   "credit": "文化部文化資產局",
+   "url": "https://data.boch.gov.tw/upload/representImageFile/2021-11-10/8124cced-480c-4527-9db6-f7563e372a36/鹿港金銀廳0100.jpg",
+   "matched": "鹿港金銀廳"
+  },
+  "44": {
+   "credit": "文化部文化資產局",
+   "url": "https://data.boch.gov.tw/upload/representImageFile/2021-11-10/693fde2b-b9dc-49aa-a614-ce7cbfff806f/鹿港興安宮01.jpg",
+   "matched": "鹿港興安宮"
+  },
+  "46": {
+   "credit": "文化部文化資產局",
+   "url": "https://data.boch.gov.tw/upload/representImageFile/2021-11-10/a2c6e13e-0a74-44c6-a33c-139e695e8d9c/鹿港北方福德祠01.jpg",
+   "matched": "鹿港北方福德祠"
+  },
+  "47": {
+   "credit": "交通部觀光署觀光資訊資料庫",
+   "url": "https://tourism.chcg.gov.tw/upload/27/2016122910214915087.jpg",
+   "matched": "摸乳巷"
+  },
+  "52": {
+   "credit": "文化部文化資產局",
+   "url": "https://data.boch.gov.tw/old_upload/_upload/Assets_new/building/7643/photo/I002彰化縣鹿港龍山寺(1).JPG",
+   "matched": "鹿港龍山寺"
+  },
+  "53": {
+   "credit": "文化部文化資產局",
+   "url": "https://data.boch.gov.tw/upload/representImageFile/2021-11-10/f3a58e8a-85a0-482e-8eb9-8841aa210a4f/中央播電台鹿港分台暨周遭設施01.jpg",
+   "matched": "中央廣播電臺鹿港分臺暨周遭廣播設施地景文化景觀"
+  },
+  "54": {
+   "credit": "文化部文化資產局",
+   "url": "https://data.boch.gov.tw/upload/representImageFile/2024-09-25/83dd203a-3a9e-41b4-9109-af298df8a286/鹿港金門舘01.jpg",
+   "matched": "鹿港金門舘"
+  },
+  "59": {
+   "credit": "文化部文化資產局",
+   "url": "https://data.boch.gov.tw/upload/representImageFile/2026-10-07/5afa9a6d-5ec4-4ab3-997a-effbecfa8188/鹿港地藏王廟01.jpg",
+   "matched": "鹿港地藏王廟"
+  },
+  "61": {
+   "credit": "文化部文化資產局",
+   "url": "https://data.boch.gov.tw/upload/representImageFile/2024-12-31/4a0b06d2-168e-40b8-b4ac-346cb201ec7c/I069 彰化縣 福興鄉農會碾米廠暨穀倉02.jpg",
+   "matched": "福興鄉農會碾米廠暨穀倉"
+  },
+  "63": {
+   "credit": "文化部文化資產局",
+   "url": "https://data.boch.gov.tw/upload/representImageFile/2021-11-10/dbd7c123-0709-4529-b674-9d90dcd30753/鹿港文武廟01.jpg",
+   "matched": "鹿港文武廟"
+  },
+  "66": {
+   "credit": "交通部觀光署觀光資訊資料庫",
+   "url": "https://tourism.chcg.gov.tw/upload/27/2017092814024749454.jpg",
+   "matched": "楊橋公園/護安宮"
+  },
+  "70": {
+   "credit": "文化部文化資產局",
+   "url": "https://data.boch.gov.tw/upload/representImageFile/2021-11-10/d69f71b0-3b93-4270-bf47-02a4c73a3992/彰化縣 原福興外埔機場防空砲台01.jpg",
+   "matched": "原彰化飛行場防空塔（番婆及外埔）"
+  }
+ }
+}

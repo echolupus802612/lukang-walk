@@ -57,17 +57,18 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 .sim{display:none;gap:8px;margin-top:10px}.sim.on{display:flex}.sim button{flex:1;font-size:15px}
 .foot{margin-top:12px;text-align:center;font-size:13px;color:var(--soft)}
 .foot a{color:var(--soft)}
+.credit{display:block;margin-top:6px;text-align:center;font-size:11px;color:var(--soft);opacity:.55}
 /* 解籤卡 */
 .veil{position:fixed;inset:0;background:rgba(20,6,3,.55);display:none;place-items:center;padding:16px;z-index:5}
 .veil.on{display:grid}
-.card{width:min(100%,400px);background:var(--card);color:var(--cardink);border-radius:20px;padding:26px 22px 20px;
-  box-shadow:0 20px 50px rgba(0,0,0,.4);text-align:center;animation:rise .5s ease}
+.card{width:min(100%,400px);max-height:calc(100dvh - 32px);overflow:auto;background:var(--card);color:var(--cardink);
+  border-radius:20px;padding:18px 22px 20px;box-shadow:0 20px 50px rgba(0,0,0,.4);text-align:center;animation:rise .5s ease}
 @keyframes rise{from{transform:translateY(30px) scale(.96);opacity:0}}
 .card .no{font:700 15px/1 "LXGW WenKai TC",serif;color:var(--gold2);letter-spacing:4px}
-.card h2{font:700 clamp(30px,9vw,40px)/1.1 "LXGW WenKai TC",serif;margin:14px 0 8px;text-wrap:balance}
+.card h2{font:700 clamp(30px,9vw,40px)/1.1 "LXGW WenKai TC",serif;margin:8px 0 6px;text-wrap:balance}
+.card .ph{display:block;width:100%;aspect-ratio:16/10;object-fit:cover;border-radius:12px;margin:14px 0 0;background:rgba(0,0,0,.08)}
 .card .tag{display:inline-block;font-size:13px;border:1px solid currentColor;border-radius:999px;padding:2px 10px;opacity:.7}
 .card p{font:400 17px/1.6 "LXGW WenKai TC",serif;text-align:start;margin:16px 0 4px}
-.card .src{font-size:13px;opacity:.6;margin-top:10px}
 .card button{width:100%;margin-top:16px;background:#9a3a27;color:#fbf3e6;border:0}
 @media (prefers-reduced-motion:reduce){.card{animation:none}}
 </style>
@@ -109,11 +110,13 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
   <div class="row" id="walkrow" hidden><button id="redraw">換一支</button><button id="voice">語音：開</button><button id="stop">收工</button></div>
   <div class="sim" id="sim"><button id="stepTo">▲ 朝籤走</button><button id="stepRand">亂走</button><button id="turn">轉身 90°</button></div>
   <div class="foot" id="foot"></div>
+  <a class="credit" href="https://github.com/echolupus802612/lukang-walk#資料來源與授權" target="_blank" rel="noopener">資料來源</a>
 </div>
 
 <div class="veil" id="veil"><div class="card" role="dialog" aria-modal="true" aria-labelledby="cname">
   <div class="no" id="cno">第一籤</div><h2 id="cname"></h2><span class="tag" id="ctag"></span>
-  <p id="cdesc"></p><div class="src">資料：文化部文化資產局、交通部觀光署、內政部、© OpenStreetMap contributors、維基百科</div>
+  <img class="ph" id="cph" alt="" hidden>
+  <p id="cdesc"></p>
   <button id="again">再抽一支</button>
 </div></div>
 
@@ -124,8 +127,7 @@ const BANDS = [{max:500,min:0},{max:1000,min:400},{max:2000,min:900}];
 const ARRIVE = 25, ACC_OK = 40, LUKANG = [24.0565,120.4335];
 const DIR8 = ['北','東北','東','東南','南','西南','西','西北'];
 const HINT = {worship:'一座廟或祠',history:'一處老宅或舊址',structure:'一段巷弄、一棟老樓',nature:'一片能歇腳的地方',culture:'一間館',shop:'一間老店',other:'說不上來的地方'};
-const TAG = {古蹟:'古蹟',歷史建築:'歷史建築',文化景觀:'文化景觀'};
-const LINES = {
+const TAG = {古蹟:'古蹟',歷史建築:'歷史建築',文化景觀:'文化景觀'};const LINES = {
   greet:['這一支，我替你抽好了。跟著我。','走吧，有個地方在等你。'],
   far:['還有一段路，慢慢來。','不急，我們慢慢走。'],
   half:['走一半了。','過半了，你走得不錯。'],
@@ -302,6 +304,7 @@ function pick(){
     return;
   }
   try{ const pre = new Audio(); pre.preload='auto'; pre.src=`voice/arrived_${x.p.id}.mp3`; }catch(e){}
+  if (x.p.ph){ const im = new Image(); im.src = `photos/${x.p.id}.webp`; }   // 走路時先載好，到了直接顯示
   S.target = x.p; S.startD = x.d; S.saidHalf = S.saidNear = false; S.phase='walking'; S.pickAt = Date.now(); S.lastFarAt = Date.now();
   S.hits = 0;
   recSet('drawn', rec('drawn',0)+1);
@@ -321,6 +324,10 @@ function arrive(){
   $('cname').textContent = t.name;
   $('ctag').textContent = TAG[t.tag] || HINT[t.cat] || '';
   $('cdesc').textContent = t.desc || '沒有留下說明的地方。站一下，看看它現在的樣子。';
+  const ph = $('cph');   // 有官方照片就放在地名下面，沒有就整塊不出現
+  if (t.ph){ ph.src = `photos/${t.id}.webp`; ph.alt = t.name + '的照片'; ph.hidden = false; }
+  else { ph.hidden = true; ph.removeAttribute('src'); }
+  // 資料與照片出處暫不放在畫面上（出處紀錄在 README、data/photos.json），做成 App 時另設頁面
   clearTimeout(S.cardT);
   S.cardT = setTimeout(()=>{ if (S.phase!=='arrived') return; $('veil').classList.add('on'); $('again').focus(); }, 1800);   // 先讓他歡呼兩輪再蓋上籤卡
 }
