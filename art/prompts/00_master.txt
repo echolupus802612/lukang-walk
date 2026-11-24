@@ -1,0 +1,11 @@
+Use the image_gen tool to create ONE image, then copy the generated PNG to art/gen/00_master.png (create folders if needed). Do not edit any other file. Reply with the saved path and whether the PNG has a real alpha channel.
+
+Use case: stylized-concept (game character sprite master)
+Input images: all attached images are reference images of the SAME original character (the user's own VTuber mascot). Match his design exactly.
+Subject: this chibi wolf-boy, FULL BODY, standing, facing the viewer, relaxed neutral happy expression, arms down at sides, feet visible.
+Character details to keep: messy dark violet/indigo hair, large dark-purple wolf ears with white inner fur, a small black star hair clip on his left side, tan/brown skin, big violet eyes with highlights, small fang, white fluffy fur collar, dark brown/black sleeveless outfit with small gold gear/cog ornaments, black fingerless gloves with white fur cuffs, a big fluffy wolf tail (violet with white tip) visible beside him, short dark shorts, simple dark boots.
+Proportions: chibi, about 2.5 heads tall, head large, body small and readable at 160px tall.
+Style/medium: same clean anime sticker style as the references: crisp dark outline, soft cel shading, flat colors, no texture noise.
+Composition: single character centered, whole body inside frame with margin, square 1024x1024.
+Background: fully transparent background (real alpha). If transparency is impossible, use a perfectly flat pure #00FF00 green background with no shadow and no gradient.
+Avoid: text, letters, watermark, extra characters, the pink blob character, sparkles, floor shadow, frame/border.

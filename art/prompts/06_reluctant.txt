@@ -1,0 +1,9 @@
+Use the image_gen tool to create ONE image, then copy the generated PNG to art/gen/06_reluctant.png (keep it at 1024x1024; resize with Pillow if needed, preserving alpha). Do not edit any other file. Reply with the saved path and whether the PNG has real alpha.
+
+Use case: stylized-concept (2D game sprite sheet)
+Input images: Image 1 (art/gen/00_master.png) is the canonical full-body design of this character; the others are extra reference images of the same original character. Keep his design, colors, outfit, proportions (chibi ~2.5 heads) and clean anime sticker style EXACTLY as in Image 1.
+Layout: a 2x2 grid of 4 animation frames on a 1024x1024 canvas. Each frame sits inside its own 512x512 quadrant (order: top-left, top-right, bottom-left, bottom-right). In every frame the character is the same size (about 430px tall from ear tip to boots), horizontally centered in the quadrant, with boots at the same baseline about 490px from the top of the quadrant. Nothing crosses into another quadrant. No grid lines, no borders, no numbers.
+Background: fully transparent (real alpha). If impossible, perfectly flat pure #00FF00 with no shadow.
+Avoid: text, letters, watermark, extra characters, speech bubbles, sparkles or emoji decorations, floor shadow, motion lines.
+
+Action: reluctant to say goodbye (the walk is ending). Ears drooped, tail hanging down, teary watery eyes with a small trembling smile, waving a small goodbye with his right hand while the left hand holds the right sleeve. Frame 1: hand raised, wave left. Frame 2: hand waving right. Frame 3: hand raised, wave left, looking down sadly. Frame 4: hand waving right, looking at viewer with a small brave smile. Gentle, bittersweet, not crying loudly.

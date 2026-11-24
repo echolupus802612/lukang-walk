@@ -10,10 +10,10 @@
 <link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+TC:wght@500;700&display=swap" rel="stylesheet">
 <style>
 /* VOICE: 安靜的陪伴，像廟口有人替你抽了一支籤。
-   IDEA: 廟裡的籤筒——抽一支散步籤，籤筒精用那支籤替你指路，走到了才解籤。
-   PICTURE: 紅磚地上的籤筒精與地面方位環，佔首屏一半。
+   IDEA: 廟裡的籤筒——抽一支散步籤，小嚮導（狼耳少年）替你指路，走到了才解籤。
+   PICTURE: 紅磚地上的狼耳小嚮導與地面方位環，佔首屏一半。
    COLOUR and TYPE: 鹿港紅磚為底、廟金點題、米白文字；霞鶩文楷寫籤，思源黑體寫數字。
-   LAYOUT: 單欄一屏：籤況、籤筒精、距離、對話、主按鈕；解籤時整張籤卡蓋上來。 */
+   LAYOUT: 單欄一屏：籤況、小嚮導、距離、對話、主按鈕；解籤時整張籤卡蓋上來。 */
 :root{color-scheme:light dark;
   --bg:light-dark(#9a3a27,#3b1610);--bg2:light-dark(#82301f,#2a0f0a);
   --ink:#fbf3e6;--soft:light-dark(#f3dccb,#d9bfae);--gold:#f2c14e;--gold2:#c9922a;
@@ -32,7 +32,13 @@ body{margin:0;background:radial-gradient(120% 70% at 50% 38%,var(--bg) 0%,var(--
 .mode{border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:13px;white-space:nowrap}
 .hint{margin-top:14px;font:400 17px/1.4 "LXGW WenKai TC",serif;text-align:center;color:var(--soft);min-height:24px}
 .stage{position:relative;flex:1 1 auto;min-height:300px;display:grid;place-items:center}
-.stage svg{width:min(88vw,380px);height:auto;overflow:visible}
+.pet{position:relative;width:min(88vw,380px);aspect-ratio:400/330}
+.pet svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+.pet .over{pointer-events:none}
+/* 角色：一張橫排精靈圖，JS 換 background-position 換幀；腳底對齊地面環中心 (200,268) */
+.kid{position:absolute;left:20.25%;top:12.1%;width:59.5%;height:72.1%;
+  background:no-repeat 0 0/400% 100%;image-rendering:auto}
+.kid.flip{transform:scaleX(-1)}
 .dist{text-align:center;font-weight:700;font-size:clamp(40px,12vw,56px);line-height:1.05;letter-spacing:.5px}
 .dist small{font-size:18px;font-weight:500;margin-left:4px;color:var(--soft)}
 .sub{text-align:center;font-size:13px;color:var(--soft);min-height:20px;margin-top:2px}
@@ -64,11 +70,7 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 .card p{font:400 17px/1.6 "LXGW WenKai TC",serif;text-align:start;margin:16px 0 4px}
 .card .src{font-size:13px;opacity:.6;margin-top:10px}
 .card button{width:100%;margin-top:16px;background:#9a3a27;color:#fbf3e6;border:0}
-.pet .bob{animation:bob 2.8s ease-in-out infinite;transform-origin:200px 250px}
-@keyframes bob{50%{transform:translateY(-4px) scaleY(1.015)}}
-.pet.hop .bob{animation:hop .45s ease 3}
-@keyframes hop{50%{transform:translateY(-22px)}}
-@media (prefers-reduced-motion:reduce){.pet .bob,.pet.hop .bob,.card{animation:none}}
+@media (prefers-reduced-motion:reduce){.card{animation:none}}
 </style>
 </head>
 <body>
@@ -77,10 +79,9 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
   <div class="hint" id="hint">選一個遠近，替你抽一支籤</div>
 
   <div class="stage">
-    <svg viewBox="0 0 400 330" class="pet" id="pet" aria-label="籤筒精指著方向">
+    <div class="pet" id="pet" role="img" aria-label="小嚮導指著方向">
+    <svg viewBox="0 0 400 330" aria-hidden="true">
       <defs>
-        <linearGradient id="tube" x1="0" x2="1"><stop offset="0" stop-color="#7d2617"/><stop offset=".45" stop-color="#c2492f"/><stop offset="1" stop-color="#6e2114"/></linearGradient>
-        <linearGradient id="stick" x1="0" x2="1"><stop offset="0" stop-color="#e7c98f"/><stop offset="1" stop-color="#b98b4a"/></linearGradient>
         <radialGradient id="glow"><stop offset="0" stop-color="#f2c14e" stop-opacity=".55"/><stop offset="1" stop-color="#f2c14e" stop-opacity="0"/></radialGradient>
       </defs>
       <!-- 地面方位環（透視壓扁），金色扇形是精確方向 -->
@@ -89,32 +90,14 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
         <circle r="108" fill="none" stroke="rgba(251,243,230,.12)" stroke-width="2" stroke-dasharray="4 10"/>
         <g id="wedge"><path d="M0 0 L-34 -146 A150 150 0 0 1 34 -146 Z" fill="url(#glow)"/><path d="M0 -112 L-10 -132 L10 -132 Z" fill="#f2c14e"/></g>
       </g>
-      <ellipse cx="200" cy="268" rx="62" ry="13" fill="rgba(0,0,0,.35)"/>
-      <g class="bob" id="body">
-        <!-- 指路的那支籤：繞筒口轉 -->
-        <g id="arm" transform="rotate(0 200 150)">
-          <rect x="194" y="54" width="12" height="104" rx="5" fill="url(#stick)"/>
-          <rect x="194" y="54" width="12" height="26" rx="5" fill="#c9412b"/>
-        </g>
-        <!-- 其他幾支籤 -->
-        <g fill="url(#stick)" opacity=".9"><rect x="170" y="112" width="9" height="46" rx="4" transform="rotate(-12 174 158)"/><rect x="222" y="114" width="9" height="44" rx="4" transform="rotate(14 226 158)"/><rect x="184" y="118" width="9" height="40" rx="4" transform="rotate(-4 188 158)"/></g>
-        <!-- 筒身 -->
-        <path d="M146 152 Q146 260 156 262 L244 262 Q254 260 254 152 Z" fill="url(#tube)"/>
-        <ellipse cx="200" cy="152" rx="54" ry="13" fill="#5a1a10"/>
-        <ellipse cx="200" cy="152" rx="54" ry="13" fill="none" stroke="#f2c14e" stroke-width="4"/>
-        <rect x="148" y="236" width="104" height="8" fill="#f2c14e" opacity=".85"/>
-        <path d="M150 168 Q152 240 160 252" stroke="rgba(255,255,255,.18)" stroke-width="6" fill="none" stroke-linecap="round"/>
-        <!-- 臉 -->
-        <g id="face">
-          <ellipse id="eyeL" cx="182" cy="196" rx="6" ry="8" fill="#2a0d07"/>
-          <ellipse id="eyeR" cx="218" cy="196" rx="6" ry="8" fill="#2a0d07"/>
-          <ellipse cx="170" cy="212" rx="8" ry="4" fill="#f59a8a" opacity=".6"/><ellipse cx="230" cy="212" rx="8" ry="4" fill="#f59a8a" opacity=".6"/>
-          <path id="mouth" d="M193 214 Q200 221 207 214" stroke="#2a0d07" stroke-width="3" fill="none" stroke-linecap="round"/>
-        </g>
-      </g>
-      <!-- 「北」放在最上層，轉到筒身後面也看得見 -->
+      <ellipse cx="200" cy="268" rx="58" ry="12" fill="rgba(0,0,0,.35)"/>
+    </svg>
+    <div class="kid" id="kid"></div>
+    <!-- 「北」放在最上層，轉到角色後面也看得見 -->
+    <svg viewBox="0 0 400 330" class="over" aria-hidden="true">
       <g transform="translate(200 268) scale(1 .42)"><text id="north" y="9" text-anchor="middle" font-size="24" fill="rgba(251,243,230,.7)" transform="translate(0 -172) scale(1 2.4)">北</text></g>
     </svg>
+    </div>
   </div>
 
   <div class="dist" id="dist">？<small></small></div>
@@ -151,8 +134,22 @@ const LINES = {
   behind:['在你後面啦，轉個身。','方向反了，往回一點。'],
   idle:['停下來了？歇一下也好。','我在這，等你。'],
   weak:['訊號不太好，先站一下。'],
-  arrived:['到了！是{name}。','就是這裡——{name}。']
+  arrived:['到了！是{name}。','就是這裡——{name}。'],
+  bye:['今天就走到這吧。','下次再一起抽一支。']
 };
+/* 角色動作：每種一張橫排精靈圖。seq＝播放順序，ms＝每幀毫秒 */
+const ANIM = {
+  idle:   {n:4, ms:260, seq:[0,0,0,1,1,0,0,2,0,0,3,3]},
+  walk:   {n:4, ms:150, seq:[0,1,2,3]},
+  point:  {n:2, ms:420, seq:[0,1]},
+  pointup:{n:2, ms:420, seq:[0,1]},
+  pull:   {n:4, ms:220, seq:[0,1,2,3]},
+  care:   {n:4, ms:380, seq:[0,1,2,3]},
+  cheer:  {n:4, ms:170, seq:[0,1,2,3]},
+  bye:    {n:4, ms:300, seq:[0,1,2,3]}
+};
+for (const k in ANIM){ const im=new Image(); im.src=`sprites/${k}.webp`; }  // 先載好，換動作不閃
+const still = matchMedia('(prefers-reduced-motion: reduce)');
 const $ = id => document.getElementById(id);
 const store = {get(k,d){try{const v=localStorage.getItem('lkwalk_'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},
   set(k,v){try{localStorage.setItem('lkwalk_'+k,JSON.stringify(v))}catch(e){}}};
@@ -188,10 +185,12 @@ function draw(pos, band){
 /* ---------- 狀態 ---------- */
 const S = {phase:'ready', band:1, pos:null, acc:0, heading:null, sim:false, target:null, startD:0,
   shown:0, voice:store.get('voice',true), last:{}, lastMoveAt:Date.now(), saidHalf:false, saidNear:false,
-  behindSince:0, lastFarAt:0, watch:null, lock:null};
+  behindSince:0, lastFarAt:0, watch:null, lock:null, act:null, actUntil:0, anim:'', animAt:0, flip:false};
+// 一次性動作（關心、不捨）：播 ms 毫秒後回到依情境決定的動作
+function act(name, ms){ S.act=name; S.actUntil=Date.now()+ms; }
 
 function say(ev, vars={}){
-  const now = Date.now(); if (S.last[ev] && now-S.last[ev] < 12000) return; S.last[ev]=now;
+  const now = Date.now(); if (S.last[ev] && now-S.last[ev] < 12000) return false; S.last[ev]=now;
   const list = LINES[ev], line = list[Math.floor(Math.random()*list.length)]
     .replace('{d}', vars.d||'').replace('{name}', vars.name||'');
   const el = $('say'); el.textContent = line; el.classList.add('on');
@@ -199,6 +198,7 @@ function say(ev, vars={}){
   if (S.voice && 'speechSynthesis' in window){ try{
     const u = new SpeechSynthesisUtterance(line); u.lang='zh-TW'; u.rate=1; u.pitch=1.1;
     speechSynthesis.cancel(); speechSynthesis.speak(u);}catch(e){} }
+  return true;
 }
 
 /* ---------- 定位與指南針 ---------- */
@@ -221,7 +221,8 @@ async function startSensors(){
     try{
       S.watch = navigator.geolocation.watchPosition(p=>{
         const np=[p.coords.latitude,p.coords.longitude]; S.acc=p.coords.accuracy;
-        if (S.pos && dist(S.pos,np)>4) S.lastMoveAt=Date.now();
+        // 跟「上次確認移動的位置」比，而不是上一筆：步行每秒約 1.3m，逐筆比永遠過不了門檻
+        if (!S.anchor || dist(S.anchor,np)>4 || p.coords.speed>0.6){ if (S.anchor) S.lastMoveAt=Date.now(); S.anchor=np; }
         if (!S.sim) S.pos=np;
         if(!done){done=true;clearTimeout(t);res(true)}
         tick();
@@ -255,7 +256,7 @@ async function go(){
 }
 function pick(){
   const x = draw(S.pos, S.band);
-  S.target = x.p; S.startD = x.d; S.saidHalf = S.saidNear = false; S.phase='walking';
+  S.target = x.p; S.startD = x.d; S.saidHalf = S.saidNear = false; S.phase='walking'; S.pickAt = Date.now();
   store.set('drawn', store.get('drawn',0)+1);
   $('hint').textContent = '籤上寫著：' + (HINT[x.p.cat]||HINT.other);
   $('bands').hidden = true; $('go').hidden = true; $('walkrow').hidden = false;
@@ -265,7 +266,6 @@ function arrive(){
   S.phase='arrived'; const t=S.target; clearInterval(simT); simT=null;
   const seen = store.get('seen',[]); if(!seen.includes(t.id)){seen.push(t.id);store.set('seen',seen)}
   const recent = [t.id,...store.get('recent',[]).filter(i=>i!==t.id)].slice(0,12); store.set('recent',recent);
-  $('pet').classList.add('hop'); setTimeout(()=>$('pet').classList.remove('hop'),1500);
   try{ navigator.vibrate && navigator.vibrate([60,40,120]); }catch(e){}
   say('arrived',{name:t.name});
   const n = seen.length, cn='一二三四五六七八九十';
@@ -273,7 +273,7 @@ function arrive(){
   $('cname').textContent = t.name;
   $('ctag').textContent = TAG[t.tag] || HINT[t.cat] || '';
   $('cdesc').textContent = t.desc || '沒有留下說明的地方。站一下，看看它現在的樣子。';
-  setTimeout(()=>{$('veil').classList.add('on'); $('again').focus();}, 900);
+  setTimeout(()=>{$('veil').classList.add('on'); $('again').focus();}, 1800);   // 先讓他歡呼兩輪再蓋上籤卡
 }
 function reset(){
   $('veil').classList.remove('on'); S.phase='ready'; S.target=null;
@@ -288,7 +288,7 @@ function tick(first){
   const tp=[S.target.lat,S.target.lng], d=dist(S.pos,tp);
   const [n,u]=fmt(d); $('dist').innerHTML=''; $('dist').append(n); const sm=document.createElement('small'); sm.textContent=u; $('dist').append(sm);
   $('sub').textContent = S.acc>35 ? `定位誤差約 ${Math.round(S.acc)} 公尺` : statLine();
-  if (S.acc>60) say('weak');
+  if (S.acc>60 && say('weak')) act('care', 4000);
   if (d <= Math.min(ARRIVE+S.acc/2,40)) return arrive();
   const now=Date.now();
   if (!first && !S.saidHalf && d < S.startD/2 && S.startD>300){ S.saidHalf=true; say('half'); }
@@ -296,7 +296,7 @@ function tick(first){
   else if (d>250 && now-S.lastFarAt>90000){ S.lastFarAt=now; say('far',{d:fmt(d).join(' ')}); }
 }
 
-/* ---------- 畫面：每幀把相對角度餵給籤筒精 ---------- */
+/* ---------- 畫面：每幀把相對角度餵給地面環與小嚮導 ---------- */
 function frame(){
   const t0 = performance.now();
   let rel = 0;
@@ -307,18 +307,39 @@ function frame(){
       if (!S.behindSince) S.behindSince=Date.now(); else if (Date.now()-S.behindSince>3500) say('behind');
     } else S.behindSince=0;
   }
-  S.shown += norm180(rel - S.shown) * 0.12;
-  const a = S.shown, lim = Math.max(-115, Math.min(115, a));
-  $('arm').setAttribute('transform', `rotate(${lim.toFixed(1)} 200 152)`);
+  S.shown = norm180(S.shown + norm180(rel - S.shown) * 0.12);   // 收回 ±180，不然轉幾圈會累積成 -270° 被當成「在背後」
+  const a = S.shown;
   $('wedge').setAttribute('transform', `rotate(${a.toFixed(1)})`);
   const nh = rad(-(S.heading||0));   // 「北」字沿著地面環走，告訴你手機朝哪
   $('north').setAttribute('transform', `translate(${(172*Math.sin(nh)).toFixed(1)} ${(-172*Math.cos(nh)).toFixed(1)}) scale(1 2.4)`);
-  const look = Math.max(-1,Math.min(1,a/90))*5;
-  $('face').setAttribute('transform', `translate(${look.toFixed(1)} 0)`);
-  const bl = (t0 % 4200) < 140 ? .15 : 1;
-  $('eyeL').setAttribute('ry', 8*bl); $('eyeR').setAttribute('ry', 8*bl);
-  if (S.phase==='walking' && Date.now()-S.lastMoveAt>45000){ S.lastMoveAt=Date.now(); say('idle'); }
+  if (S.phase==='walking' && Date.now()-S.lastMoveAt>45000){ S.lastMoveAt=Date.now(); if (say('idle')) act('care', 5000); }
+  pose(a, t0);
   requestAnimationFrame(frame);
+}
+
+/* ---------- 角色：依情境挑動作 ----------
+   到了→歡呼；收工→不捨；停太久或訊號差→關心（一次性）
+   走路中：目標在背後→拉扯；在側邊→指方向；在前方且在走→走動；在前方但停著→先指前方，久了就停下等 */
+function pose(a, t0){
+  const now = Date.now(), ar = Math.abs(a);
+  let name = 'idle', flip = false;
+  if (S.phase==='arrived') name = 'cheer';
+  else if (S.act && now < S.actUntil) name = S.act;
+  else if (S.phase==='walking' && S.target){
+    if (ar > 120){ name = 'pull'; flip = a > 0; }          // 素材往左拉；目標在右後方就鏡像
+    else if (ar > 35){ name = 'point'; flip = a < 0; }      // 素材指右；目標在左就鏡像
+    else if (now - S.lastMoveAt < (S.sim ? 1500 : 6000)) name = 'walk';   // GPS 約每 3 秒才確認一次移動
+    else if (now - Math.max(S.lastMoveAt, S.pickAt||0) < 15000) name = 'pointup';
+  }
+  const k = $('kid'), A = ANIM[name];
+  if (name !== S.anim){
+    S.anim = name; S.animAt = t0;
+    k.style.backgroundImage = `url(sprites/${name}.webp)`;
+    k.style.backgroundSize = `${A.n*100}% 100%`;
+  }
+  if (flip !== S.flip){ S.flip = flip; k.classList.toggle('flip', flip); }
+  const i = still.matches ? 0 : A.seq[Math.floor((t0 - S.animAt) / A.ms) % A.seq.length];
+  k.style.backgroundPosition = `${A.n>1 ? i/(A.n-1)*100 : 0}% 0`;
 }
 
 /* ---------- 模擬：每 100ms 走一步（加速 8 倍） ---------- */
@@ -342,7 +363,7 @@ document.querySelectorAll('#bands button').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('#bands button').forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); S.band=+b.dataset.b; });
 $('go').onclick = go;
 $('redraw').onclick = pick;
-$('stop').onclick = reset;
+$('stop').onclick = ()=>{ say('bye'); act('bye', 3200); reset(); };
 $('again').onclick = reset;
 $('voice').textContent = '語音：'+(S.voice?'開':'關');
 $('voice').onclick = ()=>{ S.voice=!S.voice; store.set('voice',S.voice); $('voice').textContent='語音：'+(S.voice?'開':'關');
