@@ -126,13 +126,13 @@ const HINT = {worship:'一座廟或祠',history:'一處老宅或舊址',structur
 const TAG = {古蹟:'古蹟',歷史建築:'歷史建築',文化景觀:'文化景觀'};
 const LINES = {
   greet:['這一支，我替你抽好了。跟著我。','走吧，有個地方在等你。'],
-  far:['還有 {d}，慢慢來。','不急，還有 {d}。'],
+  far:['還有一段路，慢慢來。','不急，我們慢慢走。'],
   half:['走一半了。','過半了，你走得不錯。'],
   near:['快到了，抬頭看看。','就在這附近了。'],
   behind:['在你後面啦，轉個身。','方向反了，往回一點。'],
   idle:['停下來了？歇一下也好。','我在這，等你。'],
   weak:['訊號不太好，先站一下。'],
-  arrived:['到了！是{name}。','就是這裡——{name}。'],
+  arrived:['到了！是{name}。'],
   bye:['今天就走到這吧。','下次再一起抽一支。']
 };
 /* 角色動作：每種一張橫排精靈圖。seq＝播放順序，ms＝每幀毫秒 */
@@ -187,15 +187,29 @@ const S = {phase:'ready', band:1, pos:null, acc:0, heading:null, sim:false, targ
 // 一次性動作（關心、不捨）：播 ms 毫秒後回到依情境決定的動作
 function act(name, ms){ S.act=name; S.actUntil=Date.now()+ms; }
 
+/* 語音：先播預錄的 Breeze 音檔（voice/<事件>_<第幾句>.mp3，到達是 voice/arrived_<地點id>.mp3）；
+   載不到或被擋才退回瀏覽器內建 TTS。同一個 <audio> 重複用，第一次在點擊裡播放後 iOS 才放行之後的播放 */
+const voiceEl = new Audio(); voiceEl.preload = 'auto';
+function speak(line, src){
+  if (!S.voice) return;
+  try{ speechSynthesis.cancel(); }catch(e){}
+  const fallback = ()=>{ if (!('speechSynthesis' in window)) return; try{
+    const u = new SpeechSynthesisUtterance(line); u.lang='zh-TW'; u.rate=1; u.pitch=1.1;
+    speechSynthesis.cancel(); speechSynthesis.speak(u);}catch(e){} };
+  voiceEl.onerror = fallback;
+  voiceEl.src = src; voiceEl.currentTime = 0;
+  const p = voiceEl.play(); if (p && p.catch) p.catch(e=>{ if (e && e.name!=='AbortError') fallback(); });
+}
+const URGENT = {greet:1, arrived:1, bye:1};   // 這幾句可以打斷正在講的話，其他的等講完
 function say(ev, vars={}){
-  const now = Date.now(); if (S.last[ev] && now-S.last[ev] < 12000) return false; S.last[ev]=now;
-  const list = LINES[ev], line = list[Math.floor(Math.random()*list.length)]
-    .replace('{d}', vars.d||'').replace('{name}', vars.name||'');
+  const now = Date.now(); if (S.last[ev] && now-S.last[ev] < 12000) return false;
+  if (!URGENT[ev] && S.voice && !voiceEl.paused && !voiceEl.ended) return false;
+  S.last[ev]=now;
+  const list = LINES[ev], i = Math.floor(Math.random()*list.length);
+  const line = list[i].replace('{name}', vars.name||'');
   const el = $('say'); el.textContent = line; el.classList.add('on');
   clearTimeout(say.t); say.t = setTimeout(()=>el.classList.remove('on'), 5000);
-  if (S.voice && 'speechSynthesis' in window){ try{
-    const u = new SpeechSynthesisUtterance(line); u.lang='zh-TW'; u.rate=1; u.pitch=1.1;
-    speechSynthesis.cancel(); speechSynthesis.speak(u);}catch(e){} }
+  speak(line, ev==='arrived' ? `voice/arrived_${vars.id}.mp3` : `voice/${ev}_${i}.mp3`);
   return true;
 }
 
@@ -254,7 +268,8 @@ async function go(){
 }
 function pick(){
   const x = draw(S.pos, S.band);
-  S.target = x.p; S.startD = x.d; S.saidHalf = S.saidNear = false; S.phase='walking'; S.pickAt = Date.now();
+  try{ const pre = new Audio(); pre.preload='auto'; pre.src=`voice/arrived_${x.p.id}.mp3`; }catch(e){}
+  S.target = x.p; S.startD = x.d; S.saidHalf = S.saidNear = false; S.phase='walking'; S.pickAt = Date.now(); S.lastFarAt = Date.now();
   store.set('drawn', store.get('drawn',0)+1);
   $('hint').textContent = '籤上寫著：' + (HINT[x.p.cat]||HINT.other);
   $('bands').hidden = true; $('go').hidden = true; $('walkrow').hidden = false;
@@ -265,7 +280,7 @@ function arrive(){
   const seen = store.get('seen',[]); if(!seen.includes(t.id)){seen.push(t.id);store.set('seen',seen)}
   const recent = [t.id,...store.get('recent',[]).filter(i=>i!==t.id)].slice(0,12); store.set('recent',recent);
   try{ navigator.vibrate && navigator.vibrate([60,40,120]); }catch(e){}
-  say('arrived',{name:t.name});
+  say('arrived',{name:t.sn||t.name, id:t.id});
   const n = seen.length, cn='一二三四五六七八九十';
   $('cno').textContent = '第' + (n<=10?cn[n-1]:n) + '籤';
   $('cname').textContent = t.name;
@@ -291,7 +306,7 @@ function tick(first){
   const now=Date.now();
   if (!first && !S.saidHalf && d < S.startD/2 && S.startD>300){ S.saidHalf=true; say('half'); }
   else if (!S.saidNear && d < 80){ S.saidNear=true; say('near'); }
-  else if (d>250 && now-S.lastFarAt>90000){ S.lastFarAt=now; say('far',{d:fmt(d).join(' ')}); }
+  else if (d>250 && now-S.lastFarAt>90000){ S.lastFarAt=now; say('far'); }
 }
 
 /* ---------- 畫面：每幀把相對角度餵給地面環與小嚮導 ---------- */
@@ -365,7 +380,7 @@ $('stop').onclick = ()=>{ say('bye'); act('bye', 3200); reset(); };
 $('again').onclick = reset;
 $('voice').textContent = '語音：'+(S.voice?'開':'關');
 $('voice').onclick = ()=>{ S.voice=!S.voice; store.set('voice',S.voice); $('voice').textContent='語音：'+(S.voice?'開':'關');
-  if(!S.voice) try{speechSynthesis.cancel()}catch(e){} };
+  if(!S.voice){ try{speechSynthesis.cancel()}catch(e){} voiceEl.pause(); } };
 document.addEventListener('visibilitychange', async ()=>{ if(document.visibilityState==='visible' && S.lock!==null && S.phase==='walking'){
   try{ S.lock = await navigator.wakeLock.request('screen'); }catch(e){} } });
 if (location.hash==='#sim') useSim('模擬模式：按住「朝籤走」前進。');

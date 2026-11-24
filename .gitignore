@@ -4,3 +4,8 @@ __pycache__/
 .claude/
 art/ref/
 art/gen/
+art/voice/raw/
+art/voice/codex_run.txt
+art/voice/codex_last.txt
+art/voice/manifest.json
+art/voice/codex_lookup.txt
