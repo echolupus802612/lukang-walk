@@ -121,7 +121,8 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 {
 const PLACES = /*DATA*/[];
 const BANDS = [{max:500,min:0},{max:1000,min:400},{max:2000,min:900}];
-const ARRIVE = 25, LUKANG = [24.0565,120.4335];
+const ARRIVE = 25, ACC_OK = 40, LUKANG = [24.0565,120.4335];
+const DIR8 = ['北','東北','東','東南','南','西南','西','西北'];
 const HINT = {worship:'一座廟或祠',history:'一處老宅或舊址',structure:'一段巷弄、一棟老樓',nature:'一片能歇腳的地方',culture:'一間館',shop:'一間老店',other:'說不上來的地方'};
 const TAG = {古蹟:'古蹟',歷史建築:'歷史建築',文化景觀:'文化景觀'};
 const LINES = {
@@ -151,6 +152,14 @@ const still = matchMedia('(prefers-reduced-motion: reduce)');
 const $ = id => document.getElementById(id);
 const store = {get(k,d){try{const v=localStorage.getItem('lkwalk_'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},
   set(k,v){try{localStorage.setItem('lkwalk_'+k,JSON.stringify(v))}catch(e){}}};
+/* 足跡分兩本：實走一本、模擬一本，模擬走到的地方不會讓你在鹿港實走時抽不到 */
+const rec = (k,d=[]) => store.get((S.sim?'sim_':'')+k, d);
+const recSet = (k,v) => store.set((S.sim?'sim_':'')+k, v);
+// v2 之前沒分本，那時還沒有人實走過，舊紀錄都是模擬，一次搬進模擬本
+if (store.get('ver',1) < 2){
+  for (const k of ['seen','recent','drawn']){ const v=store.get(k,null); if (v!==null){ store.set('sim_'+k,v); try{localStorage.removeItem('lkwalk_'+k)}catch(e){} } }
+  store.set('ver',2);
+}
 
 /* ---------- 幾何 ---------- */
 const R = 6371000, rad = x => x*Math.PI/180;
@@ -166,14 +175,17 @@ function move(p,deg,m){const d=m/R,b=rad(deg),la=rad(p[0]),lo=rad(p[1]);
 const norm180 = a => ((a%360)+540)%360-180;
 const fmt = m => m>=1000?[(m/1000).toFixed(1),'公里']:[String(Math.round(m)),'公尺'];
 
-/* ---------- 抽籤：環帶內按距離加權，近的機率高，避開剛去過的 ---------- */
+/* ---------- 抽籤：環帶內按距離加權，近的機率高，避開剛去過的 ----------
+   選的距離內沒有地點就不硬抽：回傳 {none, near}，讓玩家自己決定要不要走遠 */
 function draw(pos, band){
-  const recent = store.get('recent',[]), cur = S.target && S.target.id;
-  let pool = PLACES.map(p=>({p,d:dist(pos,[p.lat,p.lng])})).filter(x=>x.p.id!==cur && !recent.includes(x.p.id));
+  const recent = rec('recent'), cur = S.target && S.target.id;
+  const all = PLACES.map(p=>({p,d:dist(pos,[p.lat,p.lng])})).filter(x=>x.p.id!==cur && x.d>=60);
+  let pool = all.filter(x=>!recent.includes(x.p.id));
+  if (!pool.length) pool = all;
   const b = BANDS[band];
   let ring = pool.filter(x=>x.d>=b.min && x.d<=b.max);
-  if (ring.length<4) ring = pool.filter(x=>x.d<=b.max && x.d>=60);
-  if (!ring.length) ring = pool.sort((a,b)=>a.d-b.d).slice(0,5);
+  if (ring.length<4) ring = pool.filter(x=>x.d<=b.max);
+  if (!ring.length) return {none:true, near: pool.sort((a,b)=>a.d-b.d)[0] || null};
   const w = ring.map(x=>1/Math.max(x.d,120)**2), sum = w.reduce((a,c)=>a+c,0);
   let r = Math.random()*sum;
   for (let i=0;i<ring.length;i++){ if((r-=w[i])<=0) return ring[i]; }
@@ -183,7 +195,8 @@ function draw(pos, band){
 /* ---------- 狀態 ---------- */
 const S = {phase:'ready', band:1, pos:null, acc:0, heading:null, sim:false, target:null, startD:0,
   shown:0, voice:store.get('voice',true), last:{}, lastMoveAt:Date.now(), saidHalf:false, saidNear:false,
-  behindSince:0, lastFarAt:0, watch:null, lock:null, act:null, actUntil:0, anim:'', animAt:0, flip:false};
+  behindSince:0, lastFarAt:0, watch:null, lock:null, act:null, actUntil:0, anim:'', animAt:0, flip:false,
+  fixAt:0, hitFix:0, hits:0, cardT:0, offer:null, forcedSim:false};
 // 一次性動作（關心、不捨）：播 ms 毫秒後回到依情境決定的動作
 function act(name, ms){ S.act=name; S.actUntil=Date.now()+ms; }
 
@@ -220,13 +233,22 @@ function onOrient(e){
   else if (e.absolute && typeof e.alpha === 'number') h = 360 - e.alpha;
   if (h==null) return;
   const so = (screen.orientation && screen.orientation.angle) || 0;
+  if (S.heading==null && !S.sim && S.started) $('mode').textContent = 'GPS 實走';   // 指南針晚一點才醒
   S.heading = (h + so + 360) % 360;
+}
+const orientEv = 'ondeviceorientationabsolute' in window ? 'deviceorientationabsolute' : 'deviceorientation';
+// 收工、轉模擬時把定位、指南針、螢幕常亮都關掉；下次出發重新取得（臨時定位失敗的人也能重試）
+function stopSensors(){
+  if (S.watch!==null){ try{ navigator.geolocation.clearWatch(S.watch); }catch(e){} S.watch=null; }
+  removeEventListener(orientEv, onOrient);
+  if (S.lock){ try{ S.lock.release(); }catch(e){} } S.lock=null;
+  S.anchor=null; S.acc=0;
+  if (!S.sim) S.heading=null;
 }
 async function startSensors(){
   try{ if (typeof DeviceOrientationEvent!=='undefined' && typeof DeviceOrientationEvent.requestPermission==='function'){
       const r = await DeviceOrientationEvent.requestPermission(); if (r!=='granted') throw 0; } }catch(e){}
-  if ('ondeviceorientationabsolute' in window) addEventListener('deviceorientationabsolute', onOrient);
-  else addEventListener('deviceorientation', onOrient);
+  addEventListener(orientEv, onOrient);
   return new Promise(res=>{
     if (!navigator.geolocation) return res(false);
     let done=false; const t=setTimeout(()=>{if(!done){done=true;res(false)}},12000);
@@ -235,7 +257,7 @@ async function startSensors(){
         const np=[p.coords.latitude,p.coords.longitude]; S.acc=p.coords.accuracy;
         // 跟「上次確認移動的位置」比，而不是上一筆：步行每秒約 1.3m，逐筆比永遠過不了門檻
         if (!S.anchor || dist(S.anchor,np)>4 || p.coords.speed>0.6){ if (S.anchor) S.lastMoveAt=Date.now(); S.anchor=np; }
-        if (!S.sim) S.pos=np;
+        if (!S.sim){ S.pos=np; S.fixAt++; }
         if(!done){done=true;clearTimeout(t);res(true)}
         tick();
       },()=>{if(!done){done=true;clearTimeout(t);res(false)}},{enableHighAccuracy:true,maximumAge:2000,timeout:15000});
@@ -243,6 +265,7 @@ async function startSensors(){
   });
 }
 function useSim(reason){
+  stopSensors();   // 模擬時方向由模擬按鈕決定，不讓真的指南針搶
   S.sim = true; S.acc = 5; if (S.heading==null) S.heading = 0;
   const tm = PLACES.find(p=>p.name.includes('天后宮')) || {lat:LUKANG[0],lng:LUKANG[1]};
   S.pos = move([tm.lat,tm.lng], 200, 30);
@@ -267,18 +290,30 @@ async function go(){
   pick();
 }
 function pick(){
-  const x = draw(S.pos, S.band);
+  // 上一次說「這個距離內沒有」，玩家按了「那就走遠一點」→ 直接去最近那處
+  const x = (S.offer && S.phase==='ready') ? S.offer : draw(S.pos, S.band);
+  S.offer = null;
+  if (x.none){
+    if (S.phase==='walking'){ $('sub').textContent = '這個距離內沒有別支籤了'; return; }
+    const n = x.near;
+    S.offer = n;
+    $('hint').textContent = n ? `這個距離內沒有籤，最近一處約 ${fmt(n.d).join(' ')}` : '附近沒有可以抽的地方';
+    $('go').textContent = n ? '那就走遠一點' : '抽一支籤，出發';
+    return;
+  }
   try{ const pre = new Audio(); pre.preload='auto'; pre.src=`voice/arrived_${x.p.id}.mp3`; }catch(e){}
   S.target = x.p; S.startD = x.d; S.saidHalf = S.saidNear = false; S.phase='walking'; S.pickAt = Date.now(); S.lastFarAt = Date.now();
-  store.set('drawn', store.get('drawn',0)+1);
+  S.hits = 0;
+  recSet('drawn', rec('drawn',0)+1);
   $('hint').textContent = '籤上寫著：' + (HINT[x.p.cat]||HINT.other);
   $('bands').hidden = true; $('go').hidden = true; $('walkrow').hidden = false;
   tick(true);
 }
 function arrive(){
   S.phase='arrived'; const t=S.target; clearInterval(simT); simT=null;
-  const seen = store.get('seen',[]); if(!seen.includes(t.id)){seen.push(t.id);store.set('seen',seen)}
-  const recent = [t.id,...store.get('recent',[]).filter(i=>i!==t.id)].slice(0,12); store.set('recent',recent);
+  $('walkrow').hidden = true; $('sim').classList.remove('on');   // 歡呼的 1.8 秒內不能再換籤或收工
+  const seen = rec('seen'); if(!seen.includes(t.id)){seen.push(t.id);recSet('seen',seen)}
+  const recent = [t.id,...rec('recent').filter(i=>i!==t.id)].slice(0,12); recSet('recent',recent);
   try{ navigator.vibrate && navigator.vibrate([60,40,120]); }catch(e){}
   say('arrived',{name:t.sn||t.name, id:t.id});
   const n = seen.length, cn='一二三四五六七八九十';
@@ -286,23 +321,37 @@ function arrive(){
   $('cname').textContent = t.name;
   $('ctag').textContent = TAG[t.tag] || HINT[t.cat] || '';
   $('cdesc').textContent = t.desc || '沒有留下說明的地方。站一下，看看它現在的樣子。';
-  setTimeout(()=>{$('veil').classList.add('on'); $('again').focus();}, 1800);   // 先讓他歡呼兩輪再蓋上籤卡
+  clearTimeout(S.cardT);
+  S.cardT = setTimeout(()=>{ if (S.phase!=='arrived') return; $('veil').classList.add('on'); $('again').focus(); }, 1800);   // 先讓他歡呼兩輪再蓋上籤卡
 }
 function reset(){
-  $('veil').classList.remove('on'); S.phase='ready'; S.target=null;
+  clearTimeout(S.cardT); S.cardT=0;
+  $('veil').classList.remove('on'); S.phase='ready'; S.target=null; S.offer=null;
   $('bands').hidden=false; $('go').hidden=false; $('go').textContent='再抽一支'; $('walkrow').hidden=true;
+  $('sim').classList.toggle('on', S.sim);
   $('hint').textContent='選一個遠近，替你抽一支籤'; $('dist').innerHTML='？<small></small>'; $('sub').textContent=statLine();
 }
-const statLine = () => `抽過 ${store.get('drawn',0)} 支 · 到過 ${store.get('seen',[]).length} 處`;
+const statLine = () => `${S.sim?'模擬：':''}抽過 ${rec('drawn',0)} 支 · 到過 ${rec('seen').length} 處`;
 
 /* ---------- 每次位置變化 ---------- */
 function tick(first){
   if (S.phase!=='walking' || !S.pos || !S.target) return;
   const tp=[S.target.lat,S.target.lng], d=dist(S.pos,tp);
   const [n,u]=fmt(d); $('dist').innerHTML=''; $('dist').append(n); const sm=document.createElement('small'); sm.textContent=u; $('dist').append(sm);
-  $('sub').textContent = S.acc>35 ? `定位誤差約 ${Math.round(S.acc)} 公尺` : statLine();
+  const blind = S.heading==null;
+  $('sub').textContent = S.acc>35 ? `定位誤差約 ${Math.round(S.acc)} 公尺`
+    : blind ? `沒有指南針・目標在${DIR8[Math.round(bearing(S.pos,tp)/45)%8]}方` : statLine();
   if (S.acc>60 && say('weak')) act('care', 4000);
-  if (d <= Math.min(ARRIVE+S.acc/2,40)) return arrive();
+  /* 到達：定位夠準（誤差 ≤ ACC_OK），而且連續兩筆不同的定位都在範圍內才算，避免一筆亂跳的定位就解籤。
+     門檻還要在鹿港巷弄裡實測校準 */
+  if (d <= Math.min(ARRIVE+S.acc/2,40)){
+    if (S.sim) return arrive();
+    if (S.acc > ACC_OK){ S.hits=0; $('sub').textContent='已經很近了，等定位準一點…'; return; }
+    if (S.fixAt !== S.hitFix){ S.hitFix = S.fixAt; S.hits++; }
+    if (S.hits >= 2) return arrive();
+    $('sub').textContent='已經很近了，確認位置中…'; return;
+  }
+  S.hits = 0;
   const now=Date.now();
   if (!first && !S.saidHalf && d < S.startD/2 && S.startD>300){ S.saidHalf=true; say('half'); }
   else if (!S.saidNear && d < 80){ S.saidNear=true; say('near'); }
@@ -313,10 +362,11 @@ function tick(first){
 function frame(){
   const t0 = performance.now();
   let rel = 0;
+  const blind = S.heading==null;   // 沒有可靠朝向：箭頭改成「上方是北」的絕對方位，不講左右、不叫人轉身
   if (S.target && S.pos){
     const b = bearing(S.pos,[S.target.lat,S.target.lng]);
     rel = norm180(b - (S.heading||0));
-    if (S.phase==='walking' && Math.abs(rel)>120){
+    if (S.phase==='walking' && !blind && Math.abs(rel)>120){
       if (!S.behindSince) S.behindSince=Date.now(); else if (Date.now()-S.behindSince>3500) say('behind');
     } else S.behindSince=0;
   }
@@ -326,21 +376,21 @@ function frame(){
   const nh = rad(-(S.heading||0));   // 「北」字沿著地面環走，告訴你手機朝哪
   $('north').setAttribute('transform', `translate(${(172*Math.sin(nh)).toFixed(1)} ${(-172*Math.cos(nh)).toFixed(1)}) scale(1 2.4)`);
   if (S.phase==='walking' && Date.now()-S.lastMoveAt>45000){ S.lastMoveAt=Date.now(); if (say('idle')) act('care', 5000); }
-  pose(a, t0);
+  pose(a, t0, blind);
   requestAnimationFrame(frame);
 }
 
 /* ---------- 角色：依情境挑動作 ----------
    到了→歡呼；收工→不捨；停太久或訊號差→關心（一次性）
    走路中：目標在背後→拉扯；在側邊→指方向；在前方且在走→走動；在前方但停著→先指前方，久了就停下等 */
-function pose(a, t0){
+function pose(a, t0, blind){
   const now = Date.now(), ar = Math.abs(a);
   let name = 'idle', flip = false;
   if (S.phase==='arrived') name = 'cheer';
   else if (S.act && now < S.actUntil) name = S.act;
   else if (S.phase==='walking' && S.target){
-    if (ar > 120){ name = 'pull'; flip = a > 0; }          // 素材往左拉；目標在右後方就鏡像
-    else if (ar > 35){ name = 'point'; flip = a < 0; }      // 素材指右；目標在左就鏡像
+    if (!blind && ar > 120){ name = 'pull'; flip = a > 0; }          // 素材往左拉；目標在右後方就鏡像
+    else if (!blind && ar > 35){ name = 'point'; flip = a < 0; }      // 素材指右；目標在左就鏡像
     else if (now - S.lastMoveAt < (S.sim ? 1500 : 6000)) name = 'walk';   // GPS 約每 3 秒才確認一次移動
     else if (now - Math.max(S.lastMoveAt, S.pickAt||0) < 15000) name = 'pointup';
   }
@@ -373,17 +423,22 @@ $('turn').onclick = ()=>{ S.heading = ((S.heading||0)+90)%360; };
 
 /* ---------- 按鈕 ---------- */
 document.querySelectorAll('#bands button').forEach(b=>b.onclick=()=>{
-  document.querySelectorAll('#bands button').forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); S.band=+b.dataset.b; });
+  document.querySelectorAll('#bands button').forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); S.band=+b.dataset.b;
+  if (S.offer){ S.offer=null; $('hint').textContent='選一個遠近，替你抽一支籤'; $('go').textContent = S.started?'再抽一支':'抽一支籤，出發'; } });
 $('go').onclick = go;
 $('redraw').onclick = pick;
-$('stop').onclick = ()=>{ say('bye'); act('bye', 3200); reset(); };
+// 收工＝結束這趟散步：關定位、指南針和螢幕常亮；下次出發重新取得
+$('stop').onclick = ()=>{ say('bye'); act('bye', 3200);
+  S.started = false; stopSensors();
+  if (!S.forcedSim){ S.sim = false; $('foot').textContent = ''; }
+  reset(); $('go').textContent = '抽一支籤，出發'; $('mode').textContent = S.sim ? '模擬行走' : '已收工'; };
 $('again').onclick = reset;
 $('voice').textContent = '語音：'+(S.voice?'開':'關');
 $('voice').onclick = ()=>{ S.voice=!S.voice; store.set('voice',S.voice); $('voice').textContent='語音：'+(S.voice?'開':'關');
   if(!S.voice){ try{speechSynthesis.cancel()}catch(e){} voiceEl.pause(); } };
 document.addEventListener('visibilitychange', async ()=>{ if(document.visibilityState==='visible' && S.lock!==null && S.phase==='walking'){
   try{ S.lock = await navigator.wakeLock.request('screen'); }catch(e){} } });
-if (location.hash==='#sim') useSim('模擬模式：按住「朝籤走」前進。');
+if (location.hash==='#sim'){ S.forcedSim = true; useSim('模擬模式：按住「朝籤走」前進。'); }
 $('sub').textContent = statLine();
 $('foot').textContent ||= `鹿港鎮內 ${PLACES.length} 個地點`;
 requestAnimationFrame(frame);

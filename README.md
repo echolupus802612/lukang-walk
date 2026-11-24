@@ -12,6 +12,7 @@
 | `src/app.html` | 頁面原始碼（資料以 `/*DATA*/[]` 佔位） |
 | `data/lukang.json` | 鹿港鎮內 72 個地點（WGS-84） |
 | `tools/build_data.py` | 合併文資局、OSM、維基 → `data/lukang.json`（原始下載不進版控） |
+| `data/place_ids.json` | 地點永久編號登記（只增不刪）；足跡和到達語音都認這個號碼，重跑資料不會換號 |
 | `tools/build_page.py` | 把資料嵌入頁面 → `docs/index.html`（GitHub Pages 從 `docs/` 發布） |
 | `art/prompts/` | 角色動作的生圖提示詞（Codex image_gen） |
 | `tools/build_sprites.py` | 把 `art/gen/` 的 2×2 動作表切成橫排精靈圖 → `docs/sprites/*.webp`（原圖不進版控） |

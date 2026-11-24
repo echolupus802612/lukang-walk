@@ -137,15 +137,35 @@ def merge(items):
     return kept
 
 
+def assign_ids(rows, reg_path):
+    """地点编号一旦发出就永久不变：玩家足迹和到达语音（arrived_<id>.mp3）都认这个号码。
+    编号登记在 place_ids.json（只增不删）；同名且相距 250m 内视为同一地点，沿用旧号；新地点从最大号往后排。
+    下架的地点号码也留在登记里，不会被新地点拿去用。"""
+    reg = json.loads(reg_path.read_text(encoding="utf-8")) if reg_path.exists() else []
+    used, nxt = set(), max((e["id"] for e in reg), default=0) + 1
+    for r in rows:
+        hit = next((e for e in reg if e["id"] not in used and norm(e["name"]) == norm(r["name"])
+                    and haversine((e["lat"], e["lng"]), (r["lat"], r["lng"])) < 250), None)
+        if hit:
+            r["id"] = hit["id"]
+        else:
+            r["id"] = nxt
+            nxt += 1
+            reg.append({"id": r["id"], "name": r["name"], "lat": round(r["lat"], 6), "lng": round(r["lng"], 6)})
+        used.add(r["id"])
+    reg_path.write_text(json.dumps(reg, ensure_ascii=False, indent=0), encoding="utf-8")
+
+
 def main():
     raw, out = Path(sys.argv[1]), Path(sys.argv[2])
     boch, osm, wiki = load_boch(raw), load_osm(raw), load_wiki(raw)
     rows = merge(boch + osm + wiki)
     rows.sort(key=lambda r: haversine(CENTER, (r["lat"], r["lng"])))
-    data = [dict(id=i + 1, name=r["name"], lat=round(r["lat"], 6), lng=round(r["lng"], 6),
+    assign_ids(rows, out.parent / "place_ids.json")
+    data = [dict(id=r["id"], name=r["name"], lat=round(r["lat"], 6), lng=round(r["lng"], 6),
                  cat=r["cat"], tag=r["tag"], desc=r["desc"],
                  src=sorted({r["src"], *r.get("also", [])}))
-            for i, r in enumerate(rows)]
+            for r in rows]
     out.write_text(json.dumps(data, ensure_ascii=False, indent=0), encoding="utf-8")
     from collections import Counter
     print(f"boch {len(boch)} / osm {len(osm)} / wiki {len(wiki)} → 合并后 {len(data)}")
