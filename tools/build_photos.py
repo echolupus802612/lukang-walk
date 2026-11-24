@@ -103,7 +103,10 @@ def main():
         pick, extra = None, {}
         title = meta.get("commons", {}).get(str(p["id"]))
         man = meta.get("manual", {}).get(str(p["id"]))   # 人工指定的其他 CC 授权照片（例如 Flickr），作者授权手填
-        if man:
+        if man and man.get("file"):   # 本机档案（使用者提供的照片），放在 art/photos/raw/user/，不进版控
+            pick = (man["credit"], None, man["file"])
+            extra = {k: man[k] for k in ("source", "note") if k in man}
+        elif man:
             pick = (man["credit"], man["url"], man["page"])
             extra = {k: man[k] for k in ("author", "license", "page")}
         elif title:
@@ -124,8 +127,11 @@ def main():
             continue
         credit, url, matched = pick
         try:
-            key = hashlib.md5(url.encode()).hexdigest()[:8]   # 换了来源就重新下载，不会拿到旧图
-            data = fetch(url, raw / f"{p['id']}_{key}{Path(url).suffix.lower() or '.jpg'}")
+            if url is None:
+                data = (raw / "user" / matched).read_bytes()
+            else:
+                key = hashlib.md5(url.encode()).hexdigest()[:8]   # 换了来源就重新下载，不会拿到旧图
+                data = fetch(url, raw / f"{p['id']}_{key}{Path(url).suffix.lower() or '.jpg'}")
             im = ImageOps.exif_transpose(Image.open(io.BytesIO(data))).convert("RGB")
         except Exception as e:  # 网址失效或不是图片就略过
             print(f"{p['id']:3d} {p['name']} 下载失败：{e}")
