@@ -1,0 +1,157 @@
+"""合并鹿港地标：文资局（古迹/历史建筑/文化景观）+ OSM + 中文维基 → data/lukang.json
+
+用法：python -I -B tools/build_data.py <raw目录> <输出json>
+所有坐标都是 WGS-84（文资局、OSM、维基皆然），台湾不需要做坐标转换。
+"""
+import json, math, re, sys
+from pathlib import Path
+
+CENTER = (24.0565, 120.4335)   # 鹿港老街一带
+RADIUS = 4500                  # 只收鹿港镇范围
+
+EXCLUDE = re.compile(
+    r"學校|国小|國小|國中|高中|高級中學|大學|學院|幼兒園|醫院|診所|衛生所|殯儀|納骨|靈骨|公墓|墓園|"
+    r"停車|加油|便利|超市|量販|百貨|銀行|郵局|派出所|警察|分局|公所|戶政|地政|消防|"
+    r"飯店|旅館|民宿|酒店|汽車|機車|工業區|交流道|國道|省道|縣道|快速道路|"
+    r"小學|兒童|有應公|百姓公|電廠|試驗所|火車站|"
+    r"(鎮|鄉|里|村|區|市|縣)$|線$|^鹿港$"
+)
+CATS = [
+    ("shop",      r"齋|餅|店$|老舖"),
+    ("worship",   r"宮|廟|寺|祠|堂|殿|壇|庵|教會|聖母|媽祖|土地公|福德"),
+    ("history",   r"行$|廳$|古蹟|遺址|舊址|故居|古厝|宅|第|居|館舍|書院|城|砲台|碑"),
+    ("structure", r"橋|樓|巷|街|井|門|坊|亭|塔|牌|厝|屋|倉|車站|驛"),
+    ("nature",    r"公園|樹|榕|林|溪|港|海|濕地|埤|池"),
+    ("culture",   r"館|藝|文化|館"),
+]
+
+
+def haversine(a, b):
+    R = 6371000
+    p1, p2 = math.radians(a[0]), math.radians(b[0])
+    dp, dl = p2 - p1, math.radians(b[1] - a[1])
+    h = math.sin(dp / 2) ** 2 + math.cos(p1) * math.cos(p2) * math.sin(dl / 2) ** 2
+    return 2 * R * math.atan2(math.sqrt(h), math.sqrt(1 - h))
+
+
+def classify(name, hint=""):
+    core = re.sub(r"^(彰化縣?)?鹿港", "", name)   # 「鹿港」的「港」别误判成自然
+    for cat, pat in CATS:
+        if re.search(pat, core):
+            return cat
+    return hint or "other"
+
+
+def clean_desc(text, name="", limit=90):
+    if not text:
+        return ""
+    t = re.sub(r"\s+", "", str(text))
+    sents = re.findall(r"[^。]+。", t) or [t]
+    core = re.sub(r"^(彰化縣?)?鹿港", "", name)[:4]
+    # 优先选提到这个地点本身的句子，避免开头是整段鹿港背景
+    pick = next((x for x in sents if core and core in x), sents[0])
+    return pick if len(pick) <= limit else pick[:limit] + "…"
+
+
+def load_boch(raw):
+    out = []
+    for fn, kind in [("boch_1.1.json", "古蹟"), ("boch_1.2.json", "歷史建築"), ("boch_3.1.json", "文化景觀")]:
+        p = raw / fn
+        if not p.exists():
+            continue
+        for x in json.loads(p.read_text(encoding="utf-8")):
+            try:
+                lat, lng = float(x["latitude"]), float(x["longitude"])
+            except (KeyError, TypeError, ValueError):
+                continue
+            if haversine(CENTER, (lat, lng)) > RADIUS:
+                continue
+            name = x.get("caseName", "").strip()
+            desc = clean_desc(x.get("pastHistory") or x.get("briefDescribe"), name)
+            types = x.get("assetsTypes", "")
+            hint = "worship" if "寺廟" in types or "宗祠" in types else "history"
+            out.append(dict(name=name, lat=lat, lng=lng, src="boch", tag=kind,
+                            cat=classify(name, hint), desc=desc, rank=3))
+    return out
+
+
+def load_osm(raw):
+    p = raw / "osm_lukang.json"
+    out = []
+    for e in json.loads(p.read_text(encoding="utf-8"))["elements"]:
+        t = e.get("tags", {})
+        name = t.get("name:zh-Hant") or t.get("name:zh") or t.get("name")
+        if e["type"] == "node":
+            lat, lng = e.get("lat"), e.get("lon")
+        else:
+            c = e.get("center") or {}
+            lat, lng = c.get("lat"), c.get("lon")
+        if lat is None:
+            continue
+        if not name:
+            if t.get("man_made") == "water_well":
+                name = "無名古井"
+            else:
+                continue
+        hint = ("worship" if t.get("amenity") == "place_of_worship" else
+                "nature" if t.get("natural") or t.get("leisure") else
+                "structure" if t.get("man_made") else "history" if t.get("historic") else "")
+        out.append(dict(name=name.strip(), lat=lat, lng=lng, src="osm", tag="",
+                        cat=classify(name, hint), desc="", rank=2))
+    return out
+
+
+def load_wiki(raw):
+    p = raw / "wiki_lukang.json"
+    out = []
+    for g in json.loads(p.read_text(encoding="utf-8"))["query"]["geosearch"]:
+        if g["dist"] > RADIUS:
+            continue
+        name = re.sub(r"\s*\(.*?\)$", "", g["title"]).strip()
+        out.append(dict(name=name, lat=g["lat"], lng=g["lon"], src="wiki", tag="",
+                        cat=classify(name), desc="", rank=1))
+    return out
+
+
+def norm(n):
+    return re.sub(r"[\s・·()（）]|^鹿港|^彰化縣?", "", n)
+
+
+def merge(items):
+    items.sort(key=lambda x: -x["rank"])     # 文资局优先保留（有简介）
+    kept = []
+    for it in items:
+        if EXCLUDE.search(it["name"]):
+            continue
+        dup = None
+        for k in kept:
+            d = haversine((it["lat"], it["lng"]), (k["lat"], k["lng"]))
+            a, b = norm(it["name"]), norm(k["name"])
+            if d < 40 or (d < 250 and a and b and (a in b or b in a)):
+                dup = k
+                break
+        if dup:
+            dup.setdefault("also", []).append(it["src"])
+            continue
+        kept.append(it)
+    return kept
+
+
+def main():
+    raw, out = Path(sys.argv[1]), Path(sys.argv[2])
+    boch, osm, wiki = load_boch(raw), load_osm(raw), load_wiki(raw)
+    rows = merge(boch + osm + wiki)
+    rows.sort(key=lambda r: haversine(CENTER, (r["lat"], r["lng"])))
+    data = [dict(id=i + 1, name=r["name"], lat=round(r["lat"], 6), lng=round(r["lng"], 6),
+                 cat=r["cat"], tag=r["tag"], desc=r["desc"],
+                 src=sorted({r["src"], *r.get("also", [])}))
+            for i, r in enumerate(rows)]
+    out.write_text(json.dumps(data, ensure_ascii=False, indent=0), encoding="utf-8")
+    from collections import Counter
+    print(f"boch {len(boch)} / osm {len(osm)} / wiki {len(wiki)} → 合并后 {len(data)}")
+    print("分类", dict(Counter(d["cat"] for d in data)))
+    print("有简介", sum(1 for d in data if d["desc"]))
+
+
+if __name__ == "__main__":
+    main()

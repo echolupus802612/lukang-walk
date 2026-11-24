@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#8f3524">
+<title>鹿港散步籤</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+TC:wght@500;700&display=swap" rel="stylesheet">
+<style>
+/* VOICE: 安靜的陪伴，像廟口有人替你抽了一支籤。
+   IDEA: 廟裡的籤筒——抽一支散步籤，籤筒精用那支籤替你指路，走到了才解籤。
+   PICTURE: 紅磚地上的籤筒精與地面方位環，佔首屏一半。
+   COLOUR and TYPE: 鹿港紅磚為底、廟金點題、米白文字；霞鶩文楷寫籤，思源黑體寫數字。
+   LAYOUT: 單欄一屏：籤況、籤筒精、距離、對話、主按鈕；解籤時整張籤卡蓋上來。 */
+:root{color-scheme:light dark;
+  --bg:light-dark(#9a3a27,#3b1610);--bg2:light-dark(#82301f,#2a0f0a);
+  --ink:#fbf3e6;--soft:light-dark(#f3dccb,#d9bfae);--gold:#f2c14e;--gold2:#c9922a;
+  --card:light-dark(#fbf3e6,#241310);--cardink:light-dark(#3a1a12,#f6e9da);--line:rgba(251,243,230,.22)}
+:root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
+*{box-sizing:border-box;min-width:0}
+[hidden]{display:none!important}
+html,body{height:100%}
+body{margin:0;background:radial-gradient(120% 70% at 50% 38%,var(--bg) 0%,var(--bg2) 100%) fixed,var(--bg2);
+  color:var(--ink);font:16px/1.55 "Noto Sans TC",system-ui,sans-serif;overflow-x:clip;
+  -webkit-tap-highlight-color:transparent;user-select:none}
+.app{min-height:100dvh;max-width:520px;margin:0 auto;display:flex;flex-direction:column;
+  padding:max(14px,env(safe-area-inset-top)) 16px max(16px,env(safe-area-inset-bottom))}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px;font-size:14px;color:var(--soft)}
+.top b{font:700 20px/1.1 "LXGW WenKai TC",serif;color:var(--ink)}
+.mode{border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:13px;white-space:nowrap}
+.hint{margin-top:14px;font:400 17px/1.4 "LXGW WenKai TC",serif;text-align:center;color:var(--soft);min-height:24px}
+.stage{position:relative;flex:1 1 auto;min-height:300px;display:grid;place-items:center}
+.stage svg{width:min(88vw,380px);height:auto;overflow:visible}
+.dist{text-align:center;font-weight:700;font-size:clamp(40px,12vw,56px);line-height:1.05;letter-spacing:.5px}
+.dist small{font-size:18px;font-weight:500;margin-left:4px;color:var(--soft)}
+.sub{text-align:center;font-size:13px;color:var(--soft);min-height:20px;margin-top:2px}
+.say{margin:12px auto 0;max-width:360px;min-height:52px;text-align:center;font:400 18px/1.45 "LXGW WenKai TC",serif;
+  padding:12px 16px;border-radius:16px;background:rgba(0,0,0,.16);opacity:0;transform:translateY(6px);transition:.35s}
+.say.on{opacity:1;transform:none}
+.bands{display:flex;gap:8px;justify-content:center;margin-top:14px}
+.bands button{flex:1;max-width:120px}
+button{font:500 16px/1 "Noto Sans TC",sans-serif;color:var(--ink);background:rgba(0,0,0,.18);
+  border:1px solid var(--line);border-radius:14px;min-height:46px;padding:0 14px;cursor:pointer}
+button.sel{background:var(--ink);color:var(--bg2);border-color:var(--ink)}
+button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.main{display:block;width:100%;margin-top:12px;min-height:56px;font:700 20px/1 "LXGW WenKai TC",serif;
+  background:var(--gold);color:#3a1a12;border:0;box-shadow:0 6px 0 var(--gold2)}
+.main:active{transform:translateY(3px);box-shadow:0 3px 0 var(--gold2)}
+.row{display:flex;gap:8px;margin-top:10px}.row button{flex:1}
+.sim{display:none;gap:8px;margin-top:10px}.sim.on{display:flex}.sim button{flex:1;font-size:15px}
+.foot{margin-top:12px;text-align:center;font-size:13px;color:var(--soft)}
+.foot a{color:var(--soft)}
+/* 解籤卡 */
+.veil{position:fixed;inset:0;background:rgba(20,6,3,.55);display:none;place-items:center;padding:16px;z-index:5}
+.veil.on{display:grid}
+.card{width:min(100%,400px);background:var(--card);color:var(--cardink);border-radius:20px;padding:26px 22px 20px;
+  box-shadow:0 20px 50px rgba(0,0,0,.4);text-align:center;animation:rise .5s ease}
+@keyframes rise{from{transform:translateY(30px) scale(.96);opacity:0}}
+.card .no{font:700 15px/1 "LXGW WenKai TC",serif;color:var(--gold2);letter-spacing:4px}
+.card h2{font:700 clamp(30px,9vw,40px)/1.1 "LXGW WenKai TC",serif;margin:14px 0 8px;text-wrap:balance}
+.card .tag{display:inline-block;font-size:13px;border:1px solid currentColor;border-radius:999px;padding:2px 10px;opacity:.7}
+.card p{font:400 17px/1.6 "LXGW WenKai TC",serif;text-align:start;margin:16px 0 4px}
+.card .src{font-size:13px;opacity:.6;margin-top:10px}
+.card button{width:100%;margin-top:16px;background:#9a3a27;color:#fbf3e6;border:0}
+.pet .bob{animation:bob 2.8s ease-in-out infinite;transform-origin:200px 250px}
+@keyframes bob{50%{transform:translateY(-4px) scaleY(1.015)}}
+.pet.hop .bob{animation:hop .45s ease 3}
+@keyframes hop{50%{transform:translateY(-22px)}}
+@media (prefers-reduced-motion:reduce){.pet .bob,.pet.hop .bob,.card{animation:none}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="top"><b>鹿港散步籤</b><span class="mode" id="mode">尚未出發</span></div>
+  <div class="hint" id="hint">選一個遠近，替你抽一支籤</div>
+
+  <div class="stage">
+    <svg viewBox="0 0 400 330" class="pet" id="pet" aria-label="籤筒精指著方向">
+      <defs>
+        <linearGradient id="tube" x1="0" x2="1"><stop offset="0" stop-color="#7d2617"/><stop offset=".45" stop-color="#c2492f"/><stop offset="1" stop-color="#6e2114"/></linearGradient>
+        <linearGradient id="stick" x1="0" x2="1"><stop offset="0" stop-color="#e7c98f"/><stop offset="1" stop-color="#b98b4a"/></linearGradient>
+        <radialGradient id="glow"><stop offset="0" stop-color="#f2c14e" stop-opacity=".55"/><stop offset="1" stop-color="#f2c14e" stop-opacity="0"/></radialGradient>
+      </defs>
+      <!-- 地面方位環（透視壓扁），金色扇形是精確方向 -->
+      <g transform="translate(200 268) scale(1 .42)">
+        <circle r="150" fill="rgba(0,0,0,.18)" stroke="rgba(251,243,230,.25)" stroke-width="2"/>
+        <circle r="108" fill="none" stroke="rgba(251,243,230,.12)" stroke-width="2" stroke-dasharray="4 10"/>
+        <g id="wedge"><path d="M0 0 L-34 -146 A150 150 0 0 1 34 -146 Z" fill="url(#glow)"/><path d="M0 -112 L-10 -132 L10 -132 Z" fill="#f2c14e"/></g>
+      </g>
+      <ellipse cx="200" cy="268" rx="62" ry="13" fill="rgba(0,0,0,.35)"/>
+      <g class="bob" id="body">
+        <!-- 指路的那支籤：繞筒口轉 -->
+        <g id="arm" transform="rotate(0 200 150)">
+          <rect x="194" y="54" width="12" height="104" rx="5" fill="url(#stick)"/>
+          <rect x="194" y="54" width="12" height="26" rx="5" fill="#c9412b"/>
+        </g>
+        <!-- 其他幾支籤 -->
+        <g fill="url(#stick)" opacity=".9"><rect x="170" y="112" width="9" height="46" rx="4" transform="rotate(-12 174 158)"/><rect x="222" y="114" width="9" height="44" rx="4" transform="rotate(14 226 158)"/><rect x="184" y="118" width="9" height="40" rx="4" transform="rotate(-4 188 158)"/></g>
+        <!-- 筒身 -->
+        <path d="M146 152 Q146 260 156 262 L244 262 Q254 260 254 152 Z" fill="url(#tube)"/>
+        <ellipse cx="200" cy="152" rx="54" ry="13" fill="#5a1a10"/>
+        <ellipse cx="200" cy="152" rx="54" ry="13" fill="none" stroke="#f2c14e" stroke-width="4"/>
+        <rect x="148" y="236" width="104" height="8" fill="#f2c14e" opacity=".85"/>
+        <path d="M150 168 Q152 240 160 252" stroke="rgba(255,255,255,.18)" stroke-width="6" fill="none" stroke-linecap="round"/>
+        <!-- 臉 -->
+        <g id="face">
+          <ellipse id="eyeL" cx="182" cy="196" rx="6" ry="8" fill="#2a0d07"/>
+          <ellipse id="eyeR" cx="218" cy="196" rx="6" ry="8" fill="#2a0d07"/>
+          <ellipse cx="170" cy="212" rx="8" ry="4" fill="#f59a8a" opacity=".6"/><ellipse cx="230" cy="212" rx="8" ry="4" fill="#f59a8a" opacity=".6"/>
+          <path id="mouth" d="M193 214 Q200 221 207 214" stroke="#2a0d07" stroke-width="3" fill="none" stroke-linecap="round"/>
+        </g>
+      </g>
+      <!-- 「北」放在最上層，轉到筒身後面也看得見 -->
+      <g transform="translate(200 268) scale(1 .42)"><text id="north" y="9" text-anchor="middle" font-size="24" fill="rgba(251,243,230,.7)" transform="translate(0 -172) scale(1 2.4)">北</text></g>
+    </svg>
+  </div>
+
+  <div class="dist" id="dist">？<small></small></div>
+  <div class="sub" id="sub"></div>
+  <div class="say" id="say"></div>
+
+  <div class="bands" id="bands">
+    <button data-b="0">近 ~500m</button><button data-b="1" class="sel">中 ~1km</button><button data-b="2">遠 ~2km</button>
+  </div>
+  <button class="main" id="go">抽一支籤，出發</button>
+  <div class="row" id="walkrow" hidden><button id="redraw">換一支</button><button id="voice">語音：開</button><button id="stop">收工</button></div>
+  <div class="sim" id="sim"><button id="stepTo">▲ 朝籤走</button><button id="stepRand">亂走</button><button id="turn">轉身 90°</button></div>
+  <div class="foot" id="foot"></div>
+</div>
+
+<div class="veil" id="veil"><div class="card" role="dialog" aria-modal="true" aria-labelledby="cname">
+  <div class="no" id="cno">第一籤</div><h2 id="cname"></h2><span class="tag" id="ctag"></span>
+  <p id="cdesc"></p><div class="src">資料：文化部文化資產局、© OpenStreetMap contributors、維基百科</div>
+  <button id="again">再抽一支</button>
+</div></div>
+
+<script>
+{
+const PLACES = /*DATA*/[];
+const BANDS = [{max:500,min:0},{max:1000,min:400},{max:2000,min:900}];
+const ARRIVE = 25, LUKANG = [24.0565,120.4335];
+const HINT = {worship:'一座廟或祠',history:'一處老宅或舊址',structure:'一段巷弄、一棟老樓',nature:'一片能歇腳的地方',culture:'一間館',shop:'一間老店',other:'說不上來的地方'};
+const TAG = {古蹟:'古蹟',歷史建築:'歷史建築',文化景觀:'文化景觀'};
+const LINES = {
+  greet:['這一支，我替你抽好了。跟著我。','走吧，有個地方在等你。'],
+  far:['還有 {d}，慢慢來。','不急，還有 {d}。'],
+  half:['走一半了。','過半了，你走得不錯。'],
+  near:['快到了，抬頭看看。','就在這附近了。'],
+  behind:['在你後面啦，轉個身。','方向反了，往回一點。'],
+  idle:['停下來了？歇一下也好。','我在這，等你。'],
+  weak:['訊號不太好，先站一下。'],
+  arrived:['到了！是{name}。','就是這裡——{name}。']
+};
+const $ = id => document.getElementById(id);
+const store = {get(k,d){try{const v=localStorage.getItem('lkwalk_'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},
+  set(k,v){try{localStorage.setItem('lkwalk_'+k,JSON.stringify(v))}catch(e){}}};
+
+/* ---------- 幾何 ---------- */
+const R = 6371000, rad = x => x*Math.PI/180;
+function dist(a,b){const p1=rad(a[0]),p2=rad(b[0]),dp=p2-p1,dl=rad(b[1]-a[1]);
+  const h=Math.sin(dp/2)**2+Math.cos(p1)*Math.cos(p2)*Math.sin(dl/2)**2;return 2*R*Math.atan2(Math.sqrt(h),Math.sqrt(1-h))}
+function bearing(a,b){const p1=rad(a[0]),p2=rad(b[0]),dl=rad(b[1]-a[1]);
+  const y=Math.sin(dl)*Math.cos(p2),x=Math.cos(p1)*Math.sin(p2)-Math.sin(p1)*Math.cos(p2)*Math.cos(dl);
+  return (Math.atan2(y,x)*180/Math.PI+360)%360}
+function move(p,deg,m){const d=m/R,b=rad(deg),la=rad(p[0]),lo=rad(p[1]);
+  const la2=Math.asin(Math.sin(la)*Math.cos(d)+Math.cos(la)*Math.sin(d)*Math.cos(b));
+  const lo2=lo+Math.atan2(Math.sin(b)*Math.sin(d)*Math.cos(la),Math.cos(d)-Math.sin(la)*Math.sin(la2));
+  return [la2*180/Math.PI,lo2*180/Math.PI]}
+const norm180 = a => ((a%360)+540)%360-180;
+const fmt = m => m>=1000?[(m/1000).toFixed(1),'公里']:[String(Math.round(m)),'公尺'];
+
+/* ---------- 抽籤：環帶內按距離加權，近的機率高，避開剛去過的 ---------- */
+function draw(pos, band){
+  const recent = store.get('recent',[]), cur = S.target && S.target.id;
+  let pool = PLACES.map(p=>({p,d:dist(pos,[p.lat,p.lng])})).filter(x=>x.p.id!==cur && !recent.includes(x.p.id));
+  const b = BANDS[band];
+  let ring = pool.filter(x=>x.d>=b.min && x.d<=b.max);
+  if (ring.length<4) ring = pool.filter(x=>x.d<=b.max && x.d>=60);
+  if (!ring.length) ring = pool.sort((a,b)=>a.d-b.d).slice(0,5);
+  const w = ring.map(x=>1/Math.max(x.d,120)**2), sum = w.reduce((a,c)=>a+c,0);
+  let r = Math.random()*sum;
+  for (let i=0;i<ring.length;i++){ if((r-=w[i])<=0) return ring[i]; }
+  return ring[ring.length-1];
+}
+
+/* ---------- 狀態 ---------- */
+const S = {phase:'ready', band:1, pos:null, acc:0, heading:null, sim:false, target:null, startD:0,
+  shown:0, voice:store.get('voice',true), last:{}, lastMoveAt:Date.now(), saidHalf:false, saidNear:false,
+  behindSince:0, lastFarAt:0, watch:null, lock:null};
+
+function say(ev, vars={}){
+  const now = Date.now(); if (S.last[ev] && now-S.last[ev] < 12000) return; S.last[ev]=now;
+  const list = LINES[ev], line = list[Math.floor(Math.random()*list.length)]
+    .replace('{d}', vars.d||'').replace('{name}', vars.name||'');
+  const el = $('say'); el.textContent = line; el.classList.add('on');
+  clearTimeout(say.t); say.t = setTimeout(()=>el.classList.remove('on'), 5000);
+  if (S.voice && 'speechSynthesis' in window){ try{
+    const u = new SpeechSynthesisUtterance(line); u.lang='zh-TW'; u.rate=1; u.pitch=1.1;
+    speechSynthesis.cancel(); speechSynthesis.speak(u);}catch(e){} }
+}
+
+/* ---------- 定位與指南針 ---------- */
+function onOrient(e){
+  let h = null;
+  if (typeof e.webkitCompassHeading === 'number') h = e.webkitCompassHeading;
+  else if (e.absolute && typeof e.alpha === 'number') h = 360 - e.alpha;
+  if (h==null) return;
+  const so = (screen.orientation && screen.orientation.angle) || 0;
+  S.heading = (h + so + 360) % 360;
+}
+async function startSensors(){
+  try{ if (typeof DeviceOrientationEvent!=='undefined' && typeof DeviceOrientationEvent.requestPermission==='function'){
+      const r = await DeviceOrientationEvent.requestPermission(); if (r!=='granted') throw 0; } }catch(e){}
+  if ('ondeviceorientationabsolute' in window) addEventListener('deviceorientationabsolute', onOrient);
+  else addEventListener('deviceorientation', onOrient);
+  return new Promise(res=>{
+    if (!navigator.geolocation) return res(false);
+    let done=false; const t=setTimeout(()=>{if(!done){done=true;res(false)}},12000);
+    try{
+      S.watch = navigator.geolocation.watchPosition(p=>{
+        const np=[p.coords.latitude,p.coords.longitude]; S.acc=p.coords.accuracy;
+        if (S.pos && dist(S.pos,np)>4) S.lastMoveAt=Date.now();
+        if (!S.sim) S.pos=np;
+        if(!done){done=true;clearTimeout(t);res(true)}
+        tick();
+      },()=>{if(!done){done=true;clearTimeout(t);res(false)}},{enableHighAccuracy:true,maximumAge:2000,timeout:15000});
+    }catch(e){ done=true; clearTimeout(t); res(false); }
+  });
+}
+function useSim(reason){
+  S.sim = true; S.acc = 5; if (S.heading==null) S.heading = 0;
+  const tm = PLACES.find(p=>p.name.includes('天后宮')) || {lat:LUKANG[0],lng:LUKANG[1]};
+  S.pos = move([tm.lat,tm.lng], 200, 30);
+  $('sim').classList.add('on'); $('mode').textContent='模擬行走';
+  $('foot').textContent = reason;
+}
+
+/* ---------- 流程 ---------- */
+async function go(){
+  if (S.phase==='ready' && !S.started){
+    S.started = true; $('go').disabled = true; $('go').textContent='找方向中…';
+    say('greet'); // 在點擊裡先開口，iOS 才肯放聲音
+    const ok = S.sim ? true : await startSensors();
+    if (!S.sim){
+      if (!ok) useSim('拿不到定位（需要 HTTPS 網址並允許定位），先在天后宮前模擬走走。');
+      else if (dist(S.pos,LUKANG)>8000) useSim('你現在不在鹿港，先用天后宮前的位置模擬。');
+      else { $('mode').textContent = S.heading==null?'GPS（無指南針）':'GPS 實走'; $('foot').textContent=''; }
+    }
+    try{ if (navigator.wakeLock) S.lock = await navigator.wakeLock.request('screen'); }catch(e){}
+    $('go').disabled=false;
+  }
+  pick();
+}
+function pick(){
+  const x = draw(S.pos, S.band);
+  S.target = x.p; S.startD = x.d; S.saidHalf = S.saidNear = false; S.phase='walking';
+  store.set('drawn', store.get('drawn',0)+1);
+  $('hint').textContent = '籤上寫著：' + (HINT[x.p.cat]||HINT.other);
+  $('bands').hidden = true; $('go').hidden = true; $('walkrow').hidden = false;
+  tick(true);
+}
+function arrive(){
+  S.phase='arrived'; const t=S.target; clearInterval(simT); simT=null;
+  const seen = store.get('seen',[]); if(!seen.includes(t.id)){seen.push(t.id);store.set('seen',seen)}
+  const recent = [t.id,...store.get('recent',[]).filter(i=>i!==t.id)].slice(0,12); store.set('recent',recent);
+  $('pet').classList.add('hop'); setTimeout(()=>$('pet').classList.remove('hop'),1500);
+  try{ navigator.vibrate && navigator.vibrate([60,40,120]); }catch(e){}
+  say('arrived',{name:t.name});
+  const n = seen.length, cn='一二三四五六七八九十';
+  $('cno').textContent = '第' + (n<=10?cn[n-1]:n) + '籤';
+  $('cname').textContent = t.name;
+  $('ctag').textContent = TAG[t.tag] || HINT[t.cat] || '';
+  $('cdesc').textContent = t.desc || '沒有留下說明的地方。站一下，看看它現在的樣子。';
+  setTimeout(()=>{$('veil').classList.add('on'); $('again').focus();}, 900);
+}
+function reset(){
+  $('veil').classList.remove('on'); S.phase='ready'; S.target=null;
+  $('bands').hidden=false; $('go').hidden=false; $('go').textContent='再抽一支'; $('walkrow').hidden=true;
+  $('hint').textContent='選一個遠近，替你抽一支籤'; $('dist').innerHTML='？<small></small>'; $('sub').textContent=statLine();
+}
+const statLine = () => `抽過 ${store.get('drawn',0)} 支 · 到過 ${store.get('seen',[]).length} 處`;
+
+/* ---------- 每次位置變化 ---------- */
+function tick(first){
+  if (S.phase!=='walking' || !S.pos || !S.target) return;
+  const tp=[S.target.lat,S.target.lng], d=dist(S.pos,tp);
+  const [n,u]=fmt(d); $('dist').innerHTML=''; $('dist').append(n); const sm=document.createElement('small'); sm.textContent=u; $('dist').append(sm);
+  $('sub').textContent = S.acc>35 ? `定位誤差約 ${Math.round(S.acc)} 公尺` : statLine();
+  if (S.acc>60) say('weak');
+  if (d <= Math.min(ARRIVE+S.acc/2,40)) return arrive();
+  const now=Date.now();
+  if (!first && !S.saidHalf && d < S.startD/2 && S.startD>300){ S.saidHalf=true; say('half'); }
+  else if (!S.saidNear && d < 80){ S.saidNear=true; say('near'); }
+  else if (d>250 && now-S.lastFarAt>90000){ S.lastFarAt=now; say('far',{d:fmt(d).join(' ')}); }
+}
+
+/* ---------- 畫面：每幀把相對角度餵給籤筒精 ---------- */
+function frame(){
+  const t0 = performance.now();
+  let rel = 0;
+  if (S.target && S.pos){
+    const b = bearing(S.pos,[S.target.lat,S.target.lng]);
+    rel = norm180(b - (S.heading||0));
+    if (S.phase==='walking' && Math.abs(rel)>120){
+      if (!S.behindSince) S.behindSince=Date.now(); else if (Date.now()-S.behindSince>3500) say('behind');
+    } else S.behindSince=0;
+  }
+  S.shown += norm180(rel - S.shown) * 0.12;
+  const a = S.shown, lim = Math.max(-115, Math.min(115, a));
+  $('arm').setAttribute('transform', `rotate(${lim.toFixed(1)} 200 152)`);
+  $('wedge').setAttribute('transform', `rotate(${a.toFixed(1)})`);
+  const nh = rad(-(S.heading||0));   // 「北」字沿著地面環走，告訴你手機朝哪
+  $('north').setAttribute('transform', `translate(${(172*Math.sin(nh)).toFixed(1)} ${(-172*Math.cos(nh)).toFixed(1)}) scale(1 2.4)`);
+  const look = Math.max(-1,Math.min(1,a/90))*5;
+  $('face').setAttribute('transform', `translate(${look.toFixed(1)} 0)`);
+  const bl = (t0 % 4200) < 140 ? .15 : 1;
+  $('eyeL').setAttribute('ry', 8*bl); $('eyeR').setAttribute('ry', 8*bl);
+  if (S.phase==='walking' && Date.now()-S.lastMoveAt>45000){ S.lastMoveAt=Date.now(); say('idle'); }
+  requestAnimationFrame(frame);
+}
+
+/* ---------- 模擬：每 100ms 走一步（加速 8 倍） ---------- */
+let simT=null;
+function hold(btn, fn){
+  const start=e=>{e.preventDefault(); if(simT) return; S.lastMoveAt=Date.now(); simT=setInterval(fn,100)};
+  const end=()=>{clearInterval(simT); simT=null};
+  btn.addEventListener('pointerdown',start); ['pointerup','pointerleave','pointercancel'].forEach(t=>btn.addEventListener(t,end));
+}
+// 模擬時，人面向自己走的方向（手機跟著轉），方向判斷才合理
+hold($('stepTo'), ()=>{ if(S.phase!=='walking') return; const b=bearing(S.pos,[S.target.lat,S.target.lng]);
+  const dir=b+(Math.random()-.5)*50; S.heading=(S.heading+norm180(dir-S.heading)*.25+360)%360;
+  S.pos=move(S.pos, dir, 1.2); S.lastMoveAt=Date.now(); tick(); });
+let randDir = Math.random()*360;
+hold($('stepRand'), ()=>{ if(S.phase!=='walking') return; randDir += (Math.random()-.5)*30; S.heading=(randDir+360)%360;
+  S.pos=move(S.pos, randDir, 1.2); S.lastMoveAt=Date.now(); tick(); });
+$('turn').onclick = ()=>{ S.heading = ((S.heading||0)+90)%360; };
+
+/* ---------- 按鈕 ---------- */
+document.querySelectorAll('#bands button').forEach(b=>b.onclick=()=>{
+  document.querySelectorAll('#bands button').forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); S.band=+b.dataset.b; });
+$('go').onclick = go;
+$('redraw').onclick = pick;
+$('stop').onclick = reset;
+$('again').onclick = reset;
+$('voice').textContent = '語音：'+(S.voice?'開':'關');
+$('voice').onclick = ()=>{ S.voice=!S.voice; store.set('voice',S.voice); $('voice').textContent='語音：'+(S.voice?'開':'關');
+  if(!S.voice) try{speechSynthesis.cancel()}catch(e){} };
+document.addEventListener('visibilitychange', async ()=>{ if(document.visibilityState==='visible' && S.lock!==null && S.phase==='walking'){
+  try{ S.lock = await navigator.wakeLock.request('screen'); }catch(e){} } });
+if (location.hash==='#sim') useSim('模擬模式：按住「朝籤走」前進。');
+$('sub').textContent = statLine();
+$('foot').textContent ||= `鹿港鎮內 ${PLACES.length} 個地點`;
+requestAnimationFrame(frame);
+}
+</script>
+</body>
+</html>
