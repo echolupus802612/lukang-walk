@@ -16,6 +16,43 @@
   "60": "File:文開書院三川門.jpg",
   "65": "File:鹿港護安宮正面照.jpg"
  },
+ "manual": {
+  "13": {
+   "credit": "Flickr",
+   "url": "https://live.staticflickr.com/2932/14162484637_afef873a9e_b.jpg",
+   "page": "https://www.flickr.com/photos/120532743@N04/14162484637",
+   "author": "古攝古香",
+   "license": "CC BY 2.0"
+  },
+  "21": {
+   "credit": "Flickr",
+   "url": "https://live.staticflickr.com/3837/14169722267_0db9ee4d04_b.jpg",
+   "page": "https://www.flickr.com/photos/120532743@N04/14169722267",
+   "author": "古攝古香",
+   "license": "CC BY 2.0"
+  },
+  "27": {
+   "credit": "Flickr",
+   "url": "https://live.staticflickr.com/3903/14169584228_4b76dd86cf_b.jpg",
+   "page": "https://www.flickr.com/photos/120532743@N04/14169584228",
+   "author": "古攝古香",
+   "license": "CC BY 2.0"
+  },
+  "36": {
+   "credit": "Flickr",
+   "url": "https://live.staticflickr.com/2913/14361224102_120d96e026_b.jpg",
+   "page": "https://www.flickr.com/photos/120532743@N04/14361224102",
+   "author": "古攝古香",
+   "license": "CC BY 2.0"
+  },
+  "57": {
+   "credit": "Flickr",
+   "url": "https://live.staticflickr.com/5575/14325847146_5da9b39594_b.jpg",
+   "page": "https://www.flickr.com/photos/120532743@N04/14325847146",
+   "author": "古攝古香",
+   "license": "CC BY 2.0"
+  }
+ },
  "photos": {
   "1": {
    "credit": "文化部文化資產局",
@@ -60,6 +97,14 @@
    "url": "https://data.boch.gov.tw/upload/representImageFile/2021-11-10/6efdb910-2db5-4fc0-bde2-f1ad34075025/鹿港施進益古厝02.jpg",
    "matched": "鹿港施進益古厝"
   },
+  "13": {
+   "credit": "Flickr",
+   "url": "https://live.staticflickr.com/2932/14162484637_afef873a9e_b.jpg",
+   "matched": "https://www.flickr.com/photos/120532743@N04/14162484637",
+   "author": "古攝古香",
+   "license": "CC BY 2.0",
+   "page": "https://www.flickr.com/photos/120532743@N04/14162484637"
+  },
   "14": {
    "credit": "文化部文化資產局",
    "url": "https://data.boch.gov.tw/upload/representImageFile/2021-11-10/d311e907-c42e-4752-8299-6666f721988e/鹿港街長宿舍01.jpg",
@@ -96,6 +141,14 @@
    "license": "CC BY-SA 4.0",
    "page": "https://commons.wikimedia.org/wiki/File:%E9%B9%BF%E6%B8%AF%E7%A6%8F%E9%9D%88%E5%AE%AE%E6%AD%A3%E9%9D%A2%E7%85%A7.jpg"
   },
+  "21": {
+   "credit": "Flickr",
+   "url": "https://live.staticflickr.com/3837/14169722267_0db9ee4d04_b.jpg",
+   "matched": "https://www.flickr.com/photos/120532743@N04/14169722267",
+   "author": "古攝古香",
+   "license": "CC BY 2.0",
+   "page": "https://www.flickr.com/photos/120532743@N04/14169722267"
+  },
   "22": {
    "credit": "文化部文化資產局",
    "url": "https://data.boch.gov.tw/upload/representImageFile/2021-11-10/3055e469-63f8-4732-bf3c-cb77c8ad205b/鹿港敬義園紀念碑02.jpg",
@@ -123,6 +176,14 @@
    "credit": "文化部文化資產局",
    "url": "https://data.boch.gov.tw/upload/representImageFile/2021-11-10/c5233d05-f031-4062-bb95-15ddeae7990a/鹿港新祖宮01.jpg",
    "matched": "鹿港新祖宮"
+  },
+  "27": {
+   "credit": "Flickr",
+   "url": "https://live.staticflickr.com/3903/14169584228_4b76dd86cf_b.jpg",
+   "matched": "https://www.flickr.com/photos/120532743@N04/14169584228",
+   "author": "古攝古香",
+   "license": "CC BY 2.0",
+   "page": "https://www.flickr.com/photos/120532743@N04/14169584228"
   },
   "29": {
    "credit": "Wikimedia Commons",
@@ -167,6 +228,14 @@
    "author": "Outlookxp",
    "license": "CC BY-SA 4.0",
    "page": "https://commons.wikimedia.org/wiki/File:%E9%B9%BF%E6%B8%AF%E5%A8%81%E9%9D%88%E5%BB%9F%E6%96%9C%E7%85%A7.jpg"
+  },
+  "36": {
+   "credit": "Flickr",
+   "url": "https://live.staticflickr.com/2913/14361224102_120d96e026_b.jpg",
+   "matched": "https://www.flickr.com/photos/120532743@N04/14361224102",
+   "author": "古攝古香",
+   "license": "CC BY 2.0",
+   "page": "https://www.flickr.com/photos/120532743@N04/14361224102"
   },
   "37": {
    "credit": "Wikimedia Commons",
@@ -254,6 +323,14 @@
    "author": "Outlookxp",
    "license": "CC BY-SA 4.0",
    "page": "https://commons.wikimedia.org/wiki/File:%E9%B9%BF%E6%B8%AF%E6%96%87%E5%BE%B7%E5%AE%AE%E6%96%9C%E7%85%A7.jpg"
+  },
+  "57": {
+   "credit": "Flickr",
+   "url": "https://live.staticflickr.com/5575/14325847146_5da9b39594_b.jpg",
+   "matched": "https://www.flickr.com/photos/120532743@N04/14325847146",
+   "author": "古攝古香",
+   "license": "CC BY 2.0",
+   "page": "https://www.flickr.com/photos/120532743@N04/14325847146"
   },
   "59": {
    "credit": "文化部文化資產局",

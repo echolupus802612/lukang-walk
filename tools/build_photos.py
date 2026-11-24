@@ -3,7 +3,8 @@
 用法：python -I -B tools/build_photos.py <项目根目录> <观光署 AttractionList.json>
 
 来源优先顺序：
-  0. data/photos.json 的 "commons"：人工挑的维基共享资源（Wikimedia Commons）档名，作者与授权从 API 取得
+  0. data/photos.json 的 "manual"：人工挑的其他 CC 授权照片（网址、作者、授权手填）
+     data/photos.json 的 "commons"：人工挑的维基共享资源（Wikimedia Commons）档名，作者与授权从 API 取得
   1. 文化部文化资产局 开放资料的代表图（data/raw/boch_*.json 的 representImage）
   2. 交通部观光署 观光资讯资料库的景点图片（第一张）
 每张裁成 16:10、宽 720，存 WebP。原图下载到 art/photos/raw/（不进版控）。
@@ -101,7 +102,11 @@ def main():
         ll = (p["lat"], p["lng"])
         pick, extra = None, {}
         title = meta.get("commons", {}).get(str(p["id"]))
-        if title:
+        man = meta.get("manual", {}).get(str(p["id"]))   # 人工指定的其他 CC 授权照片（例如 Flickr），作者授权手填
+        if man:
+            pick = (man["credit"], man["url"], man["page"])
+            extra = {k: man[k] for k in ("author", "license", "page")}
+        elif title:
             url, artist, lic, page = commons_info(title)
             pick = ("Wikimedia Commons", url, title)
             extra = {"author": artist, "license": lic, "page": page}
@@ -133,7 +138,8 @@ def main():
         if f.stem not in photos:
             f.unlink()
     meta = {"_note": meta.get("_note", "地點照片出處（build_photos.py 產生）；skip＝人工排除、不配照片的編號"),
-            "skip": meta.get("skip", {}), "commons": meta.get("commons", {}), "photos": photos}
+            "skip": meta.get("skip", {}), "commons": meta.get("commons", {}), "manual": meta.get("manual", {}),
+            "photos": photos}
     meta_path.write_text(json.dumps(meta, ensure_ascii=False, indent=1), encoding="utf-8")
     kb = sum(f.stat().st_size for f in out.glob("*.webp")) // 1024
     print(f"共 {len(photos)} 張，{kb} KB")
