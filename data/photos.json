@@ -1,7 +1,20 @@
 {
  "_note": "地點照片出處（build_photos.py 產生）；skip＝人工排除、不配照片的編號",
- "skip": {
-  "65": "觀光署這張是楊橋公園的水池，廟本身看不清楚，和 66 楊橋公園重複"
+ "skip": {},
+ "commons": {
+  "6": "File:202607 真耶穌教會鹿港教會 01.jpg",
+  "18": "File:鹿港景靈宮門殿.jpg",
+  "20": "File:鹿港福靈宮正面照.jpg",
+  "25": "File:泊仔寮洽義堂門殿.jpg",
+  "29": "File:鹿港玉渠宮一景.jpg",
+  "30": "File:鹿港民俗文物館 Lugang Folk Arts Museum - panoramio.jpg",
+  "35": "File:鹿港威靈廟斜照.jpg",
+  "37": "File:鐵皮屋遮雨棚下的鹿港集英宮.jpg",
+  "49": "File:鹿港郭厝保安宮.jpg",
+  "51": "File:鹿港紫極殿正面照.jpg",
+  "55": "File:鹿港文德宮斜照.jpg",
+  "60": "File:文開書院三川門.jpg",
+  "65": "File:鹿港護安宮正面照.jpg"
  },
  "photos": {
   "1": {
@@ -23,6 +36,14 @@
    "credit": "文化部文化資產局",
    "url": "https://data.boch.gov.tw/upload/representImageFile/2021-11-10/596df590-8afa-4d76-8700-1521356bf254/鹿港蔡氏宗祠01.jpg",
    "matched": "鹿港蔡氏宗祠"
+  },
+  "6": {
+   "credit": "Wikimedia Commons",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/d/db/202607_%E7%9C%9F%E8%80%B6%E7%A9%8C%E6%95%99%E6%9C%83%E9%B9%BF%E6%B8%AF%E6%95%99%E6%9C%83_01.jpg/1280px-202607_%E7%9C%9F%E8%80%B6%E7%A9%8C%E6%95%99%E6%9C%83%E9%B9%BF%E6%B8%AF%E6%95%99%E6%9C%83_01.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "matched": "File:202607 真耶穌教會鹿港教會 01.jpg",
+   "author": "Jonashtand",
+   "license": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:202607_%E7%9C%9F%E8%80%B6%E7%A9%8C%E6%95%99%E6%9C%83%E9%B9%BF%E6%B8%AF%E6%95%99%E6%9C%83_01.jpg"
   },
   "10": {
    "credit": "交通部觀光署觀光資訊資料庫",
@@ -54,10 +75,26 @@
    "url": "https://data.boch.gov.tw/upload/representImageFile/2021-11-10/ea9fb32a-eb3b-4124-b24d-89a00df36364/鹿港玉珍齋01.jpg",
    "matched": "鹿港玉珍齋"
   },
+  "18": {
+   "credit": "Wikimedia Commons",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f5/%E9%B9%BF%E6%B8%AF%E6%99%AF%E9%9D%88%E5%AE%AE%E9%96%80%E6%AE%BF.jpg/1280px-%E9%B9%BF%E6%B8%AF%E6%99%AF%E9%9D%88%E5%AE%AE%E9%96%80%E6%AE%BF.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "matched": "File:鹿港景靈宮門殿.jpg",
+   "author": "Outlookxp",
+   "license": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:%E9%B9%BF%E6%B8%AF%E6%99%AF%E9%9D%88%E5%AE%AE%E9%96%80%E6%AE%BF.jpg"
+  },
   "19": {
    "credit": "文化部文化資產局",
    "url": "https://data.boch.gov.tw/upload/representImageFile/2021-11-10/863c8995-7641-4d4c-a19d-6e9b411df904/鹿港城隍廟01.jpg",
    "matched": "鹿港城隍廟"
+  },
+  "20": {
+   "credit": "Wikimedia Commons",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/5/5d/%E9%B9%BF%E6%B8%AF%E7%A6%8F%E9%9D%88%E5%AE%AE%E6%AD%A3%E9%9D%A2%E7%85%A7.jpg/1280px-%E9%B9%BF%E6%B8%AF%E7%A6%8F%E9%9D%88%E5%AE%AE%E6%AD%A3%E9%9D%A2%E7%85%A7.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "matched": "File:鹿港福靈宮正面照.jpg",
+   "author": "Outlookxp",
+   "license": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:%E9%B9%BF%E6%B8%AF%E7%A6%8F%E9%9D%88%E5%AE%AE%E6%AD%A3%E9%9D%A2%E7%85%A7.jpg"
   },
   "22": {
    "credit": "文化部文化資產局",
@@ -74,10 +111,34 @@
    "url": "https://data.boch.gov.tw/upload/representImageFile/2021-11-10/dfd7d7e1-1f9c-435c-aa85-a48956e43e91/鹿港元昌行01.jpg",
    "matched": "鹿港元昌行"
   },
+  "25": {
+   "credit": "Wikimedia Commons",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/e5/%E6%B3%8A%E4%BB%94%E5%AF%AE%E6%B4%BD%E7%BE%A9%E5%A0%82%E9%96%80%E6%AE%BF.jpg/1280px-%E6%B3%8A%E4%BB%94%E5%AF%AE%E6%B4%BD%E7%BE%A9%E5%A0%82%E9%96%80%E6%AE%BF.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "matched": "File:泊仔寮洽義堂門殿.jpg",
+   "author": "Outlookxp",
+   "license": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:%E6%B3%8A%E4%BB%94%E5%AF%AE%E6%B4%BD%E7%BE%A9%E5%A0%82%E9%96%80%E6%AE%BF.jpg"
+  },
   "26": {
    "credit": "文化部文化資產局",
    "url": "https://data.boch.gov.tw/upload/representImageFile/2021-11-10/c5233d05-f031-4062-bb95-15ddeae7990a/鹿港新祖宮01.jpg",
    "matched": "鹿港新祖宮"
+  },
+  "29": {
+   "credit": "Wikimedia Commons",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/9/95/%E9%B9%BF%E6%B8%AF%E7%8E%89%E6%B8%A0%E5%AE%AE%E4%B8%80%E6%99%AF.jpg/1280px-%E9%B9%BF%E6%B8%AF%E7%8E%89%E6%B8%A0%E5%AE%AE%E4%B8%80%E6%99%AF.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "matched": "File:鹿港玉渠宮一景.jpg",
+   "author": "Outlookxp",
+   "license": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:%E9%B9%BF%E6%B8%AF%E7%8E%89%E6%B8%A0%E5%AE%AE%E4%B8%80%E6%99%AF.jpg"
+  },
+  "30": {
+   "credit": "Wikimedia Commons",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/0/07/%E9%B9%BF%E6%B8%AF%E6%B0%91%E4%BF%97%E6%96%87%E7%89%A9%E9%A4%A8_Lugang_Folk_Arts_Museum_-_panoramio.jpg/1280px-%E9%B9%BF%E6%B8%AF%E6%B0%91%E4%BF%97%E6%96%87%E7%89%A9%E9%A4%A8_Lugang_Folk_Arts_Museum_-_panoramio.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "matched": "File:鹿港民俗文物館 Lugang Folk Arts Museum - panoramio.jpg",
+   "author": "lienyuan lee",
+   "license": "CC BY 3.0",
+   "page": "https://commons.wikimedia.org/wiki/File:%E9%B9%BF%E6%B8%AF%E6%B0%91%E4%BF%97%E6%96%87%E7%89%A9%E9%A4%A8_Lugang_Folk_Arts_Museum_-_panoramio.jpg"
   },
   "31": {
    "credit": "文化部文化資產局",
@@ -98,6 +159,22 @@
    "credit": "文化部文化資產局",
    "url": "https://data.boch.gov.tw/upload/representImageFile/2021-11-10/2ace713a-2400-4b06-9ed1-0a8565824497/鹿港丁家古厝04.jpg",
    "matched": "鹿港丁家古厝"
+  },
+  "35": {
+   "credit": "Wikimedia Commons",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/f/f8/%E9%B9%BF%E6%B8%AF%E5%A8%81%E9%9D%88%E5%BB%9F%E6%96%9C%E7%85%A7.jpg/1280px-%E9%B9%BF%E6%B8%AF%E5%A8%81%E9%9D%88%E5%BB%9F%E6%96%9C%E7%85%A7.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "matched": "File:鹿港威靈廟斜照.jpg",
+   "author": "Outlookxp",
+   "license": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:%E9%B9%BF%E6%B8%AF%E5%A8%81%E9%9D%88%E5%BB%9F%E6%96%9C%E7%85%A7.jpg"
+  },
+  "37": {
+   "credit": "Wikimedia Commons",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/c/ce/%E9%90%B5%E7%9A%AE%E5%B1%8B%E9%81%AE%E9%9B%A8%E6%A3%9A%E4%B8%8B%E7%9A%84%E9%B9%BF%E6%B8%AF%E9%9B%86%E8%8B%B1%E5%AE%AE.jpg/1280px-%E9%90%B5%E7%9A%AE%E5%B1%8B%E9%81%AE%E9%9B%A8%E6%A3%9A%E4%B8%8B%E7%9A%84%E9%B9%BF%E6%B8%AF%E9%9B%86%E8%8B%B1%E5%AE%AE.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "matched": "File:鐵皮屋遮雨棚下的鹿港集英宮.jpg",
+   "author": "Outlookxp",
+   "license": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:%E9%90%B5%E7%9A%AE%E5%B1%8B%E9%81%AE%E9%9B%A8%E6%A3%9A%E4%B8%8B%E7%9A%84%E9%B9%BF%E6%B8%AF%E9%9B%86%E8%8B%B1%E5%AE%AE.jpg"
   },
   "38": {
    "credit": "交通部觀光署觀光資訊資料庫",
@@ -139,6 +216,22 @@
    "url": "https://tourism.chcg.gov.tw/upload/27/2016122910214915087.jpg",
    "matched": "摸乳巷"
   },
+  "49": {
+   "credit": "Wikimedia Commons",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/be/%E9%B9%BF%E6%B8%AF%E9%83%AD%E5%8E%9D%E4%BF%9D%E5%AE%89%E5%AE%AE.jpg/1280px-%E9%B9%BF%E6%B8%AF%E9%83%AD%E5%8E%9D%E4%BF%9D%E5%AE%89%E5%AE%AE.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "matched": "File:鹿港郭厝保安宮.jpg",
+   "author": "Sean Chiu",
+   "license": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:%E9%B9%BF%E6%B8%AF%E9%83%AD%E5%8E%9D%E4%BF%9D%E5%AE%89%E5%AE%AE.jpg"
+  },
+  "51": {
+   "credit": "Wikimedia Commons",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/b/b2/%E9%B9%BF%E6%B8%AF%E7%B4%AB%E6%A5%B5%E6%AE%BF%E6%AD%A3%E9%9D%A2%E7%85%A7.jpg/1280px-%E9%B9%BF%E6%B8%AF%E7%B4%AB%E6%A5%B5%E6%AE%BF%E6%AD%A3%E9%9D%A2%E7%85%A7.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "matched": "File:鹿港紫極殿正面照.jpg",
+   "author": "Outlookxp",
+   "license": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:%E9%B9%BF%E6%B8%AF%E7%B4%AB%E6%A5%B5%E6%AE%BF%E6%AD%A3%E9%9D%A2%E7%85%A7.jpg"
+  },
   "52": {
    "credit": "文化部文化資產局",
    "url": "https://data.boch.gov.tw/old_upload/_upload/Assets_new/building/7643/photo/I002彰化縣鹿港龍山寺(1).JPG",
@@ -154,10 +247,26 @@
    "url": "https://data.boch.gov.tw/upload/representImageFile/2024-09-25/83dd203a-3a9e-41b4-9109-af298df8a286/鹿港金門舘01.jpg",
    "matched": "鹿港金門舘"
   },
+  "55": {
+   "credit": "Wikimedia Commons",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/2/23/%E9%B9%BF%E6%B8%AF%E6%96%87%E5%BE%B7%E5%AE%AE%E6%96%9C%E7%85%A7.jpg/1280px-%E9%B9%BF%E6%B8%AF%E6%96%87%E5%BE%B7%E5%AE%AE%E6%96%9C%E7%85%A7.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "matched": "File:鹿港文德宮斜照.jpg",
+   "author": "Outlookxp",
+   "license": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:%E9%B9%BF%E6%B8%AF%E6%96%87%E5%BE%B7%E5%AE%AE%E6%96%9C%E7%85%A7.jpg"
+  },
   "59": {
    "credit": "文化部文化資產局",
    "url": "https://data.boch.gov.tw/upload/representImageFile/2026-10-07/5afa9a6d-5ec4-4ab3-997a-effbecfa8188/鹿港地藏王廟01.jpg",
    "matched": "鹿港地藏王廟"
+  },
+  "60": {
+   "credit": "Wikimedia Commons",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/e/ed/%E6%96%87%E9%96%8B%E6%9B%B8%E9%99%A2%E4%B8%89%E5%B7%9D%E9%96%80.jpg/1280px-%E6%96%87%E9%96%8B%E6%9B%B8%E9%99%A2%E4%B8%89%E5%B7%9D%E9%96%80.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "matched": "File:文開書院三川門.jpg",
+   "author": "Outlookxp",
+   "license": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:%E6%96%87%E9%96%8B%E6%9B%B8%E9%99%A2%E4%B8%89%E5%B7%9D%E9%96%80.jpg"
   },
   "61": {
    "credit": "文化部文化資產局",
@@ -168,6 +277,14 @@
    "credit": "文化部文化資產局",
    "url": "https://data.boch.gov.tw/upload/representImageFile/2021-11-10/dbd7c123-0709-4529-b674-9d90dcd30753/鹿港文武廟01.jpg",
    "matched": "鹿港文武廟"
+  },
+  "65": {
+   "credit": "Wikimedia Commons",
+   "url": "https://thumb.wikimedia.org/wikipedia/commons/thumb/7/7a/%E9%B9%BF%E6%B8%AF%E8%AD%B7%E5%AE%89%E5%AE%AE%E6%AD%A3%E9%9D%A2%E7%85%A7.jpg/1280px-%E9%B9%BF%E6%B8%AF%E8%AD%B7%E5%AE%89%E5%AE%AE%E6%AD%A3%E9%9D%A2%E7%85%A7.jpg?utm_source=commons.wikimedia.org&utm_campaign=imageinfo&utm_content=thumbnail",
+   "matched": "File:鹿港護安宮正面照.jpg",
+   "author": "Outlookxp",
+   "license": "CC BY-SA 4.0",
+   "page": "https://commons.wikimedia.org/wiki/File:%E9%B9%BF%E6%B8%AF%E8%AD%B7%E5%AE%89%E5%AE%AE%E6%AD%A3%E9%9D%A2%E7%85%A7.jpg"
   },
   "66": {
    "credit": "交通部觀光署觀光資訊資料庫",

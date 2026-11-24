@@ -16,14 +16,14 @@ if jobs_path.exists():
     for x in slim:
         if x["id"] in sn and sn[x["id"]] != x["name"]:
             x["sn"] = sn[x["id"]]
-# 有官方照片的地點標上出處代號（文＝文資局、觀＝觀光署），照片在 docs/photos/<id>.webp
+# 有照片的地點標上出處代號（文＝文資局、觀＝觀光署、共＝維基共享資源），照片在 docs/photos/<id>.webp
 photos_path = root / "data" / "photos.json"
 if photos_path.exists():
     ph = json.loads(photos_path.read_text(encoding="utf-8"))["photos"]
     for x in slim:
         c = ph.get(str(x["id"]), {}).get("credit", "")
         if c:
-            x["ph"] = "文" if "文化資產" in c else "觀"
+            x["ph"] = "文" if "文化資產" in c else "共" if "Commons" in c else "觀"
 blob = json.dumps(slim, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
 html = (root / "src" / "app.html").read_text(encoding="utf-8")
 assert "/*DATA*/[]" in html
