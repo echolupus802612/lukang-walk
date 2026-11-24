@@ -162,9 +162,19 @@ def main():
     rows = merge(boch + osm + wiki)
     rows.sort(key=lambda r: haversine(CENTER, (r["lat"], r["lng"])))
     assign_ids(rows, out.parent / "place_ids.json")
+    # 人工整理：补简介、移出不适合的地点（编号照样留在登记里）
+    ov_path = out.parent / "place_overrides.json"
+    ov = json.loads(ov_path.read_text(encoding="utf-8")) if ov_path.exists() else {}
+    drop = {int(k) for k in ov.get("drop", {})}
+    for r in rows:
+        o = ov.get("desc", {}).get(str(r["id"]))
+        if o:
+            r["desc"], r["desc_src"] = o["text"], o["src"]
+    rows = [r for r in rows if r["id"] not in drop]
     data = [dict(id=r["id"], name=r["name"], lat=round(r["lat"], 6), lng=round(r["lng"], 6),
                  cat=r["cat"], tag=r["tag"], desc=r["desc"],
-                 src=sorted({r["src"], *r.get("also", [])}))
+                 src=sorted({r["src"], *r.get("also", [])}),
+                 **({"desc_src": r["desc_src"]} if r.get("desc_src") else {}))
             for r in rows]
     out.write_text(json.dumps(data, ensure_ascii=False, indent=0), encoding="utf-8")
     from collections import Counter
