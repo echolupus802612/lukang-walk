@@ -85,14 +85,17 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
         <circle r="150" fill="rgba(0,0,0,.18)" stroke="rgba(251,243,230,.25)" stroke-width="2"/>
         <circle r="108" fill="none" stroke="rgba(251,243,230,.12)" stroke-width="2" stroke-dasharray="4 10"/>
       </g>
-      <ellipse cx="200" cy="268" rx="74" ry="15" fill="rgba(0,0,0,.35)"/>
-      <!-- 導航箭頭：平躺在角色腳前的地面上（同樣透視壓扁），原地轉向目標，不會被身體擋住 -->
+      <!-- 導航箭頭：大到角色踩在上面，平躺在地面（同樣透視壓扁），以腳底為中心原地轉向目標 -->
       <g transform="translate(200 268) scale(1 .42)">
-        <g transform="translate(0 92)"><g id="wedge"><g transform="scale(1.5)">
-          <path d="M0 -38 L28 32 L0 17 L-28 32 Z" fill="none" stroke="rgba(42,13,7,.5)" stroke-width="16" stroke-linejoin="round"/>
-          <path d="M0 -38 L28 32 L0 17 L-28 32 Z" fill="#f2c14e" stroke="#f2c14e" stroke-width="7" stroke-linejoin="round"/>
-        </g></g></g>
-        <!-- 「北」沿著環走，告訴你手機朝哪 -->
+        <g id="wedge"><g transform="scale(3.4) translate(0 3)">
+          <path d="M0 -38 L28 32 L0 17 L-28 32 Z" fill="none" stroke="rgba(42,13,7,.5)" stroke-width="7" stroke-linejoin="round"/>
+          <path d="M0 -38 L28 32 L0 17 L-28 32 Z" fill="#f2c14e" stroke="#f2c14e" stroke-width="3" stroke-linejoin="round"/>
+        </g></g>
+      </g>
+      <!-- 腳下影子壓在箭頭上，看起來是踩著 -->
+      <ellipse cx="200" cy="268" rx="74" ry="15" fill="rgba(42,13,7,.4)"/>
+      <!-- 「北」沿著環走，告訴你手機朝哪 -->
+      <g transform="translate(200 268) scale(1 .42)">
         <text id="north" y="9" text-anchor="middle" font-size="24" fill="rgba(251,243,230,.7)" transform="translate(0 -172) scale(1 2.4)">北</text>
       </g>
     </svg>
