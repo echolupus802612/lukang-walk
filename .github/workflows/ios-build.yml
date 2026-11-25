@@ -58,10 +58,9 @@ jobs:
               print(f"SIMULATOR_ID={udid}", file=env)
           PY
 
-      - name: Boot simulator and run UI tests
-        id: test
+      - name: Build for the iPhone simulator
+        id: build_sim
         run: |
-          xcrun simctl bootstatus "$SIMULATOR_ID" -b
           settings=(
             -project "$PROJECT" -scheme "$SCHEME" -configuration Debug
             -destination "platform=iOS Simulator,id=$SIMULATOR_ID"
@@ -69,39 +68,12 @@ jobs:
           )
           xcodebuild build-for-testing "${settings[@]}" \
             -resultBundlePath "$RUNNER_TEMP/LukangWalk-Build.xcresult"
-          xcrun simctl install "$SIMULATOR_ID" "$RUNNER_TEMP/DerivedData/Build/Products/Debug-iphonesimulator/LukangWalk.app"
-          xcrun simctl privacy "$SIMULATOR_ID" grant location "$BUNDLE_ID"
-          xcodebuild test-without-building "${settings[@]}" \
-            -resultBundlePath "$RUNNER_TEMP/LukangWalk-Tests.xcresult"
-          xcrun xcresulttool get test-results summary \
-            --path "$RUNNER_TEMP/LukangWalk-Tests.xcresult" | tee "$RUNNER_TEMP/test-summary.json"
-          jq -e '.passedTests > 0' "$RUNNER_TEMP/test-summary.json"
-
-      - name: Preserve the Xcode test report
-        if: ${{ !cancelled() && steps.test.outcome != 'skipped' }}
-        run: |
-          if [[ -d "$RUNNER_TEMP/LukangWalk-Tests.xcresult" ]]; then
-            ditto -c -k --keepParent "$RUNNER_TEMP/LukangWalk-Tests.xcresult" "$RUNNER_TEMP/LukangWalk-Tests.xcresult.zip"
-          elif [[ -d "$RUNNER_TEMP/LukangWalk-Build.xcresult" ]]; then
-            ditto -c -k --keepParent "$RUNNER_TEMP/LukangWalk-Build.xcresult" "$RUNNER_TEMP/LukangWalk-Build.xcresult.zip"
-          fi
-
-      - name: Upload test report
-        if: ${{ !cancelled() && steps.test.outcome != 'skipped' }}
-        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
-        with:
-          name: LukangWalk-TestResults
-          path: ${{ runner.temp }}/LukangWalk-*.xcresult.zip
-          if-no-files-found: warn
-          compression-level: 0
 
       - name: Package simulator app and capture the ready screen
         run: |
           app="$RUNNER_TEMP/DerivedData/Build/Products/Debug-iphonesimulator/LukangWalk.app"
           ditto -c -k --keepParent "$app" "$RUNNER_TEMP/LukangWalk-Simulator.zip"
-          if xcrun simctl get_app_container "$SIMULATOR_ID" "$BUNDLE_ID" > /dev/null 2>&1; then
-            xcrun simctl uninstall "$SIMULATOR_ID" "$BUNDLE_ID"
-          fi
+          xcrun simctl bootstatus "$SIMULATOR_ID" -b
           xcrun simctl install "$SIMULATOR_ID" "$app"
           xcrun simctl ui "$SIMULATOR_ID" appearance light
           xcrun simctl status_bar "$SIMULATOR_ID" override --time '9:41' --batteryState discharging --batteryLevel 100
@@ -140,4 +112,38 @@ jobs:
           name: LukangWalk-Unsigned-Device
           path: ${{ runner.temp }}/LukangWalk-Unsigned-Device.zip
           if-no-files-found: error
+          compression-level: 0
+
+      - name: Run iPhone UI tests
+        id: test
+        run: |
+          settings=(
+            -project "$PROJECT" -scheme "$SCHEME" -configuration Debug
+            -destination "platform=iOS Simulator,id=$SIMULATOR_ID"
+            -derivedDataPath "$RUNNER_TEMP/DerivedData" -parallel-testing-enabled NO
+          )
+          xcrun simctl terminate "$SIMULATOR_ID" "$BUNDLE_ID"
+          xcrun simctl privacy "$SIMULATOR_ID" grant location "$BUNDLE_ID"
+          xcodebuild test-without-building "${settings[@]}" \
+            -resultBundlePath "$RUNNER_TEMP/LukangWalk-Tests.xcresult"
+          xcrun xcresulttool get test-results summary \
+            --path "$RUNNER_TEMP/LukangWalk-Tests.xcresult" | tee "$RUNNER_TEMP/test-summary.json"
+          jq -e '.passedTests > 0' "$RUNNER_TEMP/test-summary.json"
+
+      - name: Preserve the Xcode test report
+        if: ${{ !cancelled() && steps.build_sim.outcome != 'skipped' }}
+        run: |
+          if [[ -d "$RUNNER_TEMP/LukangWalk-Tests.xcresult" ]]; then
+            ditto -c -k --keepParent "$RUNNER_TEMP/LukangWalk-Tests.xcresult" "$RUNNER_TEMP/LukangWalk-Tests.xcresult.zip"
+          elif [[ -d "$RUNNER_TEMP/LukangWalk-Build.xcresult" ]]; then
+            ditto -c -k --keepParent "$RUNNER_TEMP/LukangWalk-Build.xcresult" "$RUNNER_TEMP/LukangWalk-Build.xcresult.zip"
+          fi
+
+      - name: Upload test report
+        if: ${{ !cancelled() && steps.build_sim.outcome != 'skipped' }}
+        uses: actions/upload-artifact@b7c566a772e6b6bfb58ed0dc250532a479d7789f # v6.0.0
+        with:
+          name: LukangWalk-TestResults
+          path: ${{ runner.temp }}/LukangWalk-*.xcresult.zip
+          if-no-files-found: warn
           compression-level: 0
