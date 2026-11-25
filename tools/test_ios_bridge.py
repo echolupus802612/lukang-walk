@@ -6,6 +6,7 @@
 import json
 import unittest
 from datetime import datetime, timezone
+from math import degrees
 from pathlib import Path
 
 from playwright.sync_api import sync_playwright
@@ -17,6 +18,14 @@ ENTRY = (ROOT / "docs/index.html").as_uri()
 PLACE = json.loads((ROOT / "data/lukang.json").read_text(encoding="utf-8"))[0]
 ORIGIN = (PLACE["lat"] + 0.002, PLACE["lng"])
 DESTINATION = (PLACE["lat"], PLACE["lng"])
+TAIWAN = json.loads((ROOT / "data/taiwan.json").read_text(encoding="utf-8"))
+NANTOU = next(p for p in TAIWAN if p["id"] == 1001)
+# 由資料最北點沿經線繼續往北，最近距離可獨立算出，不依賴選點程式。
+NORTHERNMOST = max(TAIWAN, key=lambda p: p["lat"])
+
+
+def north_of_edge(meters):
+    return (NORTHERNMOST["lat"] + degrees(meters / 6_371_000), NORTHERNMOST["lng"])
 
 BRIDGE = """
     window.nativeMessages = [];
@@ -118,6 +127,51 @@ class WalkBridgeTests(unittest.TestCase):
         session = self.start()
         self.fix(session, (ORIGIN[0] + 1, ORIGIN[1]))
         self.assert_simulated(session, "5 公里內還沒有收錄")
+
+    def test_nantou_real_walk_reveals_and_saves_national_place(self):
+        session = self.start()
+        destination = (NANTOU["lat"], NANTOU["lng"])
+        self.fix(session, (NANTOU["lat"] + 0.002, NANTOU["lng"]), age=750)
+        self.assertIn({"drawn": 5}, self.writes())
+        self.assertEqual(self.label("#mode"), "GPS（無指南針）")
+        self.assertFalse(self.page.locator("#stepTo").is_visible())
+        self.assertNotIn(NANTOU["name"], self.label("body"))
+        self.fix(session, destination, age=500)
+        self.assertEqual(self.messages("arrived"), [])
+        self.fix(session, destination)
+        self.page.clock.fast_forward(1800)
+        self.assertEqual(self.label("#cname"), NANTOU["name"])
+        self.assertEqual(self.label("#cdesc"), NANTOU["desc"])
+        photo = self.page.locator("#cph")
+        self.assertTrue(photo.is_visible())
+        self.assertEqual(photo.get_attribute("src"), f"photos/{NANTOU['id']}.webp")
+        self.assertGreater(photo.evaluate("async image => { await image.decode(); return image.naturalWidth; }"), 0)
+        self.assertIn({"seen": [NANTOU["id"]], "recent": [NANTOU["id"]]}, self.writes())
+        self.assertFalse(any("sim_drawn" in v or "sim_seen" in v for v in self.writes()))
+
+    def test_just_inside_5km_waits_for_consent_to_walk_farther(self):
+        point = north_of_edge(4999)
+        session = self.start()
+        self.fix(session, point)
+        self.assertEqual(self.label("#go"), "那就走遠一點")
+        self.assertIn("5.0 公里", self.label("#hint"))
+        self.assertEqual(self.writes(), [])
+        self.assertEqual(self.messages("stop"), [{"action": "stop", "session": session}])
+        self.assertFalse(self.messages("awake")[-1]["enabled"])
+        self.assertFalse(self.page.locator("#stepTo").is_visible())
+        self.click("#go")
+        second = self.messages("start")[-1]["session"]
+        self.assertNotEqual(second, session)
+        self.fix(second, point)
+        self.assertEqual(self.label("#mode"), "GPS（無指南針）")
+        self.assertTrue(self.page.locator("#stop").is_visible())
+        self.assertIn({"drawn": 5}, self.writes())
+
+    def test_just_outside_5km_falls_back_to_lukang_simulation(self):
+        session = self.start()
+        self.fix(session, north_of_edge(5001))
+        self.assert_simulated(session, "鹿港天后宮前模擬")
+        self.assertFalse(any("drawn" in v for v in self.writes()))
 
     def test_permission_lost_while_walking_draws_in_separate_book(self):
         session = self.start()

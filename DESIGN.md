@@ -78,7 +78,7 @@ ready ──出門散步吧──▶ walking ──到達──▶ arrived ─�
 5. **簡介**：文楷 17px，靠左；沒有簡介時寫「沒有留下說明的地方。站一下，看看它現在的樣子。」
 6. **再走一趟**：紅磚色按鈕
 
-App 的「資料來源」頁列出照片、文字、角色與字型授權；逐張照片的紀錄取自 `data/photos.json`。地點卡保留地點故事與照片。
+App 的「資料來源」頁列出照片、文字、角色與字型授權；鹿港逐張照片的紀錄取自 `data/photos.json`，全台其他地點依提供機關彙整，連結至 `data/photos_tw.json` 的逐張紀錄。地點卡保留地點故事與照片。
 
 ---
 
@@ -398,7 +398,7 @@ iPhone 工程在 `ios/LukangWalk.xcodeproj`，部署目標為 iOS 17.0 起，直
 - 資料矛盾：
   - 慈普寺主祀神明（釋迦牟尼佛或阿彌陀佛）
   - 鎮安宮地址
-- iPhone App 已使用 Xcode 26.3 編譯出模擬器版與未簽名的真機 Release 歸檔。iPhone 16 模擬器（iOS 26.2）通過三項 UI 測試：開關授權頁、以模擬位置經 Core Location 進入實走流程、重啟後保留模擬抽籤次數。桌面 WebKit 另通過八項畫面與橋接測試。[本次 Xcode 建置與測試紀錄](https://github.com/echolupus802612/lukang-walk/actions/runs/45634788257)
+- 鹿港版 1.0 已使用 Xcode 26.3 編譯出模擬器版與未簽名的真機 Release 歸檔。iPhone 16 模擬器（iOS 26.2）通過三項 UI 測試：開關授權頁、以模擬位置經 Core Location 進入實走流程、重啟後保留模擬抽籤次數。桌面 WebKit 另通過八項畫面與橋接測試。[本次 Xcode 建置與測試紀錄](https://github.com/echolupus802612/lukang-walk/actions/runs/45634788257)
 - 真機簽名安裝、鹿港窄巷的到達判定、指南針、背景恢復、語音和震動仍待實地驗收。
 - 全台版：鹿港以外的簡介由 Codex 濃縮、照片自動配對，都沒有逐筆人工核對；選點規則只看名稱，會有誤收或誤刪。
-- 全台版：桌面 WebKit 八項橋接測試已重跑通過（2026-11-26）；Xcode 建置與 iPhone 模擬器 UI 測試尚未重跑（地點資料、照片、字型都變大）。
+- 全台版 1.1（build 2）沿用原 App 識別碼與足跡格式。iPhone 模擬器測試使用鹿港以外的定位，桌面 WebKit 另驗證全台地點到達後的照片、簡介與足跡，以及距離最近地點 5 公里內外的處理。[全台版 iOS 建置與測試紀錄](https://github.com/echolupus802612/lukang-walk/actions/workflows/ios-build.yml?query=branch%3Aios%2Ffirst-app)
