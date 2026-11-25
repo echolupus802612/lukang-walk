@@ -173,6 +173,8 @@ final class WalkViewController: UIViewController, WKNavigationDelegate {
 
 private final class CreditsViewController: UIViewController, WKNavigationDelegate {
     private let page: URL
+    private var initialLoad: WKNavigation?
+    private var retriedAfterTermination = false
 
     init(page: URL) {
         self.page = page
@@ -187,10 +189,51 @@ private final class CreditsViewController: UIViewController, WKNavigationDelegat
         let web = WKWebView(frame: .zero, configuration: config)
         web.navigationDelegate = self
         view = web
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
         navigationItem.title = "資料來源與授權"
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "完成", style: .done, target: self,
                                                            action: #selector(close))
-        web.loadFileURL(page, allowingReadAccessTo: page.deletingLastPathComponent())
+        if let web = view as? WKWebView {
+            loadCredits(in: web)
+        }
+    }
+
+    private func loadCredits(in web: WKWebView) {
+        guard let html = try? String(contentsOf: page, encoding: .utf8) else {
+            showLoadError()
+            return
+        }
+        // 授權頁的樣式與文字都在此檔案內，對外連結均使用完整網址。
+        initialLoad = web.loadHTMLString(html, baseURL: nil)
+    }
+
+    private func showLoadError() {
+        let message = UILabel()
+        message.text = "無法讀取資料來源與授權。請關閉此頁後再試一次。"
+        message.numberOfLines = 0
+        message.textAlignment = .center
+        message.font = .preferredFont(forTextStyle: .body)
+        message.adjustsFontForContentSizeCategory = true
+        message.backgroundColor = .systemBackground
+        view = message
+    }
+
+    func webView(_ webView: WKWebView, didFailProvisionalNavigation navigation: WKNavigation!,
+                 withError error: Error) {
+        if navigation === initialLoad { showLoadError() }
+    }
+
+    func webView(_ webView: WKWebView, didFail navigation: WKNavigation!, withError error: Error) {
+        if navigation === initialLoad { showLoadError() }
+    }
+
+    func webViewWebContentProcessDidTerminate(_ webView: WKWebView) {
+        guard !retriedAfterTermination else { showLoadError(); return }
+        retriedAfterTermination = true
+        loadCredits(in: webView)
     }
 
     @objc private func close() { dismiss(animated: true) }
@@ -198,7 +241,7 @@ private final class CreditsViewController: UIViewController, WKNavigationDelegat
     func webView(_ webView: WKWebView, decidePolicyFor navigationAction: WKNavigationAction,
                  decisionHandler: @escaping (WKNavigationActionPolicy) -> Void) {
         guard let url = navigationAction.request.url else { decisionHandler(.cancel); return }
-        if url.isFileURL && url.standardizedFileURL.path == page.standardizedFileURL.path {
+        if navigationAction.navigationType == .other && url.absoluteString == "about:blank" {
             decisionHandler(.allow)
             return
         }

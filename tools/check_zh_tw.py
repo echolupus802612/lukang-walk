@@ -9,7 +9,7 @@ ROOT = Path(__file__).resolve().parents[1]
 TEXT = {".md", ".html", ".csv", ".tsv", ".json", ".txt", ".swift", ".plist", ".py",
         ".yml", ".yaml", ".strings", ".xcstrings", ".xcscheme", ".pbxproj", ".css", ".js"}
 # 對照表的左側以 Unicode 碼位表示，避免檢查程式的原始檔本身出現待替換文字。
-REPLACEMENTS = {
+PROJECT_TERMS = {
     "\u8fd9": "這",
     "\u4eec": "們",
     "\u8bf4": "說",
@@ -64,7 +64,27 @@ REPLACEMENTS = {
     "\u9a0e\u884c\u9014\u4e2d": "騎車途中",
     "\u6563\u6b65\u6216\u9a0e\u884c": "散步或騎單車",
 }
-PATTERN = re.compile("|".join(sorted(REPLACEMENTS, key=len, reverse=True)))
+
+
+def unihan_characters():
+    """讀取隨專案提供的保守字表；來源版本、選字規則與授權列在表頭。"""
+    table = Path(__file__).with_name("zh_tw_unihan.tsv")
+    characters = {}
+    for line in table.read_text(encoding="utf-8").splitlines():
+        if not line or line.startswith("#"):
+            continue
+        source, targets = line.split("\t")
+        characters[chr(int(source, 16))] = "／".join(chr(int(code, 16)) for code in targets.split())
+    return characters
+
+
+# 專案審閱過的建議優先；遇到一對多的字形只提示，保留人工判讀。
+REPLACEMENTS = {**unihan_characters(), **PROJECT_TERMS}
+phrases = sorted((key for key in REPLACEMENTS if len(key) > 1), key=len, reverse=True)
+characters = "".join(key for key in REPLACEMENTS if len(key) == 1)
+patterns = [re.escape(phrase) for phrase in phrases]
+patterns.append("[" + re.escape(characters) + "]")
+PATTERN = re.compile("|".join(patterns))
 
 
 def project_files():
