@@ -36,7 +36,7 @@ body{margin:0;background:radial-gradient(120% 70% at 50% 38%,var(--bg) 0%,var(--
 .stage{position:relative;flex:1 1 auto;min-height:300px;display:grid;place-items:center}
 .pet{position:relative;width:min(88vw,380px);aspect-ratio:400/330}
 .pet svg{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-/* 角色：一張橫排精靈圖，JS 換 background-position 換幀；腳底對齊地面環中心 (200,268) */
+/* 角色使用一張橫排精靈圖，JS 調整 background-position 來切換影格。腳底對齊地面環中心 (200,268)。 */
 .kid{position:absolute;left:11.25%;top:-8.8%;width:77.5%;height:93.94%;
   background:no-repeat 0 0/400% 100%;image-rendering:auto}
 .kid.flip{transform:scaleX(-1)}
@@ -146,7 +146,7 @@ const TAG = {古蹟:'古蹟',歷史建築:'歷史建築',文化景觀:'文化景
   arrived:['到啦～就是這裡！'],
   bye:['今天就走到這吧。','下次再一起出門散步吧。']
 };
-/* 角色動作：每種一張橫排精靈圖。seq＝播放順序，ms＝每幀毫秒 */
+/* 每種角色動作各用一張橫排精靈圖。seq 是播放順序，ms 是每個影格顯示的毫秒數。 */
 const ANIM = {
   idle:   {n:4, ms:260, seq:[0,0,0,1,1,0,0,2,0,0,3,3]},
   walk:   {n:4, ms:150, seq:[0,1,2,3]},
@@ -478,7 +478,7 @@ function tick(first){
   else if (d>250 && now-S.lastFarAt>90000){ S.lastFarAt=now; say('far'); }
 }
 
-/* ---------- 畫面：每幀把相對角度餵給地面環與小嚮導 ---------- */
+/* ---------- 每個影格依相對角度更新地面環與小嚮導 ---------- */
 function frame(){
   const t0 = performance.now();
   let rel = 0;
@@ -509,8 +509,8 @@ function pose(a, t0, blind){
   if (S.phase==='arrived') name = 'cheer';
   else if (S.act && now < S.actUntil) name = S.act;
   else if (S.phase==='walking' && S.target){
-    if (!blind && ar > 120){ name = 'pull'; flip = a > 0; }          // 素材往左拉；目標在右後方就鏡像
-    else if (!blind && ar > 35){ name = 'point'; flip = a < 0; }      // 素材指右；目標在左就鏡像
+    if (!blind && ar > 120){ name = 'pull'; flip = a > 0; }          // 素材往左拉，目標在右後方時水平翻轉
+    else if (!blind && ar > 35){ name = 'point'; flip = a < 0; }      // 素材指向右方，目標在左方時水平翻轉
     else if (now - S.lastMoveAt < (S.sim ? 1500 : 6000)) name = 'walk';   // GPS 約每 3 秒才確認一次移動
     else if (now - Math.max(S.lastMoveAt, S.pickAt||0) < 15000) name = 'pointup';
   }

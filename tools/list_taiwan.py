@@ -75,7 +75,11 @@ def load(root, attr_path):
             continue
         pa = x.get("PostalAddress") or {}
         imgs = x.get("Images") or []
-        rows.append(dict(name=trad(x.get("AttractionName")).strip(), lat=lat, lng=lng, src="觀光署", tag="",
+        name = trad(x.get("AttractionName")).strip()
+        # 南投縣政府旅遊網登載為「貓囒山步道」，只校正魚池鄉這筆觀光署資料。
+        if x.get("AttractionID") == "Attraction_A15010600H_000064" and name == "\u732b囒山步道":
+            name = "貓囒山步道"
+        rows.append(dict(name=name, lat=lat, lng=lng, src="觀光署", tag="",
                          city=city(pa.get("City")), town=(pa.get("Town") or "").strip(),
                          desc=len(re.sub(r"\s+", "", x.get("Description") or "")),
                          img=bool(imgs) and "notfound" not in imgs[0].get("URL", ""),

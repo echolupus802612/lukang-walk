@@ -1,6 +1,6 @@
 # 散步吧（原型）
 
-出門散步吧：狼耳小嚮導替你挑一個附近的地方、替你指路，到達後才揭曉是哪裡。全台約 5,200 個地點，鹿港老街一帶是人工整理過的試點。
+出門散步吧：狼耳小嚮導替你挑一個附近的地方、替你指路，到達後才揭曉是哪裡。全台約 5,200 個地點，鹿港老街一帶是人工整理的試辦地區。
 
 - 線上試玩：https://echolupus802612.github.io/lukang-walk/ （需允許定位與動作感測；附近 5 公里內沒有收錄的地點時，自動在鹿港天后宮前進入模擬模式）
 - 模擬模式：網址加 `#sim`，按住「▲ 往目的地走」前進
@@ -15,7 +15,7 @@
 
 - **在桌前試玩**。在 **Product → Scheme → Edit Scheme → Run → Arguments** 新增 `-simulate-walk`，用 Debug 組態執行。選「近」並按「出門散步吧」，按住「▲ 往目的地走」直到地點卡出現，按「再走一趟」即可繼續。移除參數後，下一次啟動會使用手機定位。
 - **實地試走**。出發時允許「使用 App 期間」與「準確位置」。實走用 iPhone 的定位與指南針，方向不可靠時改顯示絕對方位。到達後或按「收工」會關閉感測器與螢幕常亮。實走與模擬的足跡分開存在 App。
-- **更新內容**。改動畫面或地點後執行 `python -B tools/build_page.py .`。改動照片、署名或字型授權後，執行 `python -B tools/build_ios_credits.py`。若新增介面用字或地點簡介，可用 `tools/build_fonts.py` 更新離線字型子集。
+- **更新內容**。改動畫面或地點後執行 `python -B tools/build_page.py .`。改動照片、署名或字型授權後，執行 `python -B tools/build_ios_credits.py`。若新增介面用字或地點簡介，可用 `tools/build_fonts.py` 更新離線字型所收錄的字元。
 
 Mac 可在專案根目錄用以下命令檢查模擬器建置。
 
@@ -28,14 +28,14 @@ xcodebuild -project ios/LukangWalk.xcodeproj -scheme LukangWalk \
 
 | 路徑 | 內容 |
 |---|---|
-| `src/app.html` | 頁面原始碼（資料以 `/*DATA*/[]` 佔位） |
+| `src/app.html` | 頁面原始碼（以 `/*DATA*/[]` 預留地點資料的插入位置） |
 | `data/lukang.json` | 鹿港一帶 68 個地點（WGS-84，人工整理） |
 | `data/taiwan.json` | 全台其他地方的地點（鹿港老街 4.5 公里外），`tools/build_taiwan.py` 產生 |
 | `tools/list_taiwan.py` | 全台選點規則：以景點、觀光地點、公園為主，逐筆標出收或不收與理由 → `survey/全台地點列表.csv` |
 | `tools/build_taiwan.py` | 依上面的規則取「收」的地點 → `data/taiwan.json`；編號登記在 `data/place_ids_tw.json`（從 1001 起，只增不刪） |
 | `data/desc_tw.json` | 全台地點簡介：依文資局、觀光署的來源原文濃縮成 2～3 句（Codex 依 `art/prompts/desc_tw.txt` 撰寫） |
 | `tools/build_photos_tw.py` | 全台地點照片：文資局代表圖優先，其次觀光署景點圖，縮成 480×300 WebP → `docs/photos/<id>.webp`；出處記在 `data/photos_tw.json` |
-| `survey/` | 全台資料試算報告、地點列表與統計 |
+| `survey/` | 全台資料試算報告、地點清單與統計 |
 | `tools/build_data.py` | 合併文資局、OSM、維基 → `data/lukang.json`（原始下載不進版控） |
 | `data/place_overrides.json` | 人工整理：地點簡介（附出處）、移出的地點；`build_data.py` 重跑時套用。草稿與審閱見 `data/desc_draft.md` |
 | `data/place_ids.json` | 鹿港地點永久編號登記（只增不刪）；足跡認這個號碼，重跑資料不會換號 |
@@ -44,11 +44,11 @@ xcodebuild -project ios/LukangWalk.xcodeproj -scheme LukangWalk \
 | `art/prompts/` | 角色動作的生圖提示詞（Codex image_gen） |
 | `tools/build_sprites.py` | 把 `art/gen/` 的 2×2 動作表切成橫排精靈圖 → `docs/sprites/*.webp`（原圖不進版控） |
 | `tools/voice_jobs.py` | 產生配音任務清單 `art/voice/jobs.json`（台詞、表演指令） |
-| `tools/voice_gen.py` | 用 BreezeBlue `breeze-tts-2` 生成中文語音 → `docs/voice/*.mp3`（金鑰在本機讀取，不進版控） |
+| `tools/voice_gen.py` | 用 BreezeBlue `breeze-tts-2` 合成中文語音 → `docs/voice/*.mp3`（金鑰在本機讀取，不進版控） |
 
 語音共 16 段：15 段固定台詞，加上所有地點共用的到達台詞「到啦～就是這裡！」（`voice/arrived.mp3`）。音色為 BreezeBlue Sparks（`voc_cfnf6vu2sp2p`），`language_code=zh`。音檔載不到時退回系統語音。
 
-角色動作：idle 停著、walk 走動、point 指側邊（左邊用鏡像）、pointup 指前方、pull 拉扯（目標在背後）、care 關心（停太久／訊號差）、cheer 歡呼（到達）、bye 不捨（收工）。
+角色動作：idle 停著、walk 走動、point 指側邊（朝左時水平翻轉）、pointup 指前方、pull 拉扯（目標在背後）、care 關心（停太久／訊號差）、cheer 歡呼（到達）、bye 不捨（收工）。
 
 ```
 python -I -B tools/build_page.py .

@@ -29,6 +29,9 @@ jobs:
         with:
           persist-credentials: false
 
+      - name: 檢查繁體中文與臺灣用語
+        run: python3 tools/check_zh_tw.py
+
       - name: Select an available iPhone
         run: |
           xcodebuild -version

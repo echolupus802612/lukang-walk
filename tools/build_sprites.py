@@ -2,8 +2,8 @@
 
 用法：python -I -B tools/build_sprites.py <專案根目錄>
 
-每張表 1024x1024，四格各 512。每幀：
-  - 去背（若沒有透明通道，摳掉純綠 #00FF00）
+每張動作表為 1024×1024 像素，分成四個 512×512 的影格。各影格依序處理：
+  - 若圖片沒有透明背景，就移除綠色背景
   - 只留最大的一塊連通區域，去掉雜點
   - 橫向以「頭部」中線對齊，縱向以腳底對齊（會跳的動作保留原本高度）
   - 放回 512 畫布（腳底 y=490，中線 x=256），縮成 FRAME 像素
@@ -16,7 +16,7 @@ FRAME = 320
 BASE_Y, MID_X, CELL = 490, 256, 512
 
 # 動作 → (來源表, 用哪幾格, 縱向對齊方式, 縮放)
-# keepY：保留原本的高低（跳起來的幀）；第五項 "bbox"＝橫向用整體外框置中（身體大幅傾斜的動作）
+# keepY 保留各影格的腳底高度，讓角色能跳起來。第五項 "bbox" 會將整體外框水平置中，供身體大幅傾斜的動作使用。
 SHEETS = {
     "walk":      ("01_walk", [0, 1, 2, 3], "feet", 1.0),
     "idle":      ("02_idle", [0, 1, 2, 3], "feet", 1.0),
@@ -122,7 +122,7 @@ def build(root):
         path = out / f"{name}.webp"
         strip.save(path, "WEBP", quality=86, method=6)
         report[name] = {"frames": len(frames), "kb": path.stat().st_size // 1024, "cells": info}
-        print(f"{name:8s} {len(frames)} 幀 {path.stat().st_size // 1024} KB", [(c["dx"], c["dy"]) for c in info])
+        print(f"{name:8s} {len(frames)} 個影格 {path.stat().st_size // 1024} KB", [(c["dx"], c["dy"]) for c in info])
     (root / "art" / "sprites_report.json").write_text(json.dumps(report, ensure_ascii=False, indent=1), encoding="utf-8")
 
 

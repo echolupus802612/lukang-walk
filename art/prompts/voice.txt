@@ -1,15 +1,15 @@
-用你的 breeze-replay-voice skill 裡記錄的 BreezeBlue 雲端 API（參考 references/breeze-api.md），為這個網頁原型生成中文語音。
+用你的 breeze-replay-voice skill 裡記錄的 BreezeBlue 雲端 API（參考 references/breeze-api.md），為這個網頁原型合成中文語音。
 
 規格（照做，不要改）：
-- 音色：voice_id = voc_cfnf6vu2sp2p（BreezeBlue default 庫的 Sparks，美式英語男童音；已確認可用於合成）。先用 GET /v1/voices/voc_cfnf6vu2sp2p 確認仍存在；不存在就停下回報，不要換別的音色。這是英語音色，但一律用中文 language_code="zh" 生成，不要改成英文。
+- 音色：voice_id = voc_cfnf6vu2sp2p（BreezeBlue 預設音色庫中的 Sparks，美式英語男童音；已確認可用於合成）。先用 GET /v1/voices/voc_cfnf6vu2sp2p 確認仍存在；不存在就停下回報，不要換別的音色。這是英語音色，但一律用中文 language_code="zh" 合成，不要改成英文。
 - model_id = breeze-tts-2，language_code = "zh"（一定要中文），voice_settings.guidance_scale = 2.0，output_format = mp3_24000_128，delivery=sync。
-- 台詞與表演指令在 art/voice/jobs.json（87 條）。每條用它的 text 和 instructions，原樣送出，不要改字。
+- 台詞與表演指令在 art/voice/jobs.json（87 句）。請照原文送出每句的 text 與 instructions。
 - API key 依 skill 規定從本機檔案在程式執行時直接讀取；不要輸出、不要寫進任何檔案、命令列參數或記錄檔。
 
 產出：
-1. 原始音檔存 art/voice/raw/<file>（file 就是 jobs.json 裡的檔名）。已存在且能解碼的不要重生成，避免重複扣費。失敗的不要無限重試，記錄下來。
-2. 用 FFmpeg（C:/Program Files/FFMPEG/bin/）轉成網頁用的小檔：單聲道、24 kHz、48 kbps MP3，存 docs/voice/<file>。頭尾超過 0.15 秒的靜音修掉（silenceremove，閾值 -45dB），中間停頓不動。
-3. 寫 art/voice/manifest.json：每條記錄 file、text、voice_id、實際 request body（不含 key）、HTTP 狀態、原始檔與網頁檔的時長和 SHA-256、成功與否。
+1. 原始音檔存 art/voice/raw/<file>（file 就是 jobs.json 裡的檔名）。已存在且能解碼的音檔不必重新合成，避免重複扣費。失敗的不要無限重試，記錄下來。
+2. 用 FFmpeg（C:/Program Files/FFMPEG/bin/）轉成網頁用的小檔：單聲道、24 kHz、48 kbps MP3，存 docs/voice/<file>。頭尾超過 0.15 秒的靜音修掉（silenceremove，靜音門檻 -45 dB），中間停頓不動。
+3. 寫 art/voice/manifest.json：每筆記下 file、text、voice_id、實際 request body（不含 key）、HTTP 狀態、原始檔與網頁檔的長度和 SHA-256、成功與否。
 4. 最後回報：音色名稱、成功/失敗數量、失敗原因、總扣費或用量（如果 API 有回傳）、docs/voice 總大小。
 
-只寫 art/voice/ 和 docs/voice/，不要改其他檔案。可以寫一個 tools/voice_gen.py 放生成程式（不含 key）。
+只寫 art/voice/ 和 docs/voice/，不要改其他檔案。可以寫一個 tools/voice_gen.py 存放語音合成程式（不含 key）。
