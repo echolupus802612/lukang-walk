@@ -16,7 +16,7 @@ jobs:
     runs-on: macos-15
     timeout-minutes: 40
     env:
-      DEVELOPER_DIR: /Applications/Xcode_16.4.app/Contents/Developer
+      DEVELOPER_DIR: /Applications/Xcode_26.3.app/Contents/Developer
       PROJECT: ios/LukangWalk.xcodeproj
       SCHEME: LukangWalk
       BUNDLE_ID: io.github.echolupus802612.lukangwalk

@@ -9,6 +9,8 @@
 
 在 Mac 用裝有 iOS 17 或更新 SDK 的 Xcode 開啟 `ios/LukangWalk.xcodeproj`，選擇 **LukangWalk** 方案和一台 iPhone 模擬器，按 **⌘R**。專案已附字型、地點、照片、語音與授權頁。從原始碼建置 App 可直接使用這些檔案。
 
+工程以 iOS 17.0 為最低部署版本。雲端編譯使用 Xcode 26.3。若 Xcode 16.4 的 iOS 18.5 模擬器啟動時回報 `libswiftWebKit.dylib` 遺失，請選擇更新的模擬器執行環境。[WebKit 問題紀錄](https://bugs.webkit.org/show_bug.cgi?id=293831)
+
 要在自己的 iPhone 上試走，在 target 的 **Signing & Capabilities → Team** 選擇自己的開發團隊，接上手機後按 **⌘R**。預設 Bundle ID 為 `io.github.echolupus802612.lukangwalk`，若簽署時顯示識別碼已被註冊，請改成團隊可用的識別碼。
 
 - **在桌前試玩**。在 **Product → Scheme → Edit Scheme → Run → Arguments** 新增 `-simulate-walk`，用 Debug 組態執行。選「近」並出發，按住「▲ 朝籤走」直到解籤，再抽一支即可繼續。移除參數後，下一次啟動會使用手機定位。
