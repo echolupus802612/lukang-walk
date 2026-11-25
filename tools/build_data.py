@@ -138,7 +138,7 @@ def merge(items):
 
 
 def assign_ids(rows, reg_path):
-    """地點編號一旦發出就永久不變：玩家足跡和到達語音（arrived_<id>.mp3）都認這個號碼。
+    """地點編號一旦發出就永久不變：玩家足跡認這個號碼。
     編號登記在 place_ids.json（只增不刪）；同名且相距 250m 內視為同一地點，沿用舊號；新地點從最大號往後排。
     下架的地點號碼也留在登記裡，不會被新地點拿去用。"""
     reg = json.loads(reg_path.read_text(encoding="utf-8")) if reg_path.exists() else []

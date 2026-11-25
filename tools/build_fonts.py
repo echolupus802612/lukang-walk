@@ -24,7 +24,7 @@ FONTS = [
 def build():
     DEST.mkdir(parents=True, exist_ok=True)
     text = (ROOT / "src/app.html").read_text(encoding="utf-8")
-    for path in ("data/lukang.json", "art/voice/jobs.json"):
+    for path in ("data/lukang.json", "data/taiwan.json", "art/voice/jobs.json"):
         records = json.loads((ROOT / path).read_text(encoding="utf-8"))
         text += "".join(str(item.get(key) or "") for item in records
                         for key in ("name", "desc", "tag", "text"))

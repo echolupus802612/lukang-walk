@@ -52,19 +52,23 @@ def font_credit(root, family, directory, license_file):
 
 def render(root):
     places = json.loads((root / "data/lukang.json").read_text(encoding="utf-8"))
+    places += json.loads((root / "data/taiwan.json").read_text(encoding="utf-8"))
     photos = json.loads((root / "data/photos.json").read_text(encoding="utf-8"))["photos"]
+    tw = json.loads((root / "data/photos_tw.json").read_text(encoding="utf-8"))
     assets = {p.stem for p in (root / "docs/photos").glob("*.webp")}
     places_by_id = {str(p["id"]): p for p in places}
-    if assets != set(photos) or not assets.issubset(places_by_id):
+    if assets != set(photos) | set(tw) or set(photos) & set(tw) or not assets.issubset(places_by_id):
         raise ValueError("The bundled photos, their credits and the active place IDs disagree.")
-    items = "\n".join(photo_item(places_by_id[i], photos[i]) for i in sorted(assets, key=int))
+    # 鹿港一帶的照片逐張列出處；全台其他地方的照片都來自兩個政府開放資料，依來源合計
+    items = "\n".join(photo_item(places_by_id[i], photos[i]) for i in sorted(photos, key=int))
+    tw_count = {c: sum(1 for r in tw.values() if r["credit"] == c) for c in sorted(GOV_PROVIDERS)}
     return f"""<!doctype html>
 <html lang="zh-Hant-TW">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="color-scheme" content="light dark">
-<title>資料來源與授權 · 鹿港散步籤</title>
+<title>資料來源與授權 · 散步吧</title>
 <style>
 :root {{ color-scheme: light dark; --paper: #fbf3e6; --ink: #3a1a12; --link: #87331f; --line: #d8c7b6 }}
 @media (prefers-color-scheme: dark) {{
@@ -89,17 +93,19 @@ pre {{ white-space: pre-wrap; font: inherit; line-height: 1.45 }}
 <h1>資料來源與授權</h1>
 <section>
 <h2>地點與文字</h2>
-<p>地點名稱、座標及文資身分參考文化部文化資產局、OpenStreetMap 與中文維基百科。散步籤將鹿港一帶的地點合併整理。</p>
+<p>地點名稱、座標及文資身分參考文化部文化資產局、交通部觀光署、OpenStreetMap 與中文維基百科。鹿港一帶的地點經人工合併整理；全台其他地方的地點取自文化部文化資產局與交通部觀光署的開放資料。</p>
 <p>© OpenStreetMap contributors。整理後的地點資料依 ODbL 1.0 提供。{link("https://www.openstreetmap.org/copyright", "OpenStreetMap 著作權說明")} · {link("https://opendatacommons.org/licenses/odbl/1-0/", "ODbL 條款")} · {link("https://github.com/echolupus802612/lukang-walk/blob/main/data/lukang.json", "地點資料檔")}</p>
 <p>政府資料來自文化部文化資產局、交通部觀光署及內政部。{link("https://nchdb.boch.gov.tw/", "國家文化資產網")} · {link("https://data.gov.tw/dataset/7777", "景點－觀光資訊資料庫")} · {link("https://data.gov.tw/dataset/8203", "全國宗教資訊系統資料－寺廟")} · {link(LICENSE_URLS[GOV_LICENSE], GOV_LICENSE)}</p>
 <p>部分地點簡介依中文維基百科貢獻者的條目改寫，依 {link(LICENSE_URLS["CC BY-SA 4.0"], "CC BY-SA 4.0")} 提供。{link("https://github.com/echolupus802612/lukang-walk/blob/main/data/place_overrides.json", "各則改寫簡介的來源紀錄")}</p>
+<p>全台其他地方的地點簡介，依文化部文化資產局與交通部觀光署開放資料的內容濃縮改寫。</p>
 </section>
 <section>
 <h2>地點照片</h2>
 <p>照片經裁切、縮小後使用。創用 CC 照片的改作沿用各原作的授權。</p>
-<details><summary>查看 {len(assets)} 張照片的作者與出處</summary><ul class="photos">
+<details><summary>查看鹿港一帶 {len(photos)} 張照片的作者與出處</summary><ul class="photos">
 {items}
 </ul></details>
+<p>全台其他地方的 {len(tw)} 張照片取自{"、".join(f"{c}（{k} 張）" for c, k in tw_count.items())}，縮小後使用，依 {link(LICENSE_URLS[GOV_LICENSE], GOV_LICENSE)}。{link("https://github.com/echolupus802612/lukang-walk/blob/main/data/photos_tw.json", "每張照片的原始網址")}</p>
 </section>
 <section>
 <h2>小嚮導</h2>

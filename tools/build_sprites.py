@@ -1,6 +1,6 @@
 """把 art/gen 裡 Codex 畫的 2x2 動作表切成橫排精靈圖 → docs/sprites/<動作>.webp
 
-用法：python -I -B tools/build_sprites.py <項目根目錄>
+用法：python -I -B tools/build_sprites.py <專案根目錄>
 
 每張表 1024x1024，四格各 512。每幀：
   - 去背（若沒有透明通道，摳掉純綠 #00FF00）

@@ -1,6 +1,6 @@
 """替地點找官方照片 → docs/photos/<id>.webp，出處記在 data/photos.json
 
-用法：python -I -B tools/build_photos.py <項目根目錄> <觀光署 AttractionList.json>
+用法：python -I -B tools/build_photos.py <專案根目錄> <觀光署 AttractionList.json>
 
 來源優先順序：
   0. data/photos.json 的 "manual"：人工挑的其他 CC 授權照片（網址、作者、授權手填）

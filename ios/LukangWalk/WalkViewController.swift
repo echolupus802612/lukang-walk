@@ -50,7 +50,7 @@ final class WalkViewController: UIViewController, WKNavigationDelegate {
     private func loadGame() {
         guard let index else {
             let label = UILabel()
-            label.text = "讀不到散步籤的畫面。請重新安裝 App。"
+            label.text = "讀不到散步吧的畫面。請重新安裝 App。"
             label.textColor = .white
             label.numberOfLines = 0
             label.textAlignment = .center

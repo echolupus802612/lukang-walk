@@ -4,17 +4,17 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#8f3524">
-<title>鹿港散步籤</title>
+<title>散步吧</title>
 <style>
 @font-face{font-family:"LXGW WenKai TC";src:url("fonts/walk-kai.woff2") format("woff2");font-weight:400;font-display:swap}
 @font-face{font-family:"LXGW WenKai TC";src:url("fonts/walk-kai-bold.woff2") format("woff2");font-weight:700;font-display:swap}
 @font-face{font-family:"Noto Sans TC";src:url("fonts/walk-sans.woff2") format("woff2");font-weight:500;font-display:swap}
 @font-face{font-family:"Noto Sans TC";src:url("fonts/walk-sans-bold.woff2") format("woff2");font-weight:700;font-display:swap}
-/* VOICE: 安靜的陪伴，像廟口有人替你抽了一支籤。
-   IDEA: 廟裡的籤筒——抽一支散步籤，小嚮導（狼耳少年）替你指路，走到了才解籤。
-   PICTURE: 紅磚地上的狼耳小嚮導與地面方位環，佔首屏一半。
-   COLOUR and TYPE: 鹿港紅磚為底、廟金點題、米白文字；霞鶩文楷寫籤，思源黑體寫數字。
-   LAYOUT: 單欄一屏：籤況、小嚮導、距離、對話、主按鈕；解籤時整張籤卡蓋上來。 */
+/* VOICE: 安靜的陪伴，像有個朋友拉你出門散步。
+   IDEA: 出門散步吧——小嚮導（狼耳少年）替你挑一個附近的地方、替你指路，走到了才揭曉是哪裡。
+   PICTURE: 紅磚地上的狼耳小嚮導與地面導航箭頭，佔第一個畫面的一半。
+   COLOUR and TYPE: 紅磚為底、金色點題、米白文字；霞鶩文楷寫提示與台詞，思源黑體寫數字。
+   LAYOUT: 單欄、一個畫面：提示、小嚮導、距離、對話、主按鈕；到了整張地點卡蓋上來。 */
 :root{color-scheme:light dark;
   --bg:#9a3a27;--bg2:#82301f;--ink:#fbf3e6;--soft:#f3dccb;--gold:#f2c14e;--gold2:#c9922a;
   --card:#fbf3e6;--cardink:#3a1a12;--line:rgba(251,243,230,.22)}
@@ -60,7 +60,7 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 .foot{margin-top:12px;text-align:center;font-size:13px;color:var(--soft)}
 .foot a{color:var(--soft)}
 .credit{display:grid;place-items:center;align-self:center;min-height:44px;padding:0 10px;text-align:center;font-size:11px;color:var(--soft);opacity:.75}
-/* 解籤卡 */
+/* 地點卡 */
 .veil{position:fixed;inset:0;background:rgba(20,6,3,.55);display:none;place-items:center;
   padding:max(16px,env(safe-area-inset-top)) 16px max(16px,env(safe-area-inset-bottom));z-index:5}
 .veil.on{display:grid;grid-template:minmax(0,1fr) / minmax(0,1fr)}
@@ -82,8 +82,8 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 </head>
 <body>
 <div class="app">
-  <div class="top"><b>鹿港散步籤</b><span class="mode" id="mode">尚未出發</span></div>
-  <div class="hint" id="hint">選一個遠近，替你抽一支籤</div>
+  <div class="top"><b>散步吧</b><span class="mode" id="mode">尚未出發</span></div>
+  <div class="hint" id="hint">選一個遠近，出門散步吧</div>
 
   <div class="stage">
     <div class="pet" id="pet" role="img" aria-label="小嚮導指著方向">
@@ -113,38 +113,38 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
   <div class="bands" id="bands">
     <button data-b="0" aria-pressed="false">近 ~500m</button><button data-b="1" class="sel" aria-pressed="true">中 ~1km</button><button data-b="2" aria-pressed="false">遠 ~2km</button>
   </div>
-  <button class="main" id="go">抽一支籤，出發</button>
-  <div class="row" id="walkrow" hidden><button id="redraw">換一支</button><button id="voice">語音：開</button><button id="stop">收工</button></div>
-  <div class="sim" id="sim"><button id="stepTo">▲ 朝籤走</button><button id="stepRand">亂走</button><button id="turn">轉身 90°</button></div>
+  <button class="main" id="go">出門散步吧</button>
+  <div class="row" id="walkrow" hidden><button id="redraw">換個地方</button><button id="voice">語音：開</button><button id="stop">收工</button></div>
+  <div class="sim" id="sim"><button id="stepTo">▲ 往目的地走</button><button id="stepRand">亂走</button><button id="turn">轉身 90°</button></div>
   <div class="foot" id="foot"></div>
   <div class="foot" role="status" id="storageWarning" hidden></div>
   <a id="credits" class="credit" href="https://github.com/echolupus802612/lukang-walk#資料來源與授權" target="_blank" rel="noopener">資料來源</a>
 </div>
 
 <div class="veil" id="veil"><div class="card" role="dialog" aria-modal="true" aria-labelledby="cname">
-  <div class="no" id="cno">第一籤</div><h2 id="cname"></h2><span class="tag" id="ctag"></span>
+  <div class="no" id="cno">第 1 站</div><h2 id="cname"></h2><span class="tag" id="ctag"></span>
   <img class="ph" id="cph" alt="" hidden>
   <p id="cdesc"></p>
-  <button id="again">再抽一支</button>
+  <button id="again">再走一趟</button>
 </div></div>
 
 <script>
 {
 const PLACES = /*DATA*/[];
 const BANDS = [{max:500,min:0},{max:1000,min:400},{max:2000,min:900}];
-const ARRIVE = 25, ACC_OK = 40, LUKANG = [24.0565,120.4335];
+const ARRIVE = 25, ACC_OK = 40, SIM_HOME = 32, NO_PLACE = 5000;   // 模擬起點：鹿港天后宮（編號 32）；5 公里內沒有地點就改用模擬
 const DIR8 = ['北','東北','東','東南','南','西南','西','西北'];
-const HINT = {worship:'一座廟或祠',history:'一處老宅或舊址',structure:'一段巷弄、一棟老樓',nature:'一片能歇腳的地方',culture:'一間館',shop:'一間老店',other:'說不上來的地方'};
+const HINT = {worship:'一座廟或祠',history:'一處老宅或舊址',structure:'一段巷弄、一棟老樓',nature:'一片能歇腳的地方',scenic:'一處看風景的地方',culture:'一處館舍或藝文空間',shop:'一間老店',other:'說不上來的地方'};
 const TAG = {古蹟:'古蹟',歷史建築:'歷史建築',文化景觀:'文化景觀'};const LINES = {
-  greet:['這一支，我替你抽好了。跟著我。','走吧，有個地方在等你。'],
+  greet:['走吧，出門散步吧！跟著我。','今天想去哪走走？跟我來。'],
   far:['還有一段路，慢慢來。','不急，我們慢慢走。'],
   half:['走一半了。','過半了，你走得不錯。'],
   near:['快到了，抬頭看看。','就在這附近了。'],
   behind:['在你後面啦，轉個身。','方向反了，往回一點。'],
   idle:['停下來了？歇一下也好。','我在這，等你。'],
   weak:['訊號不太好，先站一下。'],
-  arrived:['到了！是{name}。'],
-  bye:['今天就走到這吧。','下次再一起抽一支。']
+  arrived:['到啦～就是這裡！'],
+  bye:['今天就走到這吧。','下次再一起出門散步吧。']
 };
 /* 角色動作：每種一張橫排精靈圖。seq＝播放順序，ms＝每幀毫秒 */
 const ANIM = {
@@ -185,7 +185,7 @@ if (native){
     $('storageWarning').hidden=false;
   });
 }
-/* 足跡分兩本：實走一本、模擬一本，模擬走到的地方不會讓你在鹿港實走時抽不到 */
+/* 足跡分兩本：實走一本、模擬一本，模擬走到的地方不會影響實際散步時的選點 */
 const rec = (k,d=[]) => store.get((S.sim?'sim_':'')+k, d);
 const recSet = (k,v) => store.set((S.sim?'sim_':'')+k, v);
 // v2 之前沒分本，那時還沒有人實走過，舊紀錄都是模擬，一次搬進模擬本
@@ -208,7 +208,7 @@ function move(p,deg,m){const d=m/R,b=rad(deg),la=rad(p[0]),lo=rad(p[1]);
 const norm180 = a => ((a%360)+540)%360-180;
 const fmt = m => m>=1000?[(m/1000).toFixed(1),'公里']:[String(Math.round(m)),'公尺'];
 
-/* ---------- 抽籤：環帶內按距離加權，近的機率高，避開剛去過的 ----------
+/* ---------- 選目的地：環帶內按距離加權，近的機率高，避開剛去過的 ----------
    選的距離內沒有地點就不硬抽：回傳 {none, near}，讓玩家自己決定要不要走遠 */
 function draw(pos, band){
   const recent = rec('recent'), cur = S.target && S.target.id;
@@ -233,8 +233,8 @@ const S = {phase:'ready', band:1, pos:null, acc:0, heading:null, sim:false, targ
 // 一次性動作（關心、不捨）：播 ms 毫秒後回到依情境決定的動作
 function act(name, ms){ S.act=name; S.actUntil=Date.now()+ms; }
 
-/* 語音：先播預錄的 Breeze 音檔（voice/<事件>_<第幾句>.mp3，到達是 voice/arrived_<地點id>.mp3）；
-   載不到或被擋才退回瀏覽器內建 TTS。同一個 <audio> 重複用，第一次在點擊裡播放後 iOS 才放行之後的播放 */
+/* 語音：先播預錄的 Breeze 音檔（voice/<事件>_<第幾句>.mp3，到達一律是 voice/arrived.mp3）；
+   載不到或被擋才退回瀏覽器內建 TTS。同一個 <audio> 重複用，第一次在使用者點按時播放後，iOS 才放行之後的播放 */
 const voiceEl = new Audio(); voiceEl.preload = 'auto';
 function speak(line, src){
   if (!S.voice) return;
@@ -252,10 +252,10 @@ function say(ev, vars={}){
   if (!URGENT[ev] && S.voice && !voiceEl.paused && !voiceEl.ended) return false;
   S.last[ev]=now;
   const list = LINES[ev], i = Math.floor(Math.random()*list.length);
-  const line = list[i].replace('{name}', vars.name||'');
+  const line = list[i];
   const el = $('say'); el.textContent = line; el.classList.add('on');
   clearTimeout(say.t); say.t = setTimeout(()=>el.classList.remove('on'), 5000);
-  speak(line, ev==='arrived' ? `voice/arrived_${vars.id}.mp3` : `voice/${ev}_${i}.mp3`);
+  speak(line, ev==='arrived' ? 'voice/arrived.mp3' : `voice/${ev}_${i}.mp3`);
   return true;
 }
 
@@ -341,10 +341,10 @@ async function startSensors(){
           case 'pause': resetFixes(); break;
           case 'error':
             if (waiting){S.locationFailure=detail.reason;finish(false);break}
-            // 途中失去權限時，模擬從另一支籤開始，兩本足跡各自記錄。
+            // 途中失去權限時，改用模擬重新選一個目的地，兩本足跡各自記錄。
             if (S.phase==='arrived'){stopSensors(); S.started=false;break}
             reset();
-            useSim(detail.reason==='approximate'?'目前只允許大概位置，從天后宮前另抽一支模擬籤。':'定位中斷了，從天后宮前另抽一支模擬籤。');
+            useSim(detail.reason==='approximate'?'目前只允許大概位置，先在鹿港天后宮前模擬走走。':'定位中斷了，先在鹿港天后宮前模擬走走。');
             pick();
             break;
         }
@@ -369,7 +369,7 @@ async function startSensors(){
 function useSim(reason){
   stopSensors();   // 模擬時方向由模擬按鈕決定，不讓真的指南針搶
   S.sim = true; S.acc = 5; if (S.heading==null) S.heading = 0;
-  const tm = PLACES.find(p=>p.name.includes('天后宮')) || {lat:LUKANG[0],lng:LUKANG[1]};
+  const tm = PLACES.find(p=>p.id===SIM_HOME) || PLACES[0];
   S.pos = move([tm.lat,tm.lng], 200, 30);
   $('mode').textContent='模擬行走';
   $('foot').textContent = reason;
@@ -379,16 +379,16 @@ function useSim(reason){
 async function go(){
   if (S.phase==='ready' && !S.started){
     S.started = true; $('go').disabled = true; $('go').textContent='找方向中…';
-    if (!S.offer) say('greet'); // 在點擊裡先開口，iOS 才肯放聲音
+    if (!S.offer) say('greet'); // 在使用者點按時先開口，iOS 才肯放聲音
     if (S.sim){ S.acc=5; S.heading ??= 0; }
     const ok = S.sim ? true : await startSensors();
     if (!S.sim){
       if (!ok){
         S.offer=null;
         const reason={denied:'未取得定位權限',approximate:'目前只允許大概位置'}[S.locationFailure]||'拿不到目前位置';
-        useSim(native?reason+'，先在天后宮前模擬走走。':'拿不到定位（需要 HTTPS 網址並允許定位），先在天后宮前模擬走走。');
+        useSim(native?reason+'，先在鹿港天后宮前模擬走走。':'拿不到定位（需要 HTTPS 網址並允許定位），先在鹿港天后宮前模擬走走。');
       }
-      else if (dist(S.pos,LUKANG)>8000){ S.offer=null; useSim('你現在不在鹿港，先用天后宮前的位置模擬。'); }
+      else if (!PLACES.some(p=>dist(S.pos,[p.lat,p.lng])<=NO_PLACE)){ S.offer=null; useSim('你附近 5 公里內還沒有收錄的地點，先在鹿港天后宮前模擬走走。'); }
       else { $('mode').textContent = S.heading==null?'GPS（無指南針）':'GPS 實走'; $('foot').textContent=''; }
     }
     $('go').disabled=false;
@@ -401,20 +401,20 @@ function pick(){
   if (S.offer && S.phase==='ready' && x.none && x.near?.p.id===S.offer.p.id) x=x.near;
   S.offer = null;
   if (x.none){
-    if (S.phase==='walking'){ $('sub').textContent = '這個距離內沒有別支籤了'; return; }
+    if (S.phase==='walking'){ $('sub').textContent = '這個距離內沒有別的地方了'; return; }
     const n = x.near;
     S.offer = n;
     S.started=false; stopSensors();
-    $('hint').textContent = n ? `這個距離內沒有籤，最近一處約 ${fmt(n.d).join(' ')}` : '附近沒有可以抽的地方';
-    $('go').textContent = n ? '那就走遠一點' : '抽一支籤，出發';
+    $('hint').textContent = n ? `這個距離內沒有地點，最近一處約 ${fmt(n.d).join(' ')}` : '附近沒有可以去的地方';
+    $('go').textContent = n ? '那就走遠一點' : '出門散步吧';
     return;
   }
-  try{ const pre = new Audio(); pre.preload='auto'; pre.src=`voice/arrived_${x.p.id}.mp3`; }catch(e){}
+  try{ const pre = new Audio(); pre.preload='auto'; pre.src='voice/arrived.mp3'; }catch(e){}
   if (x.p.ph){ const im = new Image(); im.src = `photos/${x.p.id}.webp`; }   // 走路時先載好，到了直接顯示
   S.target = x.p; S.startD = x.d; S.saidHalf = S.saidNear = false; S.phase='walking'; S.pickAt = Date.now(); S.lastFarAt = Date.now();
   S.hits = 0;
   recSet('drawn', rec('drawn',0)+1);
-  $('hint').textContent = '籤上寫著：' + (HINT[x.p.cat]||HINT.other);
+  $('hint').textContent = '這次要去：' + (HINT[x.p.cat]||HINT.other);
   $('bands').hidden = true; $('go').hidden = true; $('walkrow').hidden = false;
   $('sim').classList.toggle('on',S.sim);
   void keepAwake();
@@ -422,7 +422,7 @@ function pick(){
 }
 function arrive(){
   S.phase='arrived'; const t=S.target; clearInterval(simT); simT=null;
-  $('walkrow').hidden = true; $('sim').classList.remove('on');   // 歡呼的 1.8 秒內不能再換籤或收工
+  $('walkrow').hidden = true; $('sim').classList.remove('on');   // 歡呼的 1.8 秒內不能再換地方或收工
   const previous=rec('seen');
   const seen=previous.includes(t.id)?previous:[...previous,t.id];
   const recent=[t.id,...rec('recent').filter(i=>i!==t.id)].slice(0,12);
@@ -432,9 +432,8 @@ function arrive(){
   document.querySelector('.app').inert=true;
   if (native) native.postMessage({action:'arrived'});
   else try{ navigator.vibrate && navigator.vibrate([60,40,120]); }catch(e){}
-  say('arrived',{name:t.sn||t.name, id:t.id});
-  const n = seen.length, cn='一二三四五六七八九十';
-  $('cno').textContent = '第' + (n<=10?cn[n-1]:n) + '籤';
+  say('arrived');
+  $('cno').textContent = `第 ${seen.length} 站`;
   $('cname').textContent = t.name;
   $('ctag').textContent = TAG[t.tag] || HINT[t.cat] || '';
   $('cdesc').textContent = t.desc || '沒有留下說明的地方。站一下，看看它現在的樣子。';
@@ -442,17 +441,17 @@ function arrive(){
   if (t.ph){ ph.src = `photos/${t.id}.webp`; ph.alt = t.name + '的照片'; ph.hidden = false; }
   else { ph.hidden = true; ph.removeAttribute('src'); }
   clearTimeout(S.cardT);
-  S.cardT = setTimeout(()=>{ if (S.phase!=='arrived') return; $('veil').classList.add('on'); $('again').focus(); }, 1800);   // 先讓他歡呼兩輪再蓋上籤卡
+  S.cardT = setTimeout(()=>{ if (S.phase!=='arrived') return; $('veil').classList.add('on'); $('again').focus(); }, 1800);   // 先讓他歡呼兩輪再蓋上地點卡
 }
 function reset(){
   clearTimeout(S.cardT); S.cardT=0;
   document.querySelector('.app').inert=false;
   $('veil').classList.remove('on'); S.phase='ready'; S.target=null; S.offer=null;
-  $('bands').hidden=false; $('go').hidden=false; $('go').textContent='再抽一支'; $('walkrow').hidden=true;
+  $('bands').hidden=false; $('go').hidden=false; $('go').textContent='再走一趟'; $('walkrow').hidden=true;
   $('sim').classList.remove('on');
-  $('hint').textContent='選一個遠近，替你抽一支籤'; $('dist').innerHTML='？<small></small>'; $('sub').textContent=statLine();
+  $('hint').textContent='選一個遠近，出門散步吧'; $('dist').innerHTML='？<small></small>'; $('sub').textContent=statLine();
 }
-const statLine = () => `${S.sim?'模擬：':''}抽過 ${rec('drawn',0)} 支 · 到過 ${rec('seen').length} 處`;
+const statLine = () => `${S.sim?'模擬：':''}出發過 ${rec('drawn',0)} 次 · 到過 ${rec('seen').length} 處`;
 
 /* ---------- 每次位置變化 ---------- */
 function tick(first){
@@ -463,8 +462,8 @@ function tick(first){
   $('sub').textContent = S.acc>35 ? `定位誤差約 ${Math.round(S.acc)} 公尺`
     : blind ? `沒有指南針・目標在${DIR8[Math.round(bearing(S.pos,tp)/45)%8]}方` : statLine();
   if (S.acc>60 && say('weak')) act('care', 4000);
-  /* 到達：定位夠準（誤差 ≤ ACC_OK），而且連續兩筆不同的定位都在範圍內才算，避免一筆亂跳的定位就解籤。
-     門檻還要在鹿港巷弄裡實測校準 */
+  /* 到達：定位夠準（誤差 ≤ ACC_OK），而且連續兩筆不同的定位都在範圍內才算，避免一筆亂跳的定位就揭曉。
+     門檻還要在巷弄裡實測校準 */
   if (d <= Math.min(ARRIVE+S.acc/2,40)){
     if (S.sim) return arrive();
     if (S.acc > ACC_OK){ S.hits=0; $('sub').textContent='已經很近了，等定位準一點…'; return; }
@@ -545,14 +544,14 @@ $('turn').onclick = ()=>{ S.heading = ((S.heading||0)+90)%360; };
 /* ---------- 按鈕 ---------- */
 document.querySelectorAll('#bands button').forEach(b=>b.onclick=()=>{
   document.querySelectorAll('#bands button').forEach(x=>{x.classList.toggle('sel',x===b);x.setAttribute('aria-pressed',String(x===b))}); S.band=+b.dataset.b;
-  if (S.offer){ S.offer=null; $('hint').textContent='選一個遠近，替你抽一支籤'; $('go').textContent = S.started?'再抽一支':'抽一支籤，出發'; } });
+  if (S.offer){ S.offer=null; $('hint').textContent='選一個遠近，出門散步吧'; $('go').textContent = S.started?'再走一趟':'出門散步吧'; } });
 $('go').onclick = go;
 $('redraw').onclick = pick;
 // 收工＝結束這趟散步：關定位、指南針和螢幕常亮；下次出發重新取得
 $('stop').onclick = ()=>{ say('bye'); act('bye', 3200);
   S.started = false; stopSensors();
   if (!S.forcedSim){ S.sim = false; $('foot').textContent = ''; }
-  reset(); $('go').textContent = '抽一支籤，出發'; $('mode').textContent = S.sim ? '模擬行走' : '已收工'; };
+  reset(); $('go').textContent = '出門散步吧'; $('mode').textContent = S.sim ? '模擬行走' : '已收工'; };
 $('again').onclick = ()=>{ reset(); $('go').focus(); };
 $('voice').textContent = '語音：'+(S.voice?'開':'關');
 $('voice').onclick = ()=>{ S.voice=!S.voice; store.set('voice',S.voice); $('voice').textContent='語音：'+(S.voice?'開':'關');
@@ -561,9 +560,9 @@ document.addEventListener('visibilitychange', ()=>{
   if (document.hidden){clearInterval(simT);simT=null;return}
   if (!native && S.started && S.phase==='walking') void keepAwake();
 });
-if (location.hash==='#sim'){ S.forcedSim = true; useSim('模擬模式：按住「朝籤走」前進。'); }
+if (location.hash==='#sim'){ S.forcedSim = true; useSim('模擬模式：按住「往目的地走」前進。'); }
 $('sub').textContent = statLine();
-$('foot').textContent ||= `鹿港一帶 ${PLACES.length} 個地點`;
+$('foot').textContent ||= `全台 ${PLACES.length.toLocaleString('zh-TW')} 個地點`;
 requestAnimationFrame(frame);
 }
 </script>

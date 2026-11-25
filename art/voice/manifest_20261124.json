@@ -1,0 +1,3754 @@
+{
+  "voice_id": "voc_cfnf6vu2sp2p",
+  "voice_name": "Sparks",
+  "voice_lookup_http": 200,
+  "request_query": "output_format=mp3_24000_128&delivery=sync",
+  "jobs": [
+    {
+      "file": "greet_0.mp3",
+      "text": "這一支，我替你抽好了。跟著我。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "這一支，我替你抽好了。跟著我。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。語氣雀躍、帶著期待，像拉著朋友出門。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 3.096,
+        "bytes": 49536,
+        "sha256": "1b4e0e30fd13d7b890fbe3cbf33ac37c45d1f8deca65d38534526b895be651bf"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 3.096,
+        "bytes": 19101,
+        "sha256": "09e0bd63cade47c005db478b3e16343840e71ec20fae5b3db57f231702bca030"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_q2thc56am8da",
+        "x-request-id": "4da5a540bc5e46e19dc20eb27e23e75b"
+      },
+      "usage": {
+        "billable_units": 27,
+        "cost_millicredits": 2700
+      }
+    },
+    {
+      "file": "greet_1.mp3",
+      "text": "走吧，有個地方在等你。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "走吧，有個地方在等你。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。語氣雀躍、帶著期待，像拉著朋友出門。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 1.728,
+        "bytes": 27648,
+        "sha256": "f56d03cb38d29d3990476086448cffe2e4b58a4bb7db4fb7876882a17d52221f"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 1.728,
+        "bytes": 10893,
+        "sha256": "2fd8cd9bf46f2a2f434f3947423d6360e0658423c444b3b40f4a3926e1c638d6"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_5cnhw3grecu7",
+        "x-request-id": "a90baa126f304cc0af7ee54b0005a805"
+      },
+      "usage": {
+        "billable_units": 20,
+        "cost_millicredits": 2000
+      }
+    },
+    {
+      "file": "far_0.mp3",
+      "text": "還有一段路，慢慢來。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "還有一段路，慢慢來。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。輕鬆、陪伴感，語速稍慢。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 1.728,
+        "bytes": 27648,
+        "sha256": "a07744025b55054e9d27dd0d28e3ea6cf0e1ef9ef9be655974e9fd7d43a524f2"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 1.523625,
+        "bytes": 9741,
+        "sha256": "34dc414727d73b374c0caf134c56d5e9005699085cf5a8eb04d651be14a124ec"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_pm69bzfb7pmd",
+        "x-request-id": "cdf9b163a6c341fd9a764de4acd8f4fa"
+      },
+      "usage": {
+        "billable_units": 18,
+        "cost_millicredits": 1800
+      }
+    },
+    {
+      "file": "far_1.mp3",
+      "text": "不急，我們慢慢走。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "不急，我們慢慢走。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。輕鬆、陪伴感，語速稍慢。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 1.584,
+        "bytes": 25344,
+        "sha256": "cbaf93f47b0807c6f5395ccb545a0c6dd4bdfa907dd1d4253b627b71d8da843c"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 1.584,
+        "bytes": 10029,
+        "sha256": "c63dc003d691c69909a030f1c9778c6912af091338f3490f9e86680d739ca9d2"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_j2xnzgp54j73",
+        "x-request-id": "eeab883b88d84039b0c8f014eb0d82a4"
+      },
+      "usage": {
+        "billable_units": 16,
+        "cost_millicredits": 1600
+      }
+    },
+    {
+      "file": "half_0.mp3",
+      "text": "走一半了。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "走一半了。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。輕快地鼓勵對方，帶一點笑意。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 1.176,
+        "bytes": 18816,
+        "sha256": "b8e4db03f54299b27c83d22816e17935d506bbbb7bf122fced1d5bf4b09ff604"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 1.176,
+        "bytes": 7581,
+        "sha256": "afaa2272211968e8130502cb995b49793973f414eca14695e38205a66b6fe7ad"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_jr6mnydecyps",
+        "x-request-id": "28baf30c487a4d3ba7743b8fd5510b00"
+      },
+      "usage": {
+        "billable_units": 9,
+        "cost_millicredits": 900
+      }
+    },
+    {
+      "file": "half_1.mp3",
+      "text": "過半了，你走得不錯。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "過半了，你走得不錯。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。輕快地鼓勵對方，帶一點笑意。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 1.728,
+        "bytes": 27648,
+        "sha256": "7d64e0550faede2b1c43285e38668849e43f2ca3624613e6f5b2f353c03683c8"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 1.728,
+        "bytes": 10893,
+        "sha256": "c87a85e142b76c5c6e0d78255970d79349fc8ff3fb32de39297f43b0745b4f0a"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_kscwv9r338hc",
+        "x-request-id": "d2fc8466feb54944ab61248fe8d57912"
+      },
+      "usage": {
+        "billable_units": 18,
+        "cost_millicredits": 1800
+      }
+    },
+    {
+      "file": "near_0.mp3",
+      "text": "快到了，抬頭看看。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "快到了，抬頭看看。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。興奮但壓低聲音，有點神秘，像要揭曉驚喜。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 1.656,
+        "bytes": 26496,
+        "sha256": "2f050b43c42f0799d12b2b5991965412c6446edd848308b1b9522b0a1ac26a3f"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 1.656,
+        "bytes": 10461,
+        "sha256": "e07c676b564a5171875b64777cd55fdba3ab22d63714e930b386fd14607e8ae2"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_eddqk3sv8mn8",
+        "x-request-id": "5c3fdc8b0abc4880b9ac4e1db882ae65"
+      },
+      "usage": {
+        "billable_units": 16,
+        "cost_millicredits": 1600
+      }
+    },
+    {
+      "file": "near_1.mp3",
+      "text": "就在這附近了。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "就在這附近了。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。興奮但壓低聲音，有點神秘，像要揭曉驚喜。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 1.104,
+        "bytes": 17664,
+        "sha256": "d122cb0fa1f0f95f1d16c606bfdfaf5ad883dd332bdd97bed0b5356d65329323"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 1.104,
+        "bytes": 7149,
+        "sha256": "34640c6b967bcbb789e3409a1da6c9b59c36952880f9cc32b534e47b85974837"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_a823b6tsfzw3",
+        "x-request-id": "8207ba4072814896939c88e1d26abe69"
+      },
+      "usage": {
+        "billable_units": 13,
+        "cost_millicredits": 1300
+      }
+    },
+    {
+      "file": "behind_0.mp3",
+      "text": "在你後面啦，轉個身。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "在你後面啦，轉個身。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。有點著急、帶點撒嬌地嘟嘴，像拉著對方的袖子往回拖。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.064,
+        "bytes": 33024,
+        "sha256": "a5abf69ae6541ddd38e5204219778d60c436734667fd1104d926e89a83685978"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.064,
+        "bytes": 12909,
+        "sha256": "21f8dd94055665ae454c8043f4e8e86322ef2579b1c3fe9ba506992da306293e"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_xske2gyy9qkx",
+        "x-request-id": "474ce539e34a443890b638965dc84989"
+      },
+      "usage": {
+        "billable_units": 18,
+        "cost_millicredits": 1800
+      }
+    },
+    {
+      "file": "behind_1.mp3",
+      "text": "方向反了，往回一點。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "方向反了，往回一點。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。有點著急、帶點撒嬌地嘟嘴，像拉著對方的袖子往回拖。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 1.968,
+        "bytes": 31488,
+        "sha256": "fd1957b4c853b52010c63d27343471157bc182b9389b2105151f24f79b4dbaff"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 1.968,
+        "bytes": 12333,
+        "sha256": "5a0621ad37fc955082016104c5c685296a328d6891fe35dd39b9a33888c96a9a"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_qq3h5s8wzb3y",
+        "x-request-id": "796bcbfcf5534b32b6e34dcea6c718db"
+      },
+      "usage": {
+        "billable_units": 18,
+        "cost_millicredits": 1800
+      }
+    },
+    {
+      "file": "idle_0.mp3",
+      "text": "停下來了？歇一下也好。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "停下來了？歇一下也好。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。溫柔、關心，聲音放軟。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 1.968,
+        "bytes": 31488,
+        "sha256": "72c6ad0356c4b121599c2bc5a2ab934191064dffa22b94a212bf5435b6d344c0"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 1.968,
+        "bytes": 12333,
+        "sha256": "2cd37742b46fd13005aeaf93475073f881f3b2fa3eb8deefeec5b135813b38c1"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_bsvenvbvv3u3",
+        "x-request-id": "628c2e910e7b45f4a3ae13bbdf7f7584"
+      },
+      "usage": {
+        "billable_units": 20,
+        "cost_millicredits": 2000
+      }
+    },
+    {
+      "file": "idle_1.mp3",
+      "text": "我在這，等你。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "我在這，等你。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。溫柔、關心，聲音放軟。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 1.248,
+        "bytes": 19968,
+        "sha256": "99ceaefc25a84dad36629b8ed4d473b75bd70d6da7e21fa78f3f6a640d87d500"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 1.248,
+        "bytes": 8013,
+        "sha256": "72e18d9ed6a4b9c7010dca8fca9a0b01c8964470ec3b725d0f1218e99db30e47"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_n7xgt632855b",
+        "x-request-id": "eb2781c3cd0448408479bc5f1de80601"
+      },
+      "usage": {
+        "billable_units": 12,
+        "cost_millicredits": 1200
+      }
+    },
+    {
+      "file": "weak_0.mp3",
+      "text": "訊號不太好，先站一下。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "訊號不太好，先站一下。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。關心、輕聲提醒，不慌張。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.064,
+        "bytes": 33024,
+        "sha256": "6e301febd5a744474eb603c6e47d5b447e7219a97037a6bb301d60b28005357a"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.064,
+        "bytes": 12909,
+        "sha256": "b698c0de91020b9e5578491051d17eb2b3596306a188256e2527b8f129323952"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_wbc5pt8c9eqd",
+        "x-request-id": "788b80358b3847f9b2e64399ac817f5c"
+      },
+      "usage": {
+        "billable_units": 20,
+        "cost_millicredits": 2000
+      }
+    },
+    {
+      "file": "bye_0.mp3",
+      "text": "今天就走到這吧。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "今天就走到這吧。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。依依不捨，聲音軟、語速慢，句尾輕輕收住。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 1.968,
+        "bytes": 31488,
+        "sha256": "816a4e900bf4bacf391cf2d816c66254f6e385b63152db4e5328241f9bc51e1f"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 1.968,
+        "bytes": 12333,
+        "sha256": "9d97029163b4b0e4c46c9148fb9787f3299b73aeea7b30e6d123bc7d5fd8a7ac"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_33cjuth7vxkd",
+        "x-request-id": "65e3151a1d9a49b290d3c2110d36466c"
+      },
+      "usage": {
+        "billable_units": 15,
+        "cost_millicredits": 1500
+      }
+    },
+    {
+      "file": "bye_1.mp3",
+      "text": "下次再一起抽一支。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "下次再一起抽一支。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。依依不捨，聲音軟、語速慢，句尾輕輕收住。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 3.024,
+        "bytes": 48384,
+        "sha256": "360fb47ddfeb2f430fe462f0905e72e43dfeafe8ed3af152f71dbdbc87e192c0"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 3.024,
+        "bytes": 18669,
+        "sha256": "8bd37ab0a0094636b28648d2a0d8e05d0fcad4824e463e201fc87f77a02d493b"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_8n9auhrcpz4k",
+        "x-request-id": "acaa1de069834b5ebd773d93107f4e06"
+      },
+      "usage": {
+        "billable_units": 17,
+        "cost_millicredits": 1700
+      }
+    },
+    {
+      "file": "arrived_1.mp3",
+      "text": "到了！是三山國王廟。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是三山國王廟。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.304,
+        "bytes": 36864,
+        "sha256": "164fa4e1b82523bf32941da3c461b47ef3c0494f059b32e74033ab4a3490a851"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.304,
+        "bytes": 14349,
+        "sha256": "07ab7031123c3a645fd627322fa3c3f56869f92c1a5d434ad27cc5d484ae318b"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_gkzn5e8ezrs5",
+        "x-request-id": "b02fe0c931f64be58cac993ede240ef9"
+      },
+      "usage": {
+        "billable_units": 18,
+        "cost_millicredits": 1800
+      }
+    },
+    {
+      "file": "arrived_2.mp3",
+      "text": "到了！是鹿港隘門。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是鹿港隘門。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 1.968,
+        "bytes": 31488,
+        "sha256": "3ab01c9034aa917673d4c4c732a13d0369334fbb5f694846b44afe5bf99098d6"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 1.968,
+        "bytes": 12333,
+        "sha256": "778101d5f84f279d5563bf0f1d0c15e596281ee742e0dbc48960904cfcd31bb5"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_hvqjxqavr2mn",
+        "x-request-id": "ed05846f79f34fadb4152acf797c46b4"
+      },
+      "usage": {
+        "billable_units": 16,
+        "cost_millicredits": 1600
+      }
+    },
+    {
+      "file": "arrived_3.mp3",
+      "text": "到了！是意和行。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是意和行。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 3.504,
+        "bytes": 56064,
+        "sha256": "91270b313a48103a067b3240498e90843074be29f76a14f3824a0687b4076bfa"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 3.504,
+        "bytes": 21549,
+        "sha256": "3221a493cc46b78c8b9b02cf1b81e64ad6d70c370d55b61406fd303617073813"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_jzk68kpy7sks",
+        "x-request-id": "fe57a966566946d49ba9a9c6dcfc301d"
+      },
+      "usage": {
+        "billable_units": 14,
+        "cost_millicredits": 1400
+      }
+    },
+    {
+      "file": "arrived_4.mp3",
+      "text": "到了！是蔡氏宗祠。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是蔡氏宗祠。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.376,
+        "bytes": 38016,
+        "sha256": "ca4084fb5e6543b5a7ec1368a4f00098ee2bf9bf8d46b5f7b9f04205fa78192a"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.376,
+        "bytes": 14781,
+        "sha256": "2a6c0d377ea15674d32c310026076d534f2da5b3bea49636a2cd6be36eb50546"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_bznbey3g57w3",
+        "x-request-id": "e9c8abeb465c43cb984f430a5b887bf6"
+      },
+      "usage": {
+        "billable_units": 16,
+        "cost_millicredits": 1600
+      }
+    },
+    {
+      "file": "arrived_5.mp3",
+      "text": "到了！是泰安宮。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是泰安宮。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 1.896,
+        "bytes": 30336,
+        "sha256": "5b8d8fe125aa8e527719b611b6aafb01d6bd465f6d3261c70327edaab39e370e"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 1.896,
+        "bytes": 11901,
+        "sha256": "6f85c244d17e86b8cb32c6f8576c88000cd60882cf3f5eac039a3284c1f6a79b"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_tn2ner9zwh52",
+        "x-request-id": "fbca9918e70243c08b9a301e71c0bcf9"
+      },
+      "usage": {
+        "billable_units": 14,
+        "cost_millicredits": 1400
+      }
+    },
+    {
+      "file": "arrived_6.mp3",
+      "text": "到了！是真耶穌教會。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是真耶穌教會。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.376,
+        "bytes": 38016,
+        "sha256": "df69c16cd1537ecd1cd7dfbb34c790f7c56185647fbd10b69fc7b663d6138050"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.376,
+        "bytes": 14781,
+        "sha256": "8da89e27183cc6061df01ba5460efbe44593992d07c2cf002c98b794b5f99400"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_s8g5dfgjbkmr",
+        "x-request-id": "00ccf01b09834722845ead90fb04429b"
+      },
+      "usage": {
+        "billable_units": 18,
+        "cost_millicredits": 1800
+      }
+    },
+    {
+      "file": "arrived_7.mp3",
+      "text": "到了！是石敢當。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是石敢當。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 3.024,
+        "bytes": 48384,
+        "sha256": "73e447d0581e9f1ef590ab1665ce49b7e26a3a42ca02206973fb4cab933ebd36"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 3.024,
+        "bytes": 18669,
+        "sha256": "410b0123abc8b69366f4bab8a45c64df9c76fcbceb8d2fc92ad4b9069df4b626"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_cgc9sutnh86k",
+        "x-request-id": "4194adebdbee46deabbabd2d7686d6f3"
+      },
+      "usage": {
+        "billable_units": 14,
+        "cost_millicredits": 1400
+      }
+    },
+    {
+      "file": "arrived_8.mp3",
+      "text": "到了！是真如殿。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是真如殿。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 1.968,
+        "bytes": 31488,
+        "sha256": "9fd1f0bd01f00f6ff6a2f4c857180e351788dd7a67ed340196e370fa63aec161"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 1.968,
+        "bytes": 12333,
+        "sha256": "2d8bc9bfab6bee959f2cb57249dc378079cea330c84824afcca37a84e2755511"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_nb4j9zsykcps",
+        "x-request-id": "d6cdde47f838420f87383ccbcb10c95e"
+      },
+      "usage": {
+        "billable_units": 14,
+        "cost_millicredits": 1400
+      }
+    },
+    {
+      "file": "arrived_9.mp3",
+      "text": "到了！是振訓國術館。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是振訓國術館。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.688,
+        "bytes": 43008,
+        "sha256": "ba953de7eff6ec1d9a27e1e0fcf64f8aaeddbfc6a674bd40344576f08cd5f32d"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.688,
+        "bytes": 16653,
+        "sha256": "05406665243b247179f72e3166373b6792f7be02b42624baee5a0a5d8d5169ba"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_mj53fdgayhsu",
+        "x-request-id": "2d4fda9b10a64d4b9a2cb5061482aa48"
+      },
+      "usage": {
+        "billable_units": 18,
+        "cost_millicredits": 1800
+      }
+    },
+    {
+      "file": "arrived_10.mp3",
+      "text": "到了！是埔頭街。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是埔頭街。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.136,
+        "bytes": 34176,
+        "sha256": "99ec3e85570040954aaa8bb0a3e604a3840012f7b3adb2efc2e9fc6299b29d69"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.136,
+        "bytes": 13341,
+        "sha256": "08cc4b295a791d4cf02a874893355fb9122bbc09e009d09dd6ccde6a67e2b5a4"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_fmqam8ydqjh9",
+        "x-request-id": "6d9915c2aa5745048a9a5286a662e45a"
+      },
+      "usage": {
+        "billable_units": 14,
+        "cost_millicredits": 1400
+      }
+    },
+    {
+      "file": "arrived_11.mp3",
+      "text": "到了！是鶴棲別墅。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是鶴棲別墅。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.544,
+        "bytes": 40704,
+        "sha256": "622fd8ef461c67748b653fc0e20a0777bf234caf7fad7736bd2c1c04da6f1727"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.544,
+        "bytes": 15789,
+        "sha256": "72f417da459b1b817d51f4a63fcc0fc782aec1ff83ec14f3643615fd29ef2585"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_ghnwt99zpe89",
+        "x-request-id": "c0e4bac1eb674129abed006fb47fbdf9"
+      },
+      "usage": {
+        "billable_units": 16,
+        "cost_millicredits": 1600
+      }
+    },
+    {
+      "file": "arrived_12.mp3",
+      "text": "到了！是施進益古厝。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是施進益古厝。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 3.264,
+        "bytes": 52224,
+        "sha256": "643c33232fd33b9484d5fca68df1005e1787e5a1033b5b857ae24eb66773b6ef"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 3.264,
+        "bytes": 20109,
+        "sha256": "601b7c6861aec729ae3cd397fe91109e387188686ce82bbac51e7f3a69ea7459"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_duz58gn9k7xg",
+        "x-request-id": "ad71ff72bca94a7b9d596feb137695e7"
+      },
+      "usage": {
+        "billable_units": 18,
+        "cost_millicredits": 1800
+      }
+    },
+    {
+      "file": "arrived_13.mp3",
+      "text": "到了！是天主教堂。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是天主教堂。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.376,
+        "bytes": 38016,
+        "sha256": "9e29c6181609ffd0d9b1eb0b0b5082780f24f2b71034baa7a558c124aeb23875"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.376,
+        "bytes": 14781,
+        "sha256": "aeb6b91d146720651b8b3a899d14675b6c2c75845bcbe32cd606f5a6e034466c"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_mqmj3xkxj8ug",
+        "x-request-id": "d23cfec501c844a2bd1c603db77712a2"
+      },
+      "usage": {
+        "billable_units": 16,
+        "cost_millicredits": 1600
+      }
+    },
+    {
+      "file": "arrived_14.mp3",
+      "text": "到了！是街長宿舍。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是街長宿舍。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.448,
+        "bytes": 39168,
+        "sha256": "bc973f5afe1d815819cbaad7805256e422a62eef718dffe335f1bd360aa5513b"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.448,
+        "bytes": 15213,
+        "sha256": "36d1d113fdd080aa93deb27b69483ae04b8458ac23d567be7770efc2b1ebb0f7"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_cc8hm3m8d9wp",
+        "x-request-id": "58c15c61aaab4235bb66a06590484897"
+      },
+      "usage": {
+        "billable_units": 16,
+        "cost_millicredits": 1600
+      }
+    },
+    {
+      "file": "arrived_15.mp3",
+      "text": "到了！是南泉宮。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是南泉宮。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 3.576,
+        "bytes": 57216,
+        "sha256": "f42d55b086bceb489194ad7e77dfbe9872840f7ef4f908b6e8cbb229d886974b"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.849,
+        "bytes": 17661,
+        "sha256": "8cf0e1adf077e95bd6d58971d9d86c6e10ddb9f7ad503be255d82247e3febef0"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_4rht4nxv3jnm",
+        "x-request-id": "32029d4d224448d5a36e0ca27f83d6ff"
+      },
+      "usage": {
+        "billable_units": 14,
+        "cost_millicredits": 1400
+      }
+    },
+    {
+      "file": "arrived_16.mp3",
+      "text": "到了！是南靖宮。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是南靖宮。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 4.704,
+        "bytes": 75264,
+        "sha256": "e8a25400af3b789798f5dd9caa73da2fa82fd9c458e786f29c87dabcce5aced2"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 4.704,
+        "bytes": 28749,
+        "sha256": "da33d789a308d18fab9d8bd3bc31996f4988e6f62002c529db31cb4bcbf0108e"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_6j2pgy2s4ue3",
+        "x-request-id": "f059f4e6f192409185815071bc112337"
+      },
+      "usage": {
+        "billable_units": 14,
+        "cost_millicredits": 1400
+      }
+    },
+    {
+      "file": "arrived_17.mp3",
+      "text": "到了！是玉珍齋。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是玉珍齋。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.544,
+        "bytes": 40704,
+        "sha256": "966047cc61325eab23cb5b136722c03782980dc44458b449dfa5532826fd850a"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.544,
+        "bytes": 15789,
+        "sha256": "5d905a7a0d0b895dec106df4e073d47e26cb7a7acd66eb0b7182a82830ce543c"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_s2gsquwgyvsy",
+        "x-request-id": "7cb01e7e52364752bd2f50687d577c09"
+      },
+      "usage": {
+        "billable_units": 14,
+        "cost_millicredits": 1400
+      }
+    },
+    {
+      "file": "arrived_18.mp3",
+      "text": "到了！是牛墟頭景靈宮。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是牛墟頭景靈宮。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 3.336,
+        "bytes": 53376,
+        "sha256": "e5fac7b7741e31e261146e85fb289bd38cdee1e7036d799b874cd720f3c6b465"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 3.336,
+        "bytes": 20541,
+        "sha256": "6c194818e769fbb135b4edacb79f448972b7463b86931f5766ef51d61a1d474a"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_cw38zf83wqn9",
+        "x-request-id": "c7ee28ad2f504245af582a99388c8671"
+      },
+      "usage": {
+        "billable_units": 20,
+        "cost_millicredits": 2000
+      }
+    },
+    {
+      "file": "arrived_19.mp3",
+      "text": "到了！是城隍廟。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是城隍廟。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.856,
+        "bytes": 45696,
+        "sha256": "a14191de3389616e256586788678c79c43925c33c731438e63578498e0806b75"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.856,
+        "bytes": 17661,
+        "sha256": "7fe82ca6d3900ac95ad081ddd4473c3c20373b3dfd53af090a5a5842634c5859"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_j5kn5mff3hb3",
+        "x-request-id": "e0f9a49147884d18869b54bbabdfedae"
+      },
+      "usage": {
+        "billable_units": 14,
+        "cost_millicredits": 1400
+      }
+    },
+    {
+      "file": "arrived_20.mp3",
+      "text": "到了！是福靈宮。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是福靈宮。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.304,
+        "bytes": 36864,
+        "sha256": "04ca19a28294cdc18456c53a31c2609420d6796a61fd4bfa1963feff2c68aec8"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.1416666666666666,
+        "bytes": 13485,
+        "sha256": "fecb40a236ce8ebb7c78f8dbeb77e39ea2e9d2129e560cae824bcb544bbe0bfc"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_t9g2z68wjvmq",
+        "x-request-id": "44653cdbe1e24823942002bddc91d73f"
+      },
+      "usage": {
+        "billable_units": 14,
+        "cost_millicredits": 1400
+      }
+    },
+    {
+      "file": "arrived_21.mp3",
+      "text": "到了！是后宅闔港潤澤宮李殿王。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是后宅闔港潤澤宮李殿王。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 4.536,
+        "bytes": 72576,
+        "sha256": "0d303e35694ef8e49bcf6f7fdf88853eaaafa299ab626affca6020c8f43c50c8"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 4.536,
+        "bytes": 27741,
+        "sha256": "d8fd7996865a0b9fec5fed385587306f41ea2c987efb07b1ca8e18d77f65198e"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_83vnxbcz3kw7",
+        "x-request-id": "94a0708777224f48886d08478b8979ce"
+      },
+      "usage": {
+        "billable_units": 28,
+        "cost_millicredits": 2800
+      }
+    },
+    {
+      "file": "arrived_22.mp3",
+      "text": "到了！是敬義園紀念碑。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是敬義園紀念碑。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.688,
+        "bytes": 43008,
+        "sha256": "2a7a4016230723e4874c4cdf763b180de230d59fe2c546b8350d4acb73f19761"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.2965833333333334,
+        "bytes": 14349,
+        "sha256": "eafa98e94b193208de1cd592b9daf3eb2f5d86768f411aee2e7ceabba3c7d667"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_ybgtenrdh67b",
+        "x-request-id": "db2ed48cc81543eda44c6bcaf5226945"
+      },
+      "usage": {
+        "billable_units": 20,
+        "cost_millicredits": 2000
+      }
+    },
+    {
+      "file": "arrived_23.mp3",
+      "text": "到了！是九曲巷。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是九曲巷。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.136,
+        "bytes": 34176,
+        "sha256": "c1ed4a60e12c9c27e87b9a568bc9d09175262f7ca08e9353d78ae8d9fbac94aa"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.136,
+        "bytes": 13341,
+        "sha256": "7726406b40096d877cb75f551d32738a11ae914e8c9c24010afe77e3b7587c76"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_jqe3gh7sqk75",
+        "x-request-id": "d6842dcddbf94e7e891a0ff83dde905f"
+      },
+      "usage": {
+        "billable_units": 14,
+        "cost_millicredits": 1400
+      }
+    },
+    {
+      "file": "arrived_24.mp3",
+      "text": "到了！是元昌行。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是元昌行。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.136,
+        "bytes": 34176,
+        "sha256": "0e55be697e3b00ac9fd9a03369c4a88643a14779ac86d40d56abcf16f19f01c5"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.136,
+        "bytes": 13341,
+        "sha256": "d2553eadbed662b54f13c8e9cfe34d3b3f7c499309c56fc3d23c609a692e9632"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_qdazjtzm8vbm",
+        "x-request-id": "3789016c97cb4fd6a217c3be570391e2"
+      },
+      "usage": {
+        "billable_units": 14,
+        "cost_millicredits": 1400
+      }
+    },
+    {
+      "file": "arrived_25.mp3",
+      "text": "到了！是泊仔寮洽義堂。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是泊仔寮洽義堂。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 3.096,
+        "bytes": 49536,
+        "sha256": "e7eb7b4a529ca3225f8570ec5e126490cdef04fafa1450f27963d98e1a739a61"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 3.096,
+        "bytes": 19101,
+        "sha256": "e82d9c826950486b6d0eae1df5ca620cbedb06d7f7f64daa68905e228ec693e5"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_rfhnbwhee6c6",
+        "x-request-id": "8f0a66218d304ef2a4c305ae5dfbc968"
+      },
+      "usage": {
+        "billable_units": 20,
+        "cost_millicredits": 2000
+      }
+    },
+    {
+      "file": "arrived_26.mp3",
+      "text": "到了！是新祖宮。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是新祖宮。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.376,
+        "bytes": 38016,
+        "sha256": "fff80b62d5889defa4250ad9cfc375c28ea8f741d95711f68460ac84f5a31483"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.221041666666667,
+        "bytes": 13917,
+        "sha256": "2c10d6a833e9663d34f8957d14894481c7477dbcf5c3e898a2951c3571dffa38"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_fd4w4rju68pm",
+        "x-request-id": "acebd8c70db4452a8fec369856e7cb12"
+      },
+      "usage": {
+        "billable_units": 14,
+        "cost_millicredits": 1400
+      }
+    },
+    {
+      "file": "arrived_27.mp3",
+      "text": "到了！是施姓宗祠。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是施姓宗祠。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.784,
+        "bytes": 44544,
+        "sha256": "cec0051c82ab736438371893609465c35efefff5cfbf5b7febc9f3dfca47675b"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.784,
+        "bytes": 17229,
+        "sha256": "4ed4d8c93720024e66f7b0eb9f8f89af18011988404a3b8f8accae8411a16247"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_5byz5mgtu7g3",
+        "x-request-id": "cce5b0a630c34253a56100ebc3dbd51c"
+      },
+      "usage": {
+        "billable_units": 16,
+        "cost_millicredits": 1600
+      }
+    },
+    {
+      "file": "arrived_28.mp3",
+      "text": "到了！是鹿護福宮。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是鹿護福宮。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 4.224,
+        "bytes": 67584,
+        "sha256": "315fc1aeb0eef8c835d6e765e5ff4b376eccd31b6f866f41cb07cb9fb1f6144d"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 4.224,
+        "bytes": 25869,
+        "sha256": "a09d9415d7011b345663deb4e9757f9c23dbe971d4c8f6b68ecb1b32e53a56dd"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_artxthtgjg8w",
+        "x-request-id": "a7e95f0a395d42ec98cd1f596df53277"
+      },
+      "usage": {
+        "billable_units": 16,
+        "cost_millicredits": 1600
+      }
+    },
+    {
+      "file": "arrived_29.mp3",
+      "text": "到了！是玉渠宮。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是玉渠宮。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 3.024,
+        "bytes": 48384,
+        "sha256": "57a7c671c25af483303912512f256c5a922facbdcae584529a70244090dcaa87"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 3.024,
+        "bytes": 18669,
+        "sha256": "e2f0736423a3b69ffa18976da99b2761aa8e52c5774bd2c1693f79fa5a510c21"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_aj3ckhr5annp",
+        "x-request-id": "513b1a6220e5493db21d46f1cf108a4c"
+      },
+      "usage": {
+        "billable_units": 14,
+        "cost_millicredits": 1400
+      }
+    },
+    {
+      "file": "arrived_30.mp3",
+      "text": "到了！是鹿港辜宅。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是鹿港辜宅。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.928,
+        "bytes": 46848,
+        "sha256": "260883ea3b9f5fbe46afd1d1904bb28a073d04519c44e48ce237e1f8831320ec"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.928,
+        "bytes": 18093,
+        "sha256": "ced113517aaabb2a2f6f2619450c5bd33459f4162e153d447426c6fb2ffc447e"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_42gxrg7w5tq4",
+        "x-request-id": "61f909dfaa1c4786b321c3c653063e07"
+      },
+      "usage": {
+        "billable_units": 16,
+        "cost_millicredits": 1600
+      }
+    },
+    {
+      "file": "arrived_31.mp3",
+      "text": "到了！是十宜樓。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是十宜樓。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 1.824,
+        "bytes": 29184,
+        "sha256": "4fe02634c325f3fba5a7c6dce1f15eb642bb20bc681a3ed150f91154983cfcae"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 1.824,
+        "bytes": 11469,
+        "sha256": "93346b0ff92ea426c56e908e77d912948dd456b5375f6fac180db0c11682e698"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_r2un4suwzhts",
+        "x-request-id": "94be2175089f41fc941dc89c5c36b74c"
+      },
+      "usage": {
+        "billable_units": 14,
+        "cost_millicredits": 1400
+      }
+    },
+    {
+      "file": "arrived_32.mp3",
+      "text": "到了！是天后宮。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是天后宮。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 3.408,
+        "bytes": 54528,
+        "sha256": "640e124ac402ded4ce5fe440a162380d4172004584b9c5f0ca8236b7746989c4"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 3.408,
+        "bytes": 20973,
+        "sha256": "0533970dca9d199d6e7e43d76184032bc24c807c35daa2cab2071b04399de494"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_vdagnvnwhme4",
+        "x-request-id": "a1044740629f489ea6fbe7038e8b14c2"
+      },
+      "usage": {
+        "billable_units": 14,
+        "cost_millicredits": 1400
+      }
+    },
+    {
+      "file": "arrived_33.mp3",
+      "text": "到了！是永安宮。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是永安宮。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.376,
+        "bytes": 38016,
+        "sha256": "378199170f0fc64880587dab65c123ee82702e8127c58e1e6c557032793c1635"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.376,
+        "bytes": 14781,
+        "sha256": "442f355f44b2c73956924d2edd493c965803d62e1bcf829b0bf119d1b0f22350"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_nf3awdrxrbh9",
+        "x-request-id": "6c5e1283f49f4083aab9fe74d16b8890"
+      },
+      "usage": {
+        "billable_units": 14,
+        "cost_millicredits": 1400
+      }
+    },
+    {
+      "file": "arrived_34.mp3",
+      "text": "到了！是丁家古厝。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是丁家古厝。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 3.336,
+        "bytes": 53376,
+        "sha256": "5df84798c2a654538a5be90dd8173eea616c9072b42f71ca7dba25753fa56c9d"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 3.336,
+        "bytes": 20541,
+        "sha256": "b7c28d712fe857dbeaf13badfa345a7e234bcc8fbf2f2c5defc434aaa120a384"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_j3da28kes72p",
+        "x-request-id": "3d0e4c1fd9c2442ba2ac1edcdf760787"
+      },
+      "usage": {
+        "billable_units": 16,
+        "cost_millicredits": 1600
+      }
+    },
+    {
+      "file": "arrived_35.mp3",
+      "text": "到了！是威靈廟。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是威靈廟。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.856,
+        "bytes": 45696,
+        "sha256": "66656867a94d6c9c8047a397822f8b7343b17e408943b470f352bd56a1248845"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.856,
+        "bytes": 17661,
+        "sha256": "cafcaa603247e7c9903d4c984182213b0448dcbc06d2c4528ceb28f2d2864e64"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_w9eky4bchf5n",
+        "x-request-id": "522191aa557644378df36063bfa1e48f"
+      },
+      "usage": {
+        "billable_units": 14,
+        "cost_millicredits": 1400
+      }
+    },
+    {
+      "file": "arrived_36.mp3",
+      "text": "到了！是陸濟堂。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是陸濟堂。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.688,
+        "bytes": 43008,
+        "sha256": "b2c5434ed54d01c1dc3d5e787eebfa2848bbf200e05feb7071f8d0265b684211"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.688,
+        "bytes": 16653,
+        "sha256": "18e3c1314c7fa39532a79d1fe43514c6c2e3fd2f63b4b36af1da308948283577"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_xehvfx9ry829",
+        "x-request-id": "93d1a15c16ea4344b81679dbffc3653e"
+      },
+      "usage": {
+        "billable_units": 14,
+        "cost_millicredits": 1400
+      }
+    },
+    {
+      "file": "arrived_37.mp3",
+      "text": "到了！是集英宮。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是集英宮。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.064,
+        "bytes": 33024,
+        "sha256": "553e9e3abbd73410c990398f5766a4579c2e11e506065f803de0f44aa98d4f2f"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.064,
+        "bytes": 12909,
+        "sha256": "666c22804d5f879a71f3464bdba73e79158222380120485c85c9ccf730432c37"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_fpypf93axzyk",
+        "x-request-id": "67f67908430848d7a465af213812cd94"
+      },
+      "usage": {
+        "billable_units": 14,
+        "cost_millicredits": 1400
+      }
+    },
+    {
+      "file": "arrived_38.mp3",
+      "text": "到了！是意樓。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是意樓。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 1.968,
+        "bytes": 31488,
+        "sha256": "b8be21d597467e64f9d00c007a7b656e0e07fd7ccc780c6c4e4f3b375835b388"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 1.968,
+        "bytes": 12333,
+        "sha256": "7f400116b13ca57f8cf8e71bf168d47a3fc276f4deb46f7b833f052a09101c49"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_3b2uwk4vbgrz",
+        "x-request-id": "dc10bfcb45a94c08b0f664b46c3a73c0"
+      },
+      "usage": {
+        "billable_units": 12,
+        "cost_millicredits": 1200
+      }
+    },
+    {
+      "file": "arrived_39.mp3",
+      "text": "到了！是甕牆。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是甕牆。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.376,
+        "bytes": 38016,
+        "sha256": "6d470fd6bab3e1311b92094c1583ee586adf3794a47a5ce709a2dbcfef5ba5a2"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.376,
+        "bytes": 14781,
+        "sha256": "b841b38db4c81bbcf030258925831d5da320aa156c765bb33e097a21a6c9db09"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_rypeh59ck4c6",
+        "x-request-id": "fbc6821b1f05437a8362c45d594e2ef1"
+      },
+      "usage": {
+        "billable_units": 12,
+        "cost_millicredits": 1200
+      }
+    },
+    {
+      "file": "arrived_40.mp3",
+      "text": "到了！是鹽業文化館。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是鹽業文化館。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.448,
+        "bytes": 39168,
+        "sha256": "10e48ce82e7b48f69ea22076ad8baa1a8faced09d190a73cb774b98746f3aef7"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.448,
+        "bytes": 15213,
+        "sha256": "b0952eb91e7106e6578b2610119b1837fc0b7364372023c7999ca98dc9c80f20"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_qkfdatbxkn93",
+        "x-request-id": "6939ab67d1704894a8a88eae37ccdd5e"
+      },
+      "usage": {
+        "billable_units": 18,
+        "cost_millicredits": 1800
+      }
+    },
+    {
+      "file": "arrived_41.mp3",
+      "text": "到了！是日茂行。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是日茂行。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.448,
+        "bytes": 39168,
+        "sha256": "ae572df0834447801a294c17eb68a2ced9f2f9a6bbe0109ee369a48fb5b9e0ec"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.448,
+        "bytes": 15213,
+        "sha256": "67261dc1f24d943edc3045cb0838eb6547bec48f7495ac954b233db3c282a9f1"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_y3veextnhk9m",
+        "x-request-id": "de12654f96954e5ea6a1fd421e7ef2d5"
+      },
+      "usage": {
+        "billable_units": 14,
+        "cost_millicredits": 1400
+      }
+    },
+    {
+      "file": "arrived_42.mp3",
+      "text": "到了！是鳳山寺。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是鳳山寺。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.448,
+        "bytes": 39168,
+        "sha256": "9058232886fb07d7d586d6903ecb096e8e858f85b13741502c7c83d009b45d1f"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.448,
+        "bytes": 15213,
+        "sha256": "524d5397b62253610eba94761297f7207daff068f05c7f6a0f0b7a63ca412ad4"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_5dcgttnfgb4r",
+        "x-request-id": "12d02ed9699d49839c44a20062bfc229"
+      },
+      "usage": {
+        "billable_units": 14,
+        "cost_millicredits": 1400
+      }
+    },
+    {
+      "file": "arrived_43.mp3",
+      "text": "到了！是金銀廳。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是金銀廳。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.304,
+        "bytes": 36864,
+        "sha256": "5d990725c3e563e48a60a436d50f3687b0b1b3b5f1b5185e8487da5b4e734b93"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.304,
+        "bytes": 14349,
+        "sha256": "4f30e39f4b461d3ae3d5a83bb79af93df23d963c3c0a2e6f916919e244ad2c69"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_8ugyrsrwufch",
+        "x-request-id": "f31b3b517de74d0881c5fa35d26bc4c6"
+      },
+      "usage": {
+        "billable_units": 14,
+        "cost_millicredits": 1400
+      }
+    },
+    {
+      "file": "arrived_44.mp3",
+      "text": "到了！是興安宮。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是興安宮。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 1.824,
+        "bytes": 29184,
+        "sha256": "08289177c524029908e15367767f74ce9110a573b0f591727886ba58fbb03f63"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 1.824,
+        "bytes": 11469,
+        "sha256": "0800227fdad4489f950fa122c7889882553910cfed04d04bce8fafdb1f64ce39"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_4vqgj3fwnap6",
+        "x-request-id": "aff6584f6ced4389b8f67c6883656388"
+      },
+      "usage": {
+        "billable_units": 14,
+        "cost_millicredits": 1400
+      }
+    },
+    {
+      "file": "arrived_45.mp3",
+      "text": "到了！是武澤宮。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是武澤宮。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.448,
+        "bytes": 39168,
+        "sha256": "2ee783d0ea9a60ca5711f8901bf9b28721312415b4f9b8c76530d5e4a291cb50"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.448,
+        "bytes": 15213,
+        "sha256": "7f12f4b8f98f21e0c8d09913c9417ee1ce3ed59c18e54c81d8c860ec63f33d33"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_vskcb3y2aez3",
+        "x-request-id": "9eab41fb51134cd2aa5ffef062def3a0"
+      },
+      "usage": {
+        "billable_units": 14,
+        "cost_millicredits": 1400
+      }
+    },
+    {
+      "file": "arrived_46.mp3",
+      "text": "到了！是北方福德祠。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是北方福德祠。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.544,
+        "bytes": 40704,
+        "sha256": "05c2bc0898d0d2985047b5d0140fb504aaec87273ad523a5ed101fcc77a46d0a"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.544,
+        "bytes": 15789,
+        "sha256": "196d877787c51b6a987ad12048b3270abdae4fd8fccdab90ae37162a9f9792a6"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_4d3xc3yhv4pg",
+        "x-request-id": "5c2c8cf086a94887a77f8be1e5aefd3f"
+      },
+      "usage": {
+        "billable_units": 18,
+        "cost_millicredits": 1800
+      }
+    },
+    {
+      "file": "arrived_47.mp3",
+      "text": "到了！是摸乳巷。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是摸乳巷。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.064,
+        "bytes": 33024,
+        "sha256": "bd01db9cb282af9cdff743b2bec701065e7e12c8fe67312f92fd32d496245820"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.064,
+        "bytes": 12909,
+        "sha256": "15ab41ca8bb5998c94e2a0ab2206f0ec2755eba93100ca360e4c35ab9dd533a1"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_jjgcwketycqd",
+        "x-request-id": "9b2547fac23a446abe03f42029971762"
+      },
+      "usage": {
+        "billable_units": 14,
+        "cost_millicredits": 1400
+      }
+    },
+    {
+      "file": "arrived_48.mp3",
+      "text": "到了！是本壇宮。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是本壇宮。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 3.168,
+        "bytes": 50688,
+        "sha256": "78ebe7aa45fc21ba96342dc3787f6a3196e5a155f8e1efb28d163140e65fdde0"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 3.168,
+        "bytes": 19533,
+        "sha256": "8fdfed4de09ff910f45bf647ab4fcff84d973d092b94c33070fc18ebf0efa3f4"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_98xkaujmc47c",
+        "x-request-id": "0137c510bf364a9abe7a92adc9365df7"
+      },
+      "usage": {
+        "billable_units": 14,
+        "cost_millicredits": 1400
+      }
+    },
+    {
+      "file": "arrived_49.mp3",
+      "text": "到了！是郭厝保安宮。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是郭厝保安宮。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 3.576,
+        "bytes": 57216,
+        "sha256": "fcce0ad75ab5ef7900efff9549c25e1860c009ae50d3ecf848785b6cf56f492c"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 3.576,
+        "bytes": 21981,
+        "sha256": "c88ca308bcc32367878f98d9ac72a14853ff91be7e32ad852f5cb6322ae5ce80"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_7de3rdvumkvm",
+        "x-request-id": "fc897f72e7ea48448644e28af3270443"
+      },
+      "usage": {
+        "billable_units": 18,
+        "cost_millicredits": 1800
+      }
+    },
+    {
+      "file": "arrived_50.mp3",
+      "text": "到了！是鎮安宮。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是鎮安宮。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 1.824,
+        "bytes": 29184,
+        "sha256": "fe9406d73573a71335089905d000529d07b472cb073e409ce22f36a2d8397388"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 1.824,
+        "bytes": 11469,
+        "sha256": "e6478c167ebd1fee3bc49efd2588daeb8648ac08058e75a72da07cf6d361d612"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_e8a2brwtbanu",
+        "x-request-id": "fde796f92e7f4d789fac6d83dcfc1709"
+      },
+      "usage": {
+        "billable_units": 14,
+        "cost_millicredits": 1400
+      }
+    },
+    {
+      "file": "arrived_51.mp3",
+      "text": "到了！是紫極殿。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是紫極殿。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.304,
+        "bytes": 36864,
+        "sha256": "fe3586973ab13ba31353a19957d0fba87b92ace9379e176461c7f8db5dd24562"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.304,
+        "bytes": 14349,
+        "sha256": "2bf100f2780ab7eedf35d5bd29f7118e2d8d15a24edc9f5009cf7f0dc1315f28"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_2f8cfbmdmmh5",
+        "x-request-id": "c417303cebdf477a8b9ad48a9c1dab8d"
+      },
+      "usage": {
+        "billable_units": 14,
+        "cost_millicredits": 1400
+      }
+    },
+    {
+      "file": "arrived_52.mp3",
+      "text": "到了！是龍山寺。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是龍山寺。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.064,
+        "bytes": 33024,
+        "sha256": "da5c8012a5a861ac0999bf8111f606bc643f92c838d4c87e4ddcffe84e91d6b5"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.064,
+        "bytes": 12909,
+        "sha256": "4e34f0491df391421d53379806156592b6ea04f471512df94613d7d58019c07a"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_my8j4wet6se6",
+        "x-request-id": "e4c5253ca1bb4c7ca7cb886d4fd671bd"
+      },
+      "usage": {
+        "billable_units": 14,
+        "cost_millicredits": 1400
+      }
+    },
+    {
+      "file": "arrived_53.mp3",
+      "text": "到了！是中央廣播電臺鹿港分臺。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是中央廣播電臺鹿港分臺。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 4.608,
+        "bytes": 73728,
+        "sha256": "99c8f81d878a67de246613348aced00f3561f0dfa17fd6bc51cfce18c0e2e55f"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 4.608,
+        "bytes": 28173,
+        "sha256": "bc84a636784f37dbb78320016eb2ee1d14abc4cf6da2578a1e3b668f59e097d5"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_3vr7xgyp953y",
+        "x-request-id": "eef98b4355db4e39af57d959e69dacc6"
+      },
+      "usage": {
+        "billable_units": 28,
+        "cost_millicredits": 2800
+      }
+    },
+    {
+      "file": "arrived_54.mp3",
+      "text": "到了！是金門館。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是金門館。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 1.968,
+        "bytes": 31488,
+        "sha256": "11e6f8b47822dc349f1cf05ffedf98fb9d209105639b4c6c3e61a38e3f54b6aa"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 1.968,
+        "bytes": 12333,
+        "sha256": "dd3ce55f9bf9c13de450f3004047c75463fe7670b8819eea047b6918c9f39c36"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_zwnqb5xwk2c6",
+        "x-request-id": "697de758d39c478aa89e331ef53897d7"
+      },
+      "usage": {
+        "billable_units": 14,
+        "cost_millicredits": 1400
+      }
+    },
+    {
+      "file": "arrived_55.mp3",
+      "text": "到了！是文德宮。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是文德宮。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.544,
+        "bytes": 40704,
+        "sha256": "7aa4136472ac1c2468e3d2e7cd8c6e3d45eeacbd0fdc93b12d12ccfa96d41480"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.544,
+        "bytes": 15789,
+        "sha256": "3edcb989636a0ead2d9c2b2cb2d6901504a0f7f88043fc44b16223612c1ac207"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_ufk5jyv3vvjc",
+        "x-request-id": "9d3d40d8b8e84fdbba8d986f12176196"
+      },
+      "usage": {
+        "billable_units": 14,
+        "cost_millicredits": 1400
+      }
+    },
+    {
+      "file": "arrived_56.mp3",
+      "text": "到了！是鹿港神社。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是鹿港神社。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.448,
+        "bytes": 39168,
+        "sha256": "01f2074d8d303a5fbfe83706033b1d107c965cd45abf1d5aa0b65e5289b72158"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.448,
+        "bytes": 15213,
+        "sha256": "257c5b3dccffb9c315fbcf61728ec337ac6ca1cd11cd1e3daf01ab0bbb130908"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_6e4jwf3tpa74",
+        "x-request-id": "40d3e5c37a2f4757b57ba13faf3ffd72"
+      },
+      "usage": {
+        "billable_units": 16,
+        "cost_millicredits": 1600
+      }
+    },
+    {
+      "file": "arrived_57.mp3",
+      "text": "到了！是台灣基督長老教會鹿港教會。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是台灣基督長老教會鹿港教會。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 5.256,
+        "bytes": 84096,
+        "sha256": "2b74317f375dd7317ec72f3a4029433b3da916652b98d34422c98b54d84fd35c"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 5.256,
+        "bytes": 32061,
+        "sha256": "7b9e9661b527aca04a245877cbea3a70053185aca9c5ccd9d3e989e6e702568f"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_cmwkrmz4cy6t",
+        "x-request-id": "511166932cfb4fe49cc38ec3e97bf775"
+      },
+      "usage": {
+        "billable_units": 32,
+        "cost_millicredits": 3200
+      }
+    },
+    {
+      "file": "arrived_58.mp3",
+      "text": "到了！是生態公園。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是生態公園。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.304,
+        "bytes": 36864,
+        "sha256": "b63df6cec132676ac75041680287cb1d17fcbf55a0d7492ca7287047fb923e70"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.304,
+        "bytes": 14349,
+        "sha256": "226ecffbd580bb32fa8b5da93a7a53e34ffafb25e130211b460980962936ec29"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_h55ag6fbcuph",
+        "x-request-id": "3c162dd73e2b44ae9fdcbb86dce9804a"
+      },
+      "usage": {
+        "billable_units": 16,
+        "cost_millicredits": 1600
+      }
+    },
+    {
+      "file": "arrived_59.mp3",
+      "text": "到了！是地藏王廟。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是地藏王廟。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 3.264,
+        "bytes": 52224,
+        "sha256": "0ce790b90023189998b9c3f7de267c00a4a89779e82946687b159220373cdec1"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 3.264,
+        "bytes": 20109,
+        "sha256": "f9117191ba9af32ae6d5d91815d1cffad891c07847bd77b722062840935c1585"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_222md499xt6f",
+        "x-request-id": "280e3862e7174145b33c11225d7fdf13"
+      },
+      "usage": {
+        "billable_units": 16,
+        "cost_millicredits": 1600
+      }
+    },
+    {
+      "file": "arrived_60.mp3",
+      "text": "到了！是文開書院。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是文開書院。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.208,
+        "bytes": 35328,
+        "sha256": "2f8a5fa24d707cf3ba8622db0789bf93d0b1bba25ab26f2e61d557ce64f506d4"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.208,
+        "bytes": 13773,
+        "sha256": "15ab7cbb81a6210f33d7066f4de61b1f08fff955c86def8ac659c12f5613c505"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_u98eefw326ee",
+        "x-request-id": "9ea397f13bc54299856ceee204826cff"
+      },
+      "usage": {
+        "billable_units": 16,
+        "cost_millicredits": 1600
+      }
+    },
+    {
+      "file": "arrived_61.mp3",
+      "text": "到了！是福興鄉農會碾米廠。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是福興鄉農會碾米廠。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 3.576,
+        "bytes": 57216,
+        "sha256": "7fb99218e0bdac609063d5f048c96c5a7fc6b0c38185f3522410273b7297c29c"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 3.576,
+        "bytes": 21981,
+        "sha256": "45c97102aaf9dec09644f8c4f869d1c63a074eba4a8234df10fa1435442d9dcc"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_krxy64uchwmy",
+        "x-request-id": "051aae257a15465282af0dd3b41391aa"
+      },
+      "usage": {
+        "billable_units": 24,
+        "cost_millicredits": 2400
+      }
+    },
+    {
+      "file": "arrived_62.mp3",
+      "text": "到了！是頂厝公園。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是頂厝公園。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.928,
+        "bytes": 46848,
+        "sha256": "1c2756aa3b7cf99c6776c7ec058efd2a1fb7696a8838ddcdcbac36c9b27be40b"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.928,
+        "bytes": 18093,
+        "sha256": "44ee29c7761c6f042d24999c25a8f054a152c90f5f17211485c1e0f48615e34a"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_c9dkazg56p99",
+        "x-request-id": "69ff33cf313642d990a95557a4d0cc09"
+      },
+      "usage": {
+        "billable_units": 16,
+        "cost_millicredits": 1600
+      }
+    },
+    {
+      "file": "arrived_63.mp3",
+      "text": "到了！是文武廟。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是文武廟。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 4.056,
+        "bytes": 64896,
+        "sha256": "fb1993a6301ed980aa35b02a76e6d854a049cb6d78f80e9c607532497a7751fe"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 4.056,
+        "bytes": 24861,
+        "sha256": "0a7a8edd7da7ef3ac8789ff8004e91cc212a9c088547b7fa5ee5c0dcc5e09ca5"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_wfye6ujvknvq",
+        "x-request-id": "06330c4eae464efb93d215074cc22a3e"
+      },
+      "usage": {
+        "billable_units": 14,
+        "cost_millicredits": 1400
+      }
+    },
+    {
+      "file": "arrived_64.mp3",
+      "text": "到了！是橋頭太興宮。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是橋頭太興宮。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.376,
+        "bytes": 38016,
+        "sha256": "c9872290415f2df87c6609f7b0e9f5cdb08ba8f17dc1cbf1b3bca02a9d83a88e"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.376,
+        "bytes": 14781,
+        "sha256": "9c885aa96b148b37135a03aab796b04d83538d204fc4fc3a75966c2e16ffc766"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_9674ngvhfxx4",
+        "x-request-id": "4ec976e1077b4c5087ba25536021c091"
+      },
+      "usage": {
+        "billable_units": 18,
+        "cost_millicredits": 1800
+      }
+    },
+    {
+      "file": "arrived_65.mp3",
+      "text": "到了！是護安宮。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是護安宮。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.928,
+        "bytes": 46848,
+        "sha256": "d8bc00f00f713939dd02a8d6c584c301fcd82096f183d7431f89d807ec80c86e"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.928,
+        "bytes": 18093,
+        "sha256": "0e4bf5ef90ab858cdde15369741f954570dc44d4449e99aa8d40888cefb648a7"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_kj7ub6se3jmf",
+        "x-request-id": "8678c905cefc4a1ea40ab0553d08dec2"
+      },
+      "usage": {
+        "billable_units": 14,
+        "cost_millicredits": 1400
+      }
+    },
+    {
+      "file": "arrived_66.mp3",
+      "text": "到了！是楊橋公園。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是楊橋公園。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 1.728,
+        "bytes": 27648,
+        "sha256": "279ce6a25fc5b952036080efc668a157ecec7f4cf35b2c02d450931f5e0b1c25"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 1.728,
+        "bytes": 10893,
+        "sha256": "5271a396bb5a616c79a0ac6f7212c7cf1e94e4637abba6802be38809a5e64d2b"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_9asjk72gu7ff",
+        "x-request-id": "54eb89ca79994d54be13d2d4fb03666e"
+      },
+      "usage": {
+        "billable_units": 16,
+        "cost_millicredits": 1600
+      }
+    },
+    {
+      "file": "arrived_67.mp3",
+      "text": "到了！是慈普寺。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是慈普寺。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 1.656,
+        "bytes": 26496,
+        "sha256": "4e0efb78e7ac875bd103acc35e9fa54c81e00dbc3373565c51cd14d1f75f5e5e"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 1.656,
+        "bytes": 10461,
+        "sha256": "e456c8acb398ae3a202dd2363047f8edd699da1635f590afa96cddc0c7d307d2"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_rf9w2xh9uxg3",
+        "x-request-id": "94d1f9fc397b40be9c5d84d6dfbb13c3"
+      },
+      "usage": {
+        "billable_units": 14,
+        "cost_millicredits": 1400
+      }
+    },
+    {
+      "file": "arrived_68.mp3",
+      "text": "到了！是三清三元宮貝殼廟。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是三清三元宮貝殼廟。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 3.984,
+        "bytes": 63744,
+        "sha256": "12bc47e9bf500cc46517436b596215d9beb951929d00eff51e9a1b213ecfa5f1"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 3.984,
+        "bytes": 24429,
+        "sha256": "467dc088ecc982593f02beb553388954405a445a9b5c68db5f2406d5b0647700"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_w6k5jzyjhb2r",
+        "x-request-id": "3810820c652346b5b0956a1889a85b32"
+      },
+      "usage": {
+        "billable_units": 24,
+        "cost_millicredits": 2400
+      }
+    },
+    {
+      "file": "arrived_69.mp3",
+      "text": "到了！是同安寮福安宮。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是同安寮福安宮。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.928,
+        "bytes": 46848,
+        "sha256": "06400ab96603def1c538910dcd9300f746898f5474edafa2d975d73225d58e57"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.928,
+        "bytes": 18093,
+        "sha256": "fa8deb311f0ea7fada7bfd424b1d72509beaf1f7e08aeddc93c1be68a6833343"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_zks98becd84b",
+        "x-request-id": "69c27d4efc1a486da066d1db10601db2"
+      },
+      "usage": {
+        "billable_units": 20,
+        "cost_millicredits": 2000
+      }
+    },
+    {
+      "file": "arrived_70.mp3",
+      "text": "到了！是原彰化飛行場防空塔。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是原彰化飛行場防空塔。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 3.744,
+        "bytes": 59904,
+        "sha256": "fd9aa13cd78a3f79f368b32f5669af6be9df0744edb1bd6c5f30613c5da2a738"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 3.744,
+        "bytes": 22989,
+        "sha256": "66bfd11c771ca071e503d26743895a1b1bd6c20137a8894935cb5b4118d09779"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_2e5zpgvufud7",
+        "x-request-id": "4a9a9702b37f430291ffc048a9176f08"
+      },
+      "usage": {
+        "billable_units": 26,
+        "cost_millicredits": 2600
+      }
+    },
+    {
+      "file": "arrived_71.mp3",
+      "text": "到了！是白蘭氏健康博物館。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是白蘭氏健康博物館。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.856,
+        "bytes": 45696,
+        "sha256": "2184268e42c75b2f3fe3d7019dfed4d5708748ba0fae39680c1c5a50ad95aaf0"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.856,
+        "bytes": 17661,
+        "sha256": "79654f315989a77e18293402be62f3aea880dead6884d012836fbf436c8fccad"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_h74v9nfm4dps",
+        "x-request-id": "e727b97c507a44508fcd43a050756017"
+      },
+      "usage": {
+        "billable_units": 24,
+        "cost_millicredits": 2400
+      }
+    },
+    {
+      "file": "arrived_72.mp3",
+      "text": "到了！是台灣護聖宮。",
+      "voice_id": "voc_cfnf6vu2sp2p",
+      "request_body": {
+        "text": "到了！是台灣護聖宮。",
+        "instructions": "你是一個活潑、有點黏人又很貼心的狼耳少年嚮導，正陪著對方在鹿港老街散步，像熟朋友在身邊說話，自然口語，不要像在朗讀。非常開心地歡呼，像跳起來宣布答案，名字說得清楚。",
+        "model_id": "breeze-tts-2",
+        "language_code": "zh",
+        "voice_settings": {
+          "guidance_scale": 2.0
+        }
+      },
+      "http_status": 200,
+      "raw": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "128000",
+        "duration_seconds": 2.448,
+        "bytes": 39168,
+        "sha256": "6b11172417c88b1cb55be087c80501da6d0a6e90e3d40db0846519c7baa7d508"
+      },
+      "web": {
+        "codec_name": "mp3",
+        "sample_rate": "24000",
+        "channels": 1,
+        "bit_rate": "48000",
+        "duration_seconds": 2.448,
+        "bytes": 15213,
+        "sha256": "c901ad9c40186440adbfcb5b26eec349863003d9a98a9a978f4492965086f34d"
+      },
+      "success": true,
+      "state": "complete",
+      "response_metadata": {
+        "history-item-id": "job_gdgad3fccjvg",
+        "x-request-id": "95def548d4654413b7ce4a4486b7c4f5"
+      },
+      "usage": {
+        "billable_units": 18,
+        "cost_millicredits": 1800
+      }
+    }
+  ],
+  "usage": {
+    "verified_history_items": 87,
+    "billable_units": 1439,
+    "cost_millicredits": 143900
+  }
+}

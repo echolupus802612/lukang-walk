@@ -4,7 +4,7 @@
 - 音色：voice_id = voc_cfnf6vu2sp2p（BreezeBlue default 庫的 Sparks，美式英語男童音；已確認可用於合成）。先用 GET /v1/voices/voc_cfnf6vu2sp2p 確認仍存在；不存在就停下回報，不要換別的音色。這是英語音色，但一律用中文 language_code="zh" 生成，不要改成英文。
 - model_id = breeze-tts-2，language_code = "zh"（一定要中文），voice_settings.guidance_scale = 2.0，output_format = mp3_24000_128，delivery=sync。
 - 台詞與表演指令在 art/voice/jobs.json（87 條）。每條用它的 text 和 instructions，原樣送出，不要改字。
-- API key 依 skill 規定從本機文件在進程內讀取；不要輸出、不要寫進任何檔案、命令行參數或日誌。
+- API key 依 skill 規定從本機檔案在程式執行時直接讀取；不要輸出、不要寫進任何檔案、命令列參數或記錄檔。
 
 產出：
 1. 原始音檔存 art/voice/raw/<file>（file 就是 jobs.json 裡的檔名）。已存在且能解碼的不要重生成，避免重複扣費。失敗的不要無限重試，記錄下來。

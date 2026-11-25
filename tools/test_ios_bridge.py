@@ -13,7 +13,7 @@ from playwright.sync_api import sync_playwright
 
 ROOT = Path(__file__).resolve().parents[1]
 ENTRY = (ROOT / "docs/index.html").as_uri()
-# 固定抽籤亂數為零。從資料第一處以北約 220 公尺抽近籤，必定抽到該處。
+# 固定選點亂數為零。從資料第一處以北約 220 公尺選「近」，必定選到該處（鹿港資料排在全台資料前面）。
 PLACE = json.loads((ROOT / "data/lukang.json").read_text(encoding="utf-8"))[0]
 ORIGIN = (PLACE["lat"] + 0.002, PLACE["lng"])
 DESTINATION = (PLACE["lat"], PLACE["lng"])
@@ -94,7 +94,7 @@ class WalkBridgeTests(unittest.TestCase):
         self.page.clock.fast_forward(15000)
         self.assertEqual(self.messages("start"), [])
         self.assertFalse(self.page.locator("#walkrow").is_visible())
-        self.assertIn("抽過 4 支", self.label("#sub"))
+        self.assertIn("出發過 4 次", self.label("#sub"))
         self.click("#credits")
         self.assertEqual(self.messages("credits"), [{"action": "credits"}])
         self.assertEqual(self.page.url, ENTRY)
@@ -114,10 +114,10 @@ class WalkBridgeTests(unittest.TestCase):
         self.send("error", session, reason="approximate")
         self.assert_simulated(session, "大概位置")
 
-    def test_outside_lukang(self):
+    def test_far_from_any_place(self):
         session = self.start()
         self.fix(session, (ORIGIN[0] + 1, ORIGIN[1]))
-        self.assert_simulated(session, "不在鹿港")
+        self.assert_simulated(session, "5 公里內還沒有收錄")
 
     def test_permission_lost_while_walking_draws_in_separate_book(self):
         session = self.start()
@@ -156,7 +156,7 @@ class WalkBridgeTests(unittest.TestCase):
         self.assertEqual(self.label("#dist"), after)
 
         step.dispatch_event("pointerdown")
-        # 近籤至多 500 公尺；逐個計時器區間推進，保留長按的完整事件序列。
+        # 「近」至多 500 公尺；逐個計時器區間推進，保留長按的完整事件序列。
         for _ in range(25):
             for _ in range(20):
                 self.page.clock.fast_forward(100)

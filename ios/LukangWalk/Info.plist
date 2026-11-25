@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
     <key>CFBundleDevelopmentRegion</key><string>zh-Hant</string>
-    <key>CFBundleDisplayName</key><string>鹿港散步籤</string>
+    <key>CFBundleDisplayName</key><string>散步吧</string>
     <key>CFBundleExecutable</key><string>$(EXECUTABLE_NAME)</string>
     <key>CFBundleIdentifier</key><string>$(PRODUCT_BUNDLE_IDENTIFIER)</string>
     <key>CFBundleInfoDictionaryVersion</key><string>6.0</string>
@@ -13,7 +13,7 @@
     <key>CFBundleVersion</key><string>$(CURRENT_PROJECT_VERSION)</string>
     <key>LSRequiresIPhoneOS</key><true/>
     <key>NSLocationWhenInUseUsageDescription</key>
-    <string>散步時需要你的位置，讓小嚮導指路，走到目的地時替你解籤。位置只在這支手機上使用。</string>
+    <string>散步時需要你的位置，讓小嚮導指路，走到目的地時揭曉是哪裡。位置只在這支手機上使用。</string>
     <key>UILaunchScreen</key>
     <dict><key>UIColorName</key><string>LaunchBackground</string></dict>
     <key>UISupportedInterfaceOrientations</key>

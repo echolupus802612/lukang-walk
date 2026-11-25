@@ -30,7 +30,7 @@ final class WalkUITests: XCTestCase {
         XCTAssertTrue(done.waitForExistence(timeout: 10))
         XCTAssertTrue(app.links["OpenStreetMap 著作權說明"].waitForExistence(timeout: 10))
         done.tap()
-        let start = game.buttons["抽一支籤，出發"]
+        let start = game.buttons["出門散步吧"]
         XCTAssertTrue(start.waitForExistence(timeout: 10))
         XCTAssertTrue(start.isHittable)
     }
@@ -49,7 +49,7 @@ final class WalkUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
         let game = app.webViews.firstMatch
-        let start = game.buttons["抽一支籤，出發"]
+        let start = game.buttons["出門散步吧"]
         XCTAssertTrue(start.waitForExistence(timeout: 20))
         selectNear(in: game)
         device.location = lukangFix()
@@ -63,8 +63,8 @@ final class WalkUITests: XCTestCase {
         device.location = lukangFix()
         let gps = game.staticTexts.matching(NSPredicate(format: "label BEGINSWITH %@", "GPS")).firstMatch
         XCTAssertTrue(gps.waitForExistence(timeout: 12), "定位必須經過 Core Location 進入實走")
-        XCTAssertTrue(game.buttons["換一支"].exists)
-        XCTAssertFalse(game.buttons["▲ 朝籤走"].exists)
+        XCTAssertTrue(game.buttons["換個地方"].exists)
+        XCTAssertFalse(game.buttons["▲ 往目的地走"].exists)
         game.buttons["收工"].tap()
         XCTAssertTrue(game.staticTexts["已收工"].waitForExistence(timeout: 5))
     }
@@ -77,20 +77,20 @@ final class WalkUITests: XCTestCase {
 
         let game = app.webViews.firstMatch
         let status = game.staticTexts.matching(
-            NSPredicate(format: "label BEGINSWITH %@", "模擬：抽過 ")
+            NSPredicate(format: "label BEGINSWITH %@", "模擬：出發過 ")
         ).firstMatch
         XCTAssertTrue(status.waitForExistence(timeout: 20))
         let previousCount = try XCTUnwrap(status.label.split(separator: " ").compactMap { Int($0) }.first)
 
         selectNear(in: game)
-        let start = game.buttons["抽一支籤，出發"]
+        let start = game.buttons["出門散步吧"]
         start.tap()
-        let forward = game.buttons["▲ 朝籤走"]
+        let forward = game.buttons["▲ 往目的地走"]
         XCTAssertTrue(forward.waitForExistence(timeout: 10))
         forward.press(forDuration: 0.6)
         game.buttons["收工"].tap()
         XCTAssertTrue(start.waitForExistence(timeout: 10))
-        let expected = "模擬：抽過 \(previousCount + 1) 支"
+        let expected = "模擬：出發過 \(previousCount + 1) 次"
         XCTAssertTrue(status.label.hasPrefix(expected))
 
         app.terminate()

@@ -16,3 +16,6 @@ xcuserdata/
 DerivedData/
 *.xcresult/
 ios/build/
+art/desc/codex_run.txt
+data/desc_tw_parts/
+art/photos/raw_tw/

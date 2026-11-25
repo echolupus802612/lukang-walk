@@ -2,6 +2,6 @@
 
 目標 voice_id = voc_cfnf6vu2sp2p。請依序試：
 1. 先查官方文檔 https://docs.breezeblue.ai/api-reference/voices/list-voices 與 get-voice 相關頁面，看 voice_type 有哪些可用值、有沒有 GET /voices/{voice_id}。
-2. GET /voices/{voice_id}（如果有這個接口）。
+2. GET /voices/{voice_id}（如果有這個 API）。
 3. GET /voices 不帶 voice_type（處理分頁），以及文檔列出的每一種 voice_type 各查一次，找這個 ID。
-回報：哪個查詢找到了它、它的名稱/類型/語言等元數據（只回報音色元數據），以及它能不能用在 POST /text-to-speech/{voice_id}。若都找不到，列出個人庫現有音色的「名稱 + ID」清單，方便使用者對照。不要改任何檔案。
+回報：哪個查詢找到了它、它的名稱/類型/語言等中繼資料（只回報音色中繼資料），以及它能不能用在 POST /text-to-speech/{voice_id}。若都找不到，列出個人庫現有音色的「名稱 + ID」清單，方便使用者對照。不要改任何檔案。
