@@ -1,9 +1,26 @@
 # 鹿港散步籤（原型）
 
-抽一支散步籤，籤筒精用那支籤替你指路；走到了才解籤，揭曉是哪裡。
+抽一支散步籤，跟著狼耳小嚮導走，到達後才揭曉地名。
 
 - 線上試玩：https://echolupus802612.github.io/lukang-walk/ （需允許定位與動作感測；不在鹿港時自動進入模擬模式）
 - 模擬模式：網址加 `#sim`，按住「▲ 朝籤走」前進
+
+## iPhone App
+
+在 Mac 用裝有 iOS 17 或更新 SDK 的 Xcode 開啟 `ios/LukangWalk.xcodeproj`，選擇 **LukangWalk** 方案和一台 iPhone 模擬器，按 **⌘R**。專案已附字型、地點、照片、語音與授權頁。從原始碼建置 App 可直接使用這些檔案。
+
+要在自己的 iPhone 上試走，在 target 的 **Signing & Capabilities → Team** 選擇自己的開發團隊，接上手機後按 **⌘R**。預設 Bundle ID 為 `io.github.echolupus802612.lukangwalk`，若簽署時顯示識別碼已被註冊，請改成團隊可用的識別碼。
+
+- **在桌前試玩**。在 **Product → Scheme → Edit Scheme → Run → Arguments** 新增 `-simulate-walk`，用 Debug 組態執行。選「近」並出發，按住「▲ 朝籤走」直到解籤，再抽一支即可繼續。移除參數後，下一次啟動會使用手機定位。
+- **在鹿港試走**。出發時允許「使用 App 期間」與「準確位置」。實走用 iPhone 的定位與指南針，方向不可靠時改顯示絕對方位。到達後或按「收工」會關閉感測器與螢幕常亮。實走與模擬的足跡分開存在 App。
+- **更新內容**。改動畫面或地點後執行 `python -B tools/build_page.py .`。改動照片、署名或字型授權後，執行 `python -B tools/build_ios_credits.py`。若新增介面用字或地點簡介，可用 `tools/build_fonts.py` 更新離線字型子集。
+
+Mac 可在專案根目錄用以下命令檢查模擬器建置。
+
+```sh
+xcodebuild -project ios/LukangWalk.xcodeproj -scheme LukangWalk \
+  -configuration Debug -destination 'generic/platform=iOS Simulator' build
+```
 
 ## 結構
 
@@ -21,7 +38,7 @@
 | `tools/voice_jobs.py` | 產生配音任務清單 `art/voice/jobs.json`（台詞、表演指令、念出來的地名） |
 | `tools/voice_gen.py` | 用 BreezeBlue `breeze-tts-2` 生成中文語音 → `docs/voice/*.mp3`（金鑰在本機讀取，不進版控） |
 
-語音：87 句預錄（固定台詞 15 句＋每個地點一句到達台詞），音色 BreezeBlue Sparks（`voc_cfnf6vu2sp2p`），`language_code=zh`。音檔載不到時退回瀏覽器內建 TTS。
+語音素材共 87 段，包含 15 段固定台詞、68 個現行地點的到達台詞，以及 4 個已移出地點的舊錄音。音色為 BreezeBlue Sparks（`voc_cfnf6vu2sp2p`），`language_code=zh`。音檔載不到時退回系統語音。
 
 角色動作：idle 停著、walk 走動、point 指側邊（左邊用鏡像）、pointup 指前方、pull 拉扯（目標在背後）、care 關心（停太久／訊號差）、cheer 歡呼（到達）、bye 不捨（收工）。
 

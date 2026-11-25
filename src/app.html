@@ -5,25 +5,27 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="theme-color" content="#8f3524">
 <title>鹿港散步籤</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=LXGW+WenKai+TC:wght@400;700&family=Noto+Sans+TC:wght@500;700&display=swap" rel="stylesheet">
 <style>
+@font-face{font-family:"LXGW WenKai TC";src:url("fonts/walk-kai.woff2") format("woff2");font-weight:400;font-display:swap}
+@font-face{font-family:"LXGW WenKai TC";src:url("fonts/walk-kai-bold.woff2") format("woff2");font-weight:700;font-display:swap}
+@font-face{font-family:"Noto Sans TC";src:url("fonts/walk-sans.woff2") format("woff2");font-weight:500;font-display:swap}
+@font-face{font-family:"Noto Sans TC";src:url("fonts/walk-sans-bold.woff2") format("woff2");font-weight:700;font-display:swap}
 /* VOICE: 安靜的陪伴，像廟口有人替你抽了一支籤。
    IDEA: 廟裡的籤筒——抽一支散步籤，小嚮導（狼耳少年）替你指路，走到了才解籤。
    PICTURE: 紅磚地上的狼耳小嚮導與地面方位環，佔首屏一半。
    COLOUR and TYPE: 鹿港紅磚為底、廟金點題、米白文字；霞鶩文楷寫籤，思源黑體寫數字。
    LAYOUT: 單欄一屏：籤況、小嚮導、距離、對話、主按鈕；解籤時整張籤卡蓋上來。 */
 :root{color-scheme:light dark;
-  --bg:light-dark(#9a3a27,#3b1610);--bg2:light-dark(#82301f,#2a0f0a);
-  --ink:#fbf3e6;--soft:light-dark(#f3dccb,#d9bfae);--gold:#f2c14e;--gold2:#c9922a;
-  --card:light-dark(#fbf3e6,#241310);--cardink:light-dark(#3a1a12,#f6e9da);--line:rgba(251,243,230,.22)}
+  --bg:#9a3a27;--bg2:#82301f;--ink:#fbf3e6;--soft:#f3dccb;--gold:#f2c14e;--gold2:#c9922a;
+  --card:#fbf3e6;--cardink:#3a1a12;--line:rgba(251,243,230,.22)}
+@media(prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#3b1610;--bg2:#2a0f0a;--soft:#d9bfae;--card:#241310;--cardink:#f6e9da}}
+:root[data-theme=dark]{--bg:#3b1610;--bg2:#2a0f0a;--soft:#d9bfae;--card:#241310;--cardink:#f6e9da}
 :root[data-theme=light]{color-scheme:light}:root[data-theme=dark]{color-scheme:dark}
 *{box-sizing:border-box;min-width:0}
 [hidden]{display:none!important}
 html,body{height:100%}
 body{margin:0;background:radial-gradient(120% 70% at 50% 38%,var(--bg) 0%,var(--bg2) 100%) fixed,var(--bg2);
-  color:var(--ink);font:16px/1.55 "Noto Sans TC",system-ui,sans-serif;overflow-x:clip;
+  color:var(--ink);font:500 16px/1.55 "Noto Sans TC",system-ui,sans-serif;overflow-x:clip;
   -webkit-tap-highlight-color:transparent;user-select:none}
 .app{min-height:100dvh;max-width:520px;margin:0 auto;display:flex;flex-direction:column;
   padding:max(14px,env(safe-area-inset-top)) 16px max(16px,env(safe-area-inset-bottom))}
@@ -57,11 +59,12 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 .sim{display:none;gap:8px;margin-top:10px}.sim.on{display:flex}.sim button{flex:1;font-size:15px}
 .foot{margin-top:12px;text-align:center;font-size:13px;color:var(--soft)}
 .foot a{color:var(--soft)}
-.credit{display:block;margin-top:6px;text-align:center;font-size:11px;color:var(--soft);opacity:.55}
+.credit{display:grid;place-items:center;align-self:center;min-height:44px;padding:0 10px;text-align:center;font-size:11px;color:var(--soft);opacity:.75}
 /* 解籤卡 */
-.veil{position:fixed;inset:0;background:rgba(20,6,3,.55);display:none;place-items:center;padding:16px;z-index:5}
-.veil.on{display:grid}
-.card{width:min(100%,400px);max-height:calc(100dvh - 32px);overflow:auto;background:var(--card);color:var(--cardink);
+.veil{position:fixed;inset:0;background:rgba(20,6,3,.55);display:none;place-items:center;
+  padding:max(16px,env(safe-area-inset-top)) 16px max(16px,env(safe-area-inset-bottom));z-index:5}
+.veil.on{display:grid;grid-template:minmax(0,1fr) / minmax(0,1fr)}
+.card{width:min(100%,400px);max-height:100%;min-height:0;overflow:auto;background:var(--card);color:var(--cardink);
   border-radius:20px;padding:18px 22px 20px;box-shadow:0 20px 50px rgba(0,0,0,.4);text-align:center;animation:rise .5s ease}
 @keyframes rise{from{transform:translateY(30px) scale(.96);opacity:0}}
 .card .no{font:700 15px/1 "LXGW WenKai TC",serif;color:var(--gold2);letter-spacing:4px}
@@ -71,6 +74,10 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 .card p{font:400 17px/1.6 "LXGW WenKai TC",serif;text-align:start;margin:16px 0 4px}
 .card button{width:100%;margin-top:16px;background:#9a3a27;color:#fbf3e6;border:0}
 @media (prefers-reduced-motion:reduce){.card{animation:none}}
+@media (max-height:720px){
+  .app:has(#bands:not([hidden])) .say:not(.on){display:none}
+  .hint,.bands,.foot{margin-top:8px}
+}
 </style>
 </head>
 <body>
@@ -101,16 +108,17 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 
   <div class="dist" id="dist">？<small></small></div>
   <div class="sub" id="sub"></div>
-  <div class="say" id="say"></div>
+  <div class="say" id="say" aria-live="polite"></div>
 
   <div class="bands" id="bands">
-    <button data-b="0">近 ~500m</button><button data-b="1" class="sel">中 ~1km</button><button data-b="2">遠 ~2km</button>
+    <button data-b="0" aria-pressed="false">近 ~500m</button><button data-b="1" class="sel" aria-pressed="true">中 ~1km</button><button data-b="2" aria-pressed="false">遠 ~2km</button>
   </div>
   <button class="main" id="go">抽一支籤，出發</button>
   <div class="row" id="walkrow" hidden><button id="redraw">換一支</button><button id="voice">語音：開</button><button id="stop">收工</button></div>
   <div class="sim" id="sim"><button id="stepTo">▲ 朝籤走</button><button id="stepRand">亂走</button><button id="turn">轉身 90°</button></div>
   <div class="foot" id="foot"></div>
-  <a class="credit" href="https://github.com/echolupus802612/lukang-walk#資料來源與授權" target="_blank" rel="noopener">資料來源</a>
+  <div class="foot" role="status" id="storageWarning" hidden></div>
+  <a id="credits" class="credit" href="https://github.com/echolupus802612/lukang-walk#資料來源與授權" target="_blank" rel="noopener">資料來源</a>
 </div>
 
 <div class="veil" id="veil"><div class="card" role="dialog" aria-modal="true" aria-labelledby="cname">
@@ -152,8 +160,31 @@ const ANIM = {
 for (const k in ANIM){ const im=new Image(); im.src=`sprites/${k}.webp`; }  // 先載好，換動作不閃
 const still = matchMedia('(prefers-reduced-motion: reduce)');
 const $ = id => document.getElementById(id);
-const store = {get(k,d){try{const v=localStorage.getItem('lkwalk_'+k);return v==null?d:JSON.parse(v)}catch(e){return d}},
-  set(k,v){try{localStorage.setItem('lkwalk_'+k,JSON.stringify(v))}catch(e){}}};
+const native = window.webkit?.messageHandlers?.lukangWalk;
+const appValues = window.lukangInitialStore || {ver:2};
+function saveValues(values){
+  if (native){
+    Object.assign(appValues, values);
+    native.postMessage({action:'store', values});
+    return;
+  }
+  try{for (const [key,value] of Object.entries(values)) localStorage.setItem('lkwalk_'+key,JSON.stringify(value));}catch(e){}
+}
+const store = {
+  get(k,d){
+    if (native) return appValues[k] ?? d;
+    try{const v=localStorage.getItem('lkwalk_'+k);return v==null?d:JSON.parse(v)}catch(e){return d}
+  },
+  set(k,v){saveValues({[k]:v})}
+};
+if (native){
+  $('credits').onclick=e=>{e.preventDefault();native.postMessage({action:'credits'})};
+  addEventListener('lukangNative',({detail})=>{
+    if (detail?.type!=='storeError') return;
+    $('storageWarning').textContent='這次的紀錄還沒存好，關閉 App 後可能會消失。';
+    $('storageWarning').hidden=false;
+  });
+}
 /* 足跡分兩本：實走一本、模擬一本，模擬走到的地方不會讓你在鹿港實走時抽不到 */
 const rec = (k,d=[]) => store.get((S.sim?'sim_':'')+k, d);
 const recSet = (k,v) => store.set((S.sim?'sim_':'')+k, v);
@@ -239,31 +270,100 @@ function onOrient(e){
   S.heading = (h + so + 360) % 360;
 }
 const orientEv = 'ondeviceorientationabsolute' in window ? 'deviceorientationabsolute' : 'deviceorientation';
+let sensorSerial = 0;
+let currentSession = null;
+let receiveNative = null;
+function resetFixes(){
+  S.anchor=null; S.hits=0; S.heading=null; S.lastTimestamp=0;
+  S.hitFix=S.fixAt; S.behindSince=0; S.lastMoveAt=Date.now();
+}
+function updatePosition(p){
+  const {latitude,longitude,accuracy,speed} = p.coords;
+  if (![latitude,longitude,accuracy,p.timestamp].every(Number.isFinite) || accuracy<0 ||
+      p.timestamp<=S.lastTimestamp || Date.now()-p.timestamp>2000) return false;
+  S.lastTimestamp=p.timestamp;
+  const np=[latitude,longitude];
+  if (!S.anchor || dist(S.anchor,np)>4 || speed>0.6){
+    if (S.anchor) S.lastMoveAt=Date.now();
+    S.anchor=np;
+  }
+  S.pos=np; S.acc=accuracy; S.fixAt++;
+  tick();
+  return true;
+}
+async function keepAwake(){
+  if (native){native.postMessage({action:'awake',enabled:true});return}
+  try{
+    if (!navigator.wakeLock) return;
+    const lock=await navigator.wakeLock.request('screen');
+    if (S.phase==='walking') S.lock=lock;
+    else await lock.release();
+  }catch(e){}
+}
 // 收工、轉模擬時把定位、指南針、螢幕常亮都關掉；下次出發重新取得（臨時定位失敗的人也能重試）
 function stopSensors(){
+  if (receiveNative) removeEventListener('lukangNative',receiveNative);
+  receiveNative=null;
+  if (native && currentSession!==null) native.postMessage({action:'stop',session:currentSession});
+  currentSession=null;
+  if (native) native.postMessage({action:'awake',enabled:false});
   if (S.watch!==null){ try{ navigator.geolocation.clearWatch(S.watch); }catch(e){} S.watch=null; }
   removeEventListener(orientEv, onOrient);
   if (S.lock){ try{ S.lock.release(); }catch(e){} } S.lock=null;
-  S.anchor=null; S.acc=0;
-  if (!S.sim) S.heading=null;
+  resetFixes(); S.acc=0;
 }
 async function startSensors(){
-  try{ if (typeof DeviceOrientationEvent!=='undefined' && typeof DeviceOrientationEvent.requestPermission==='function'){
-      const r = await DeviceOrientationEvent.requestPermission(); if (r!=='granted') throw 0; } }catch(e){}
-  addEventListener(orientEv, onOrient);
+  const session = ++sensorSerial;
+  currentSession=session;
+  S.locationFailure=null;
+  resetFixes();
   return new Promise(res=>{
-    if (!navigator.geolocation) return res(false);
-    let done=false; const t=setTimeout(()=>{if(!done){done=true;res(false)}},12000);
+    let waiting=true;
+    const timer=setTimeout(()=>finish(false),12000);
+    function finish(ok){
+      if (!waiting) return;
+      waiting=false; clearTimeout(timer); res(ok);
+    }
+    if (native){
+      receiveNative=({detail})=>{
+        if (currentSession!==session || detail?.session!==session) return;
+        switch(detail.type){
+          case 'position':
+            if (updatePosition(detail)) finish(true);
+            break;
+          case 'heading':
+            S.heading=Number.isFinite(detail.degrees)?detail.degrees:null;
+            if (S.started && !waiting){
+              $('mode').textContent=S.heading===null?'GPS（無指南針）':'GPS 實走';
+              tick();
+            }
+            break;
+          case 'pause': resetFixes(); break;
+          case 'error':
+            if (waiting){S.locationFailure=detail.reason;finish(false);break}
+            // 途中失去權限時，模擬從另一支籤開始，兩本足跡各自記錄。
+            if (S.phase==='arrived'){stopSensors(); S.started=false;break}
+            reset();
+            useSim(detail.reason==='approximate'?'目前只允許大概位置，從天后宮前另抽一支模擬籤。':'定位中斷了，從天后宮前另抽一支模擬籤。');
+            pick();
+            break;
+        }
+      };
+      addEventListener('lukangNative',receiveNative);
+      native.postMessage({action:'start',session});
+      return;
+    }
+    if (!navigator.geolocation){finish(false);return}
+    if (typeof DeviceOrientationEvent!=='undefined' && typeof DeviceOrientationEvent.requestPermission==='function'){
+      DeviceOrientationEvent.requestPermission().then(permission=>{
+        if (currentSession===session && permission==='granted') addEventListener(orientEv,onOrient);
+      }).catch(()=>{});
+    } else addEventListener(orientEv,onOrient);
     try{
       S.watch = navigator.geolocation.watchPosition(p=>{
-        const np=[p.coords.latitude,p.coords.longitude]; S.acc=p.coords.accuracy;
-        // 跟「上次確認移動的位置」比，而不是上一筆：步行每秒約 1.3m，逐筆比永遠過不了門檻
-        if (!S.anchor || dist(S.anchor,np)>4 || p.coords.speed>0.6){ if (S.anchor) S.lastMoveAt=Date.now(); S.anchor=np; }
-        if (!S.sim){ S.pos=np; S.fixAt++; }
-        if(!done){done=true;clearTimeout(t);res(true)}
-        tick();
-      },()=>{if(!done){done=true;clearTimeout(t);res(false)}},{enableHighAccuracy:true,maximumAge:2000,timeout:15000});
-    }catch(e){ done=true; clearTimeout(t); res(false); }
+        if (currentSession===session && updatePosition(p)) finish(true);
+      },()=>finish(false),{enableHighAccuracy:true,maximumAge:2000,timeout:15000});
+    }catch(e){finish(false)}
   });
 }
 function useSim(reason){
@@ -271,7 +371,7 @@ function useSim(reason){
   S.sim = true; S.acc = 5; if (S.heading==null) S.heading = 0;
   const tm = PLACES.find(p=>p.name.includes('天后宮')) || {lat:LUKANG[0],lng:LUKANG[1]};
   S.pos = move([tm.lat,tm.lng], 200, 30);
-  $('sim').classList.add('on'); $('mode').textContent='模擬行走';
+  $('mode').textContent='模擬行走';
   $('foot').textContent = reason;
 }
 
@@ -279,26 +379,32 @@ function useSim(reason){
 async function go(){
   if (S.phase==='ready' && !S.started){
     S.started = true; $('go').disabled = true; $('go').textContent='找方向中…';
-    say('greet'); // 在點擊裡先開口，iOS 才肯放聲音
+    if (!S.offer) say('greet'); // 在點擊裡先開口，iOS 才肯放聲音
+    if (S.sim){ S.acc=5; S.heading ??= 0; }
     const ok = S.sim ? true : await startSensors();
     if (!S.sim){
-      if (!ok) useSim('拿不到定位（需要 HTTPS 網址並允許定位），先在天后宮前模擬走走。');
-      else if (dist(S.pos,LUKANG)>8000) useSim('你現在不在鹿港，先用天后宮前的位置模擬。');
+      if (!ok){
+        S.offer=null;
+        const reason={denied:'未取得定位權限',approximate:'目前只允許大概位置'}[S.locationFailure]||'拿不到目前位置';
+        useSim(native?reason+'，先在天后宮前模擬走走。':'拿不到定位（需要 HTTPS 網址並允許定位），先在天后宮前模擬走走。');
+      }
+      else if (dist(S.pos,LUKANG)>8000){ S.offer=null; useSim('你現在不在鹿港，先用天后宮前的位置模擬。'); }
       else { $('mode').textContent = S.heading==null?'GPS（無指南針）':'GPS 實走'; $('foot').textContent=''; }
     }
-    try{ if (navigator.wakeLock) S.lock = await navigator.wakeLock.request('screen'); }catch(e){}
     $('go').disabled=false;
   }
   pick();
 }
 function pick(){
   // 上一次說「這個距離內沒有」，玩家按了「那就走遠一點」→ 直接去最近那處
-  const x = (S.offer && S.phase==='ready') ? S.offer : draw(S.pos, S.band);
+  let x = draw(S.pos, S.band);
+  if (S.offer && S.phase==='ready' && x.none && x.near?.p.id===S.offer.p.id) x=x.near;
   S.offer = null;
   if (x.none){
     if (S.phase==='walking'){ $('sub').textContent = '這個距離內沒有別支籤了'; return; }
     const n = x.near;
     S.offer = n;
+    S.started=false; stopSensors();
     $('hint').textContent = n ? `這個距離內沒有籤，最近一處約 ${fmt(n.d).join(' ')}` : '附近沒有可以抽的地方';
     $('go').textContent = n ? '那就走遠一點' : '抽一支籤，出發';
     return;
@@ -310,14 +416,22 @@ function pick(){
   recSet('drawn', rec('drawn',0)+1);
   $('hint').textContent = '籤上寫著：' + (HINT[x.p.cat]||HINT.other);
   $('bands').hidden = true; $('go').hidden = true; $('walkrow').hidden = false;
+  $('sim').classList.toggle('on',S.sim);
+  void keepAwake();
   tick(true);
 }
 function arrive(){
   S.phase='arrived'; const t=S.target; clearInterval(simT); simT=null;
   $('walkrow').hidden = true; $('sim').classList.remove('on');   // 歡呼的 1.8 秒內不能再換籤或收工
-  const seen = rec('seen'); if(!seen.includes(t.id)){seen.push(t.id);recSet('seen',seen)}
-  const recent = [t.id,...rec('recent').filter(i=>i!==t.id)].slice(0,12); recSet('recent',recent);
-  try{ navigator.vibrate && navigator.vibrate([60,40,120]); }catch(e){}
+  const previous=rec('seen');
+  const seen=previous.includes(t.id)?previous:[...previous,t.id];
+  const recent=[t.id,...rec('recent').filter(i=>i!==t.id)].slice(0,12);
+  const prefix=S.sim?'sim_':'';
+  saveValues({[prefix+'seen']:seen,[prefix+'recent']:recent});
+  S.started=false; stopSensors();
+  document.querySelector('.app').inert=true;
+  if (native) native.postMessage({action:'arrived'});
+  else try{ navigator.vibrate && navigator.vibrate([60,40,120]); }catch(e){}
   say('arrived',{name:t.sn||t.name, id:t.id});
   const n = seen.length, cn='一二三四五六七八九十';
   $('cno').textContent = '第' + (n<=10?cn[n-1]:n) + '籤';
@@ -327,15 +441,15 @@ function arrive(){
   const ph = $('cph');   // 有官方照片就放在地名下面，沒有就整塊不出現
   if (t.ph){ ph.src = `photos/${t.id}.webp`; ph.alt = t.name + '的照片'; ph.hidden = false; }
   else { ph.hidden = true; ph.removeAttribute('src'); }
-  // 資料與照片出處暫不放在畫面上（出處紀錄在 README、data/photos.json），做成 App 時另設頁面
   clearTimeout(S.cardT);
   S.cardT = setTimeout(()=>{ if (S.phase!=='arrived') return; $('veil').classList.add('on'); $('again').focus(); }, 1800);   // 先讓他歡呼兩輪再蓋上籤卡
 }
 function reset(){
   clearTimeout(S.cardT); S.cardT=0;
+  document.querySelector('.app').inert=false;
   $('veil').classList.remove('on'); S.phase='ready'; S.target=null; S.offer=null;
   $('bands').hidden=false; $('go').hidden=false; $('go').textContent='再抽一支'; $('walkrow').hidden=true;
-  $('sim').classList.toggle('on', S.sim);
+  $('sim').classList.remove('on');
   $('hint').textContent='選一個遠近，替你抽一支籤'; $('dist').innerHTML='？<small></small>'; $('sub').textContent=statLine();
 }
 const statLine = () => `${S.sim?'模擬：':''}抽過 ${rec('drawn',0)} 支 · 到過 ${rec('seen').length} 處`;
@@ -430,7 +544,7 @@ $('turn').onclick = ()=>{ S.heading = ((S.heading||0)+90)%360; };
 
 /* ---------- 按鈕 ---------- */
 document.querySelectorAll('#bands button').forEach(b=>b.onclick=()=>{
-  document.querySelectorAll('#bands button').forEach(x=>x.classList.remove('sel')); b.classList.add('sel'); S.band=+b.dataset.b;
+  document.querySelectorAll('#bands button').forEach(x=>{x.classList.toggle('sel',x===b);x.setAttribute('aria-pressed',String(x===b))}); S.band=+b.dataset.b;
   if (S.offer){ S.offer=null; $('hint').textContent='選一個遠近，替你抽一支籤'; $('go').textContent = S.started?'再抽一支':'抽一支籤，出發'; } });
 $('go').onclick = go;
 $('redraw').onclick = pick;
@@ -439,15 +553,17 @@ $('stop').onclick = ()=>{ say('bye'); act('bye', 3200);
   S.started = false; stopSensors();
   if (!S.forcedSim){ S.sim = false; $('foot').textContent = ''; }
   reset(); $('go').textContent = '抽一支籤，出發'; $('mode').textContent = S.sim ? '模擬行走' : '已收工'; };
-$('again').onclick = reset;
+$('again').onclick = ()=>{ reset(); $('go').focus(); };
 $('voice').textContent = '語音：'+(S.voice?'開':'關');
 $('voice').onclick = ()=>{ S.voice=!S.voice; store.set('voice',S.voice); $('voice').textContent='語音：'+(S.voice?'開':'關');
   if(!S.voice){ try{speechSynthesis.cancel()}catch(e){} voiceEl.pause(); } };
-document.addEventListener('visibilitychange', async ()=>{ if(document.visibilityState==='visible' && S.lock!==null && S.phase==='walking'){
-  try{ S.lock = await navigator.wakeLock.request('screen'); }catch(e){} } });
+document.addEventListener('visibilitychange', ()=>{
+  if (document.hidden){clearInterval(simT);simT=null;return}
+  if (!native && S.started && S.phase==='walking') void keepAwake();
+});
 if (location.hash==='#sim'){ S.forcedSim = true; useSim('模擬模式：按住「朝籤走」前進。'); }
 $('sub').textContent = statLine();
-$('foot').textContent ||= `鹿港鎮內 ${PLACES.length} 個地點`;
+$('foot').textContent ||= `鹿港一帶 ${PLACES.length} 個地點`;
 requestAnimationFrame(frame);
 }
 </script>

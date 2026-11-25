@@ -12,3 +12,7 @@ art/voice/codex_lookup.txt
 art/photos/raw/
 Dokoka研究包_*/
 鹿港點位照片_*/
+xcuserdata/
+DerivedData/
+*.xcresult/
+ios/build/
