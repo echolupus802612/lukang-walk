@@ -1,6 +1,6 @@
-"""把 data/lukang.json 嵌进 src/app.html → docs/index.html（GitHub Pages 从 docs/ 发布）（单文件，哪里都能打开）
+"""把 data/lukang.json 嵌進 src/app.html → docs/index.html（GitHub Pages 從 docs/ 發布）（單文件，哪裡都能打開）
 
-用法：python -I -B tools/build_page.py <项目根目录>
+用法：python -I -B tools/build_page.py <項目根目錄>
 """
 import json, sys
 from pathlib import Path
@@ -30,4 +30,4 @@ assert "/*DATA*/[]" in html
 out = root / "docs" / "index.html"
 out.parent.mkdir(exist_ok=True)
 out.write_text(html.replace("/*DATA*/[]", blob), encoding="utf-8")
-print(f"{len(slim)} 个地点 → {out}（{out.stat().st_size // 1024} KB）")
+print(f"{len(slim)} 個地點 → {out}（{out.stat().st_size // 1024} KB）")

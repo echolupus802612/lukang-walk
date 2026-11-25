@@ -1,6 +1,6 @@
-"""产生配音任务清单 art/voice/jobs.json（台词、表演指令、输出档名）。页面的 LINES 也以此为准。
+"""產生配音任務清單 art/voice/jobs.json（台詞、表演指令、輸出檔名）。頁面的 LINES 也以此為準。
 
-用法：python -I -B tools/voice_jobs.py <项目根目录>
+用法：python -I -B tools/voice_jobs.py <項目根目錄>
 """
 import json, re, sys
 from pathlib import Path
@@ -20,7 +20,7 @@ ARRIVED = ("到了！是{name}。", "非常開心地歡呼，像跳起來宣布�
 
 
 def spoken(name):
-    """念出來用的地名：去括号、去「鹿港」前缀、太长的缩短、异体字换常用字。"""
+    """念出來用的地名：去括號、去「鹿港」前綴、太長的縮短、異體字換常用字。"""
     fix = {"中央廣播電臺鹿港分臺暨周遭廣播設施地景文化景觀": "中央廣播電臺鹿港分臺",
            "福興鄉農會碾米廠暨穀倉": "福興鄉農會碾米廠"}
     n = fix.get(name, name)

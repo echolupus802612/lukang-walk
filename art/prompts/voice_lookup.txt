@@ -1,7 +1,7 @@
-只查询、不生成任何语音（不要呼叫 text-to-speech，不要扣费）。用 breeze-replay-voice skill 记录的 BreezeBlue 云端 API 与本机 key 读取方式（key 不得输出或写入档案）。
+只查詢、不生成任何語音（不要呼叫 text-to-speech，不要扣費）。用 breeze-replay-voice skill 記錄的 BreezeBlue 雲端 API 與本機 key 讀取方式（key 不得輸出或寫入檔案）。
 
-目标 voice_id = voc_cfnf6vu2sp2p。请依序试：
-1. 先查官方文档 https://docs.breezeblue.ai/api-reference/voices/list-voices 与 get-voice 相关页面，看 voice_type 有哪些可用值、有没有 GET /voices/{voice_id}。
-2. GET /voices/{voice_id}（如果有这个接口）。
-3. GET /voices 不带 voice_type（处理分页），以及文档列出的每一种 voice_type 各查一次，找这个 ID。
-回报：哪个查询找到了它、它的名称/类型/语言等元数据（只回报音色元数据），以及它能不能用在 POST /text-to-speech/{voice_id}。若都找不到，列出个人库现有音色的「名称 + ID」清单，方便使用者对照。不要改任何档案。
+目標 voice_id = voc_cfnf6vu2sp2p。請依序試：
+1. 先查官方文檔 https://docs.breezeblue.ai/api-reference/voices/list-voices 與 get-voice 相關頁面，看 voice_type 有哪些可用值、有沒有 GET /voices/{voice_id}。
+2. GET /voices/{voice_id}（如果有這個接口）。
+3. GET /voices 不帶 voice_type（處理分頁），以及文檔列出的每一種 voice_type 各查一次，找這個 ID。
+回報：哪個查詢找到了它、它的名稱/類型/語言等元數據（只回報音色元數據），以及它能不能用在 POST /text-to-speech/{voice_id}。若都找不到，列出個人庫現有音色的「名稱 + ID」清單，方便使用者對照。不要改任何檔案。

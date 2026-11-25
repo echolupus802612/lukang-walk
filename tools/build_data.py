@@ -1,16 +1,16 @@
-"""合并鹿港地标：文资局（古迹/历史建筑/文化景观）+ OSM + 中文维基 → data/lukang.json
+"""合併鹿港地標：文資局（古蹟/歷史建築/文化景觀）+ OSM + 中文維基 → data/lukang.json
 
-用法：python -I -B tools/build_data.py <raw目录> <输出json>
-所有坐标都是 WGS-84（文资局、OSM、维基皆然），台湾不需要做坐标转换。
+用法：python -I -B tools/build_data.py <raw目錄> <輸出json>
+所有座標都是 WGS-84（文資局、OSM、維基皆然），台灣不需要做座標轉換。
 """
 import json, math, re, sys
 from pathlib import Path
 
-CENTER = (24.0565, 120.4335)   # 鹿港老街一带
-RADIUS = 4500                  # 只收鹿港镇范围
+CENTER = (24.0565, 120.4335)   # 鹿港老街一帶
+RADIUS = 4500                  # 只收鹿港鎮範圍
 
 EXCLUDE = re.compile(
-    r"學校|国小|國小|國中|高中|高級中學|大學|學院|幼兒園|醫院|診所|衛生所|殯儀|納骨|靈骨|公墓|墓園|"
+    r"學校|國小|國小|國中|高中|高級中學|大學|學院|幼兒園|醫院|診所|衛生所|殯儀|納骨|靈骨|公墓|墓園|"
     r"停車|加油|便利|超市|量販|百貨|銀行|郵局|派出所|警察|分局|公所|戶政|地政|消防|"
     r"飯店|旅館|民宿|酒店|汽車|機車|工業區|交流道|國道|省道|縣道|快速道路|"
     r"小學|兒童|有應公|百姓公|電廠|試驗所|火車站|"
@@ -35,7 +35,7 @@ def haversine(a, b):
 
 
 def classify(name, hint=""):
-    core = re.sub(r"^(彰化縣?)?鹿港", "", name)   # 「鹿港」的「港」别误判成自然
+    core = re.sub(r"^(彰化縣?)?鹿港", "", name)   # 「鹿港」的「港」別誤判成自然
     for cat, pat in CATS:
         if re.search(pat, core):
             return cat
@@ -48,7 +48,7 @@ def clean_desc(text, name="", limit=90):
     t = re.sub(r"\s+", "", str(text))
     sents = re.findall(r"[^。]+。", t) or [t]
     core = re.sub(r"^(彰化縣?)?鹿港", "", name)[:4]
-    # 优先选提到这个地点本身的句子，避免开头是整段鹿港背景
+    # 優先選提到這個地點本身的句子，避免開頭是整段鹿港背景
     pick = next((x for x in sents if core and core in x), sents[0])
     return pick if len(pick) <= limit else pick[:limit] + "…"
 
@@ -118,7 +118,7 @@ def norm(n):
 
 
 def merge(items):
-    items.sort(key=lambda x: -x["rank"])     # 文资局优先保留（有简介）
+    items.sort(key=lambda x: -x["rank"])     # 文資局優先保留（有簡介）
     kept = []
     for it in items:
         if EXCLUDE.search(it["name"]):
@@ -138,9 +138,9 @@ def merge(items):
 
 
 def assign_ids(rows, reg_path):
-    """地点编号一旦发出就永久不变：玩家足迹和到达语音（arrived_<id>.mp3）都认这个号码。
-    编号登记在 place_ids.json（只增不删）；同名且相距 250m 内视为同一地点，沿用旧号；新地点从最大号往后排。
-    下架的地点号码也留在登记里，不会被新地点拿去用。"""
+    """地點編號一旦發出就永久不變：玩家足跡和到達語音（arrived_<id>.mp3）都認這個號碼。
+    編號登記在 place_ids.json（只增不刪）；同名且相距 250m 內視為同一地點，沿用舊號；新地點從最大號往後排。
+    下架的地點號碼也留在登記裡，不會被新地點拿去用。"""
     reg = json.loads(reg_path.read_text(encoding="utf-8")) if reg_path.exists() else []
     used, nxt = set(), max((e["id"] for e in reg), default=0) + 1
     for r in rows:
@@ -162,7 +162,7 @@ def main():
     rows = merge(boch + osm + wiki)
     rows.sort(key=lambda r: haversine(CENTER, (r["lat"], r["lng"])))
     assign_ids(rows, out.parent / "place_ids.json")
-    # 人工整理：补简介、移出不适合的地点（编号照样留在登记里）
+    # 人工整理：補簡介、移出不適合的地點（編號照樣留在登記裡）
     ov_path = out.parent / "place_overrides.json"
     ov = json.loads(ov_path.read_text(encoding="utf-8")) if ov_path.exists() else {}
     drop = {int(k) for k in ov.get("drop", {})}
@@ -178,9 +178,9 @@ def main():
             for r in rows]
     out.write_text(json.dumps(data, ensure_ascii=False, indent=0), encoding="utf-8")
     from collections import Counter
-    print(f"boch {len(boch)} / osm {len(osm)} / wiki {len(wiki)} → 合并后 {len(data)}")
-    print("分类", dict(Counter(d["cat"] for d in data)))
-    print("有简介", sum(1 for d in data if d["desc"]))
+    print(f"boch {len(boch)} / osm {len(osm)} / wiki {len(wiki)} → 合併後 {len(data)}")
+    print("分類", dict(Counter(d["cat"] for d in data)))
+    print("有簡介", sum(1 for d in data if d["desc"]))
 
 
 if __name__ == "__main__":

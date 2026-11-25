@@ -1,12 +1,12 @@
-"""把 art/gen 里 Codex 画的 2x2 动作表切成横排精灵图 → docs/sprites/<动作>.webp
+"""把 art/gen 裡 Codex 畫的 2x2 動作表切成橫排精靈圖 → docs/sprites/<動作>.webp
 
-用法：python -I -B tools/build_sprites.py <项目根目录>
+用法：python -I -B tools/build_sprites.py <項目根目錄>
 
-每张表 1024x1024，四格各 512。每帧：
-  - 去背（若没有透明通道，抠掉纯绿 #00FF00）
-  - 只留最大的一块连通区域，去掉杂点
-  - 横向以「头部」中线对齐，纵向以脚底对齐（会跳的动作保留原本高度）
-  - 放回 512 画布（脚底 y=490，中线 x=256），缩成 FRAME 像素
+每張表 1024x1024，四格各 512。每幀：
+  - 去背（若沒有透明通道，摳掉純綠 #00FF00）
+  - 只留最大的一塊連通區域，去掉雜點
+  - 橫向以「頭部」中線對齊，縱向以腳底對齊（會跳的動作保留原本高度）
+  - 放回 512 畫布（腳底 y=490，中線 x=256），縮成 FRAME 像素
 """
 import json, sys
 from pathlib import Path
@@ -15,8 +15,8 @@ from PIL import Image, ImageFilter
 FRAME = 320
 BASE_Y, MID_X, CELL = 490, 256, 512
 
-# 动作 → (来源表, 用哪几格, 纵向对齐方式, 缩放)
-# keepY：保留原本的高低（跳起来的帧）；第五项 "bbox"＝横向用整体外框置中（身体大幅倾斜的动作）
+# 動作 → (來源表, 用哪幾格, 縱向對齊方式, 縮放)
+# keepY：保留原本的高低（跳起來的幀）；第五項 "bbox"＝橫向用整體外框置中（身體大幅傾斜的動作）
 SHEETS = {
     "walk":      ("01_walk", [0, 1, 2, 3], "feet", 1.0),
     "idle":      ("02_idle", [0, 1, 2, 3], "feet", 1.0),
@@ -39,13 +39,13 @@ def unkey(im):
             r, g, b, a = px[x, y]
             if g > 150 and r < 120 and b < 120:
                 px[x, y] = (r, g, b, 0)
-            elif g > r + 40 and g > b + 40:  # 绿边去溢色
+            elif g > r + 40 and g > b + 40:  # 綠邊去溢色
                 px[x, y] = (r, min(g, max(r, b)), b, a)
     return im
 
 
 def largest_blob(im):
-    """只保留不透明像素里最大的连通块（容忍 3px 缝隙，避免切掉尾巴尖）。"""
+    """只保留不透明像素裡最大的連通塊（容忍 3px 縫隙，避免切掉尾巴尖）。"""
     a = im.getchannel("A").point(lambda v: 255 if v > 24 else 0)
     grown = a.filter(ImageFilter.MaxFilter(7))
     w, h = grown.size
@@ -77,7 +77,7 @@ def largest_blob(im):
 
 
 def head_center_x(im, bbox):
-    """头部（bbox 上方 38%）不透明像素的横向重心。"""
+    """頭部（bbox 上方 38%）不透明像素的橫向重心。"""
     l, t, r, b = bbox
     band = im.getchannel("A").crop((l, t, r, t + int((b - t) * 0.38)))
     px, tot, sx = band.load(), 0, 0
@@ -95,7 +95,7 @@ def build(root):
     report = {}
     for name, (src, cells, mode, scale, *xm) in SHEETS.items():
         if not (gen / f"{src}.png").exists():
-            print(f"{name:8s} 缺 {src}.png，略过")
+            print(f"{name:8s} 缺 {src}.png，略過")
             continue
         sheet = unkey(Image.open(gen / f"{src}.png"))
         if sheet.size != (1024, 1024):
@@ -122,7 +122,7 @@ def build(root):
         path = out / f"{name}.webp"
         strip.save(path, "WEBP", quality=86, method=6)
         report[name] = {"frames": len(frames), "kb": path.stat().st_size // 1024, "cells": info}
-        print(f"{name:8s} {len(frames)} 帧 {path.stat().st_size // 1024} KB", [(c["dx"], c["dy"]) for c in info])
+        print(f"{name:8s} {len(frames)} 幀 {path.stat().st_size // 1024} KB", [(c["dx"], c["dy"]) for c in info])
     (root / "art" / "sprites_report.json").write_text(json.dumps(report, ensure_ascii=False, indent=1), encoding="utf-8")
 
 

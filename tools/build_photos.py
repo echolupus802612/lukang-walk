@@ -1,14 +1,14 @@
-"""替地点找官方照片 → docs/photos/<id>.webp，出处记在 data/photos.json
+"""替地點找官方照片 → docs/photos/<id>.webp，出處記在 data/photos.json
 
-用法：python -I -B tools/build_photos.py <项目根目录> <观光署 AttractionList.json>
+用法：python -I -B tools/build_photos.py <項目根目錄> <觀光署 AttractionList.json>
 
-来源优先顺序：
-  0. data/photos.json 的 "manual"：人工挑的其他 CC 授权照片（网址、作者、授权手填）
-     data/photos.json 的 "commons"：人工挑的维基共享资源（Wikimedia Commons）档名，作者与授权从 API 取得
-  1. 文化部文化资产局 开放资料的代表图（data/raw/boch_*.json 的 representImage）
-  2. 交通部观光署 观光资讯资料库的景点图片（第一张）
-每张裁成 16:10、宽 720，存 WebP。原图下载到 art/photos/raw/（不进版控）。
-data/photos.json 里 "skip" 列出的编号不配照片（人工看过觉得不对的）。
+來源優先順序：
+  0. data/photos.json 的 "manual"：人工挑的其他 CC 授權照片（網址、作者、授權手填）
+     data/photos.json 的 "commons"：人工挑的維基共享資源（Wikimedia Commons）檔名，作者與授權從 API 取得
+  1. 文化部文化資產局 開放資料的代表圖（data/raw/boch_*.json 的 representImage）
+  2. 交通部觀光署 觀光資訊資料庫的景點圖片（第一張）
+每張裁成 16:10、寬 720，存 WebP。原圖下載到 art/photos/raw/（不進版控）。
+data/photos.json 裡 "skip" 列出的編號不配照片（人工看過覺得不對的）。
 """
 import hashlib, io, json, math, re, sys, time, urllib.parse, urllib.request
 from pathlib import Path
@@ -58,7 +58,7 @@ def candidates(root, attr_path):
 
 
 def commons_info(title):
-    """维基共享资源档案 → (缩图网址, 作者, 授权, 档案页网址)"""
+    """維基共享資源檔案 → (縮圖網址, 作者, 授權, 檔案頁網址)"""
     q = urllib.parse.urlencode({"action": "query", "titles": title, "prop": "imageinfo", "format": "json",
                                 "iiprop": "url|extmetadata", "iiurlwidth": 1280})
     for attempt in range(5):
@@ -102,8 +102,8 @@ def main():
         ll = (p["lat"], p["lng"])
         pick, extra = None, {}
         title = meta.get("commons", {}).get(str(p["id"]))
-        man = meta.get("manual", {}).get(str(p["id"]))   # 人工指定的其他 CC 授权照片（例如 Flickr），作者授权手填
-        if man and man.get("file"):   # 本机档案（使用者提供的照片），放在 art/photos/raw/user/，不进版控
+        man = meta.get("manual", {}).get(str(p["id"]))   # 人工指定的其他 CC 授權照片（例如 Flickr），作者授權手填
+        if man and man.get("file"):   # 本機檔案（使用者提供的照片），放在 art/photos/raw/user/，不進版控
             pick = (man["credit"], None, man["file"])
             extra = {k: man[k] for k in ("source", "note") if k in man}
         elif man:
@@ -130,16 +130,16 @@ def main():
             if url is None:
                 data = (raw / "user" / matched).read_bytes()
             else:
-                key = hashlib.md5(url.encode()).hexdigest()[:8]   # 换了来源就重新下载，不会拿到旧图
+                key = hashlib.md5(url.encode()).hexdigest()[:8]   # 換了來源就重新下載，不會拿到舊圖
                 data = fetch(url, raw / f"{p['id']}_{key}{Path(url).suffix.lower() or '.jpg'}")
             im = ImageOps.exif_transpose(Image.open(io.BytesIO(data))).convert("RGB")
-        except Exception as e:  # 网址失效或不是图片就略过
-            print(f"{p['id']:3d} {p['name']} 下载失败：{e}")
+        except Exception as e:  # 網址失效或不是圖片就略過
+            print(f"{p['id']:3d} {p['name']} 下載失敗：{e}")
             continue
         ImageOps.fit(im, (W, H), Image.LANCZOS, centering=(0.5, 0.45)).save(out / f"{p['id']}.webp", "WEBP", quality=72, method=6)
         photos[str(p["id"])] = {"credit": credit, "url": url, "matched": matched, **extra}
         print(f"{p['id']:3d} {p['name']} ← {credit}（{matched}）")
-    # 清掉已不再配照片的旧檔
+    # 清掉已不再配照片的舊檔
     for f in out.glob("*.webp"):
         if f.stem not in photos:
             f.unlink()
