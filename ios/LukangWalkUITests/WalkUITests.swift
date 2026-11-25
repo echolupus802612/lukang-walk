@@ -7,6 +7,16 @@ final class WalkUITests: XCTestCase {
     }
 
     @MainActor
+    private func selectNear(in game: XCUIElement) {
+        // WebKit exposes the HTML aria-pressed control as a switch on iOS 26.
+        let near = game.descendants(matching: .any).matching(
+            NSPredicate(format: "label == %@", "近 ~500m")
+        ).firstMatch
+        XCTAssertTrue(near.waitForExistence(timeout: 10))
+        near.tap()
+    }
+
+    @MainActor
     func testCreditsOpenAndClose() {
         let app = XCUIApplication()
         app.launch()
@@ -41,7 +51,7 @@ final class WalkUITests: XCTestCase {
         let game = app.webViews.firstMatch
         let start = game.buttons["抽一支籤，出發"]
         XCTAssertTrue(start.waitForExistence(timeout: 20))
-        game.buttons["近 ~500m"].tap()
+        selectNear(in: game)
         device.location = lukangFix()
         start.tap()
 
@@ -72,8 +82,7 @@ final class WalkUITests: XCTestCase {
         XCTAssertTrue(status.waitForExistence(timeout: 20))
         let previousCount = try XCTUnwrap(status.label.split(separator: " ").compactMap { Int($0) }.first)
 
-        let near = game.buttons["近 ~500m"]
-        near.tap()
+        selectNear(in: game)
         let start = game.buttons["抽一支籤，出發"]
         start.tap()
         let forward = game.buttons["▲ 朝籤走"]
