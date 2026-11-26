@@ -394,7 +394,11 @@ function draw(pos, band){
   const b = BANDS[band];
   let ring = pool.filter(x=>x.d>=b.min && x.d<=b.max);
   if (ring.length<4) ring = pool.filter(x=>x.d<=b.max);
-  if (!ring.length) return {none:true, near: pool.sort((a,b)=>a.d-b.d)[0] || null};
+  if (!ring.length){
+    const near = pool.sort((a,b)=>a.d-b.d)[0] || null;
+    if (near) near.recentNearby = all.some(x=>x.d<=b.max && recent.includes(x.p.id));
+    return {none:true, near};
+  }
   const w = ring.map(x=>1/Math.max(x.d,120)**2), sum = w.reduce((a,c)=>a+c,0);
   let r = Math.random()*sum;
   for (let i=0;i<ring.length;i++){ if((r-=w[i])<=0) return ring[i]; }
@@ -442,7 +446,7 @@ function onOrient(e){
   else if (e.absolute && typeof e.alpha === 'number') h = 360 - e.alpha;
   if (h==null) return;
   const so = (screen.orientation && screen.orientation.angle) || 0;
-  if (S.heading==null && !S.sim && S.started) $('mode').textContent = 'GPS 實走';   // 指南針晚一點才醒
+  if (S.heading==null && !S.sim && S.started && S.pos) $('mode').textContent = 'GPS 實走';   // 指南針晚一點才醒
   S.heading = (h + so + 360) % 360;
 }
 const orientEv = 'ondeviceorientationabsolute' in window ? 'deviceorientationabsolute' : 'deviceorientation';
@@ -466,20 +470,26 @@ function updatePosition(p){
   tick();
   return true;
 }
+let wakeRequest = null;
+function releaseScreenLock(){
+  wakeRequest = null;
+  if (S.lock){ void S.lock.release().catch(()=>{}); S.lock=null; }
+}
 async function keepAwake(){
+  if (!navigator.wakeLock || document.hidden || wakeRequest || (S.lock && !S.lock.released)) return;
+  const request = wakeRequest = {};
   try{
-    if (!navigator.wakeLock) return;
     const lock=await navigator.wakeLock.request('screen');
-    if (S.phase==='walking') S.lock=lock;
+    if (wakeRequest===request && S.phase==='walking' && !document.hidden) S.lock=lock;
     else await lock.release();
-  }catch(e){}
+  }catch(e){}finally{ if (wakeRequest===request) wakeRequest=null; }
 }
 // 收工、轉模擬時把定位、指南針、螢幕常亮都關掉；下次出發重新取得（臨時定位失敗的人也能重試）
 function stopSensors(){
   currentSession=null;
   if (S.watch!==null){ try{ navigator.geolocation.clearWatch(S.watch); }catch(e){} S.watch=null; }
   removeEventListener(orientEv, onOrient);
-  if (S.lock){ try{ S.lock.release(); }catch(e){} } S.lock=null;
+  releaseScreenLock();
   resetFixes(); S.acc=0;
 }
 async function startSensors(){
@@ -501,8 +511,30 @@ async function startSensors(){
     } else addEventListener(orientEv,onOrient);
     try{
       S.watch = navigator.geolocation.watchPosition(p=>{
-        if (currentSession===session && updatePosition(p)) finish(true);
-      },()=>finish(false),{enableHighAccuracy:true,maximumAge:2000,timeout:15000});
+        if (currentSession!==session) return;
+        const recovering = S.phase==='walking' && !S.pos;
+        if (!updatePosition(p)) return;
+        if (recovering && S.phase==='walking'){
+          $('redraw').disabled=false;
+          $('mode').textContent=S.heading==null?'GPS（無指南針）':'GPS 實走';
+          $('foot').textContent='';
+        }
+        finish(true);
+      },error=>{
+        if (currentSession!==session) return;
+        if (waiting){ finish(false); return; }
+        if (S.phase!=='walking') return;
+        S.pos=null; S.walkFrom=null; S.anchor=null; S.hits=0;
+        if (error.code===1){
+          S.started=false; stopSensors(); reset();
+          $('mode').textContent='定位已中斷';
+          $('foot').textContent='定位權限已關閉，這趟散步已結束。開啟定位後可以再出發。';
+        } else {
+          $('mode').textContent='等待定位'; $('dist').textContent='？'; $('sub').textContent='';
+          $('redraw').disabled=true;
+          $('foot').textContent='暫時收不到位置，恢復定位後會繼續指路。';
+        }
+      },{enableHighAccuracy:true,maximumAge:2000,timeout:15000});
     }catch(e){finish(false)}
   });
 }
@@ -540,11 +572,15 @@ function pick(){
   if (S.offer && S.phase==='ready' && x.none && x.near?.p.id===S.offer.p.id) x=x.near;
   S.offer = null;
   if (x.none){
-    if (S.phase==='walking'){ $('sub').textContent = '這個距離內沒有別的地方了'; return; }
+    if (S.phase==='walking'){
+      $('sub').textContent = x.near?.recentNearby ? '這個距離內的其他地點最近都去過了' : '這個距離內沒有別的地方了';
+      return;
+    }
     const n = x.near;
     S.offer = n;
     S.started=false; stopSensors();
-    $('hint').textContent = n ? `這個距離內沒有地點，最近一處約 ${fmt(n.d).join(' ')}` : '附近沒有可以去的地方';
+    const reason = n?.recentNearby ? '這個距離內的地點最近都去過了' : '這個距離內沒有可抽選的地點';
+    $('hint').textContent = n ? reason+'，最近可抽選的地點約 '+fmt(n.d).join(' ') : '附近沒有可以去的地方';
     $('go').textContent = n ? '那就走遠一點' : '出門散步吧';
     return;
   }
@@ -552,7 +588,7 @@ function pick(){
   if (x.p.ph){ const im = new Image(); im.src = `photos/${x.p.id}.webp`; }   // 走路時先載好，到了直接顯示
   S.walked = 0; S.walkFrom = S.pos;
   S.target = x.p; S.startD = x.d; S.saidHalf = S.saidNear = false; S.phase='walking'; S.pickAt = Date.now(); S.lastFarAt = Date.now();
-  S.hits = 0;
+  S.hits = 0; $('redraw').disabled=false;
   recSet('drawn', rec('drawn',0)+1);
   $('hint').textContent = '這次要去：' + (HINT[x.p.cat]||HINT.other);
   $('bands').hidden = true; $('go').hidden = true; $('walkrow').hidden = false;
@@ -705,15 +741,22 @@ $('again').onclick = ()=>{ reset(); $('go').focus(); };
    照片只在這支手機上處理，不會上傳；重新繪製成圖片時，照片裡的拍攝位置等資料也一併去掉。 */
 if (typeof renderShareCard !== 'function') $('snap').hidden = true;
 const loadImg = src => new Promise((ok, no)=>{ const i = new Image(); i.onload = ()=>ok(i); i.onerror = no; i.src = src; });
-let shareFile = null, shareUrl = '';
+let shareFile = null, shareUrl = '', photoVersion = 0;
+function clearShareCard(){
+  shareFile=null; $('shareGo').disabled=true;
+  $('shareImg').removeAttribute('src'); $('shareImg').alt='';
+  if (shareUrl){ URL.revokeObjectURL(shareUrl); shareUrl=''; }
+  return ++photoVersion;
+}
 function shareMsg(text){ $('shareMsg').textContent = text; }
 $('snap').onclick = ()=>{ $('cam').value = ''; $('cam').click(); };
 $('shareRetake').onclick = ()=>{ $('cam').value = ''; $('cam').click(); };
-$('shareClose').onclick = ()=>{ $('sharev').classList.remove('on'); $('snap').focus(); };
+$('shareClose').onclick = ()=>{ clearShareCard(); $('sharev').classList.remove('on'); $('snap').focus(); };
 $('cam').onchange = async ()=>{
   const f = $('cam').files && $('cam').files[0];
   if (!f || !S.memo) return;
-  $('sharev').classList.add('on'); $('shareGo').disabled = true; shareMsg('做成透卡中…');
+  const version = clearShareCard();
+  $('sharev').classList.add('on'); shareMsg('做成透卡中…');
   const photoUrl = URL.createObjectURL(f);
   try{
     const m = S.memo, [n,u] = fmt(m.walked);
@@ -724,9 +767,9 @@ $('cam').onchange = async ()=>{
     const cv = renderShareCard({photo, sticker, avatar, theme:'brick', name:m.name, stop:m.stop, line:`走了 ${n} ${u}`,
                                 place:m.area, date:m.date});
     const blob = await new Promise(ok=>cv.toBlob(ok, 'image/png'));
+    if (photoVersion!==version) return;
     if (!blob) throw new Error('toBlob');
     shareFile = new File([blob], `散步吧_${m.name}.png`, {type:'image/png'});
-    if (shareUrl) URL.revokeObjectURL(shareUrl);
     shareUrl = URL.createObjectURL(blob);
     $('shareImg').src = shareUrl; $('shareImg').alt = `${m.name}的散步透卡`;
     const canShare = !!(navigator.canShare && navigator.canShare({files:[shareFile]}));
@@ -734,7 +777,7 @@ $('cam').onchange = async ()=>{
     $('shareGo').disabled = false; shareMsg(canShare ? '' : '這個瀏覽器不能直接分享，先存成圖片再上傳。');
     $('shareGo').focus();
   }catch(e){
-    shareMsg('這張照片讀不出來，換一張試試。');
+    if (photoVersion===version) shareMsg('這張照片讀不出來，換一張試試。');
   }finally{ URL.revokeObjectURL(photoUrl); }
 };
 $('shareGo').onclick = async ()=>{
@@ -753,7 +796,7 @@ $('voice').textContent = '語音：'+(S.voice?'開':'關');
 $('voice').onclick = ()=>{ S.voice=!S.voice; store.set('voice',S.voice); $('voice').textContent='語音：'+(S.voice?'開':'關');
   if(!S.voice){ try{speechSynthesis.cancel()}catch(e){} voiceEl.pause(); } };
 document.addEventListener('visibilitychange', ()=>{
-  if (document.hidden){clearInterval(simT);simT=null;return}
+  if (document.hidden){releaseScreenLock();clearInterval(simT);simT=null;return}
   if (S.started && S.phase==='walking') void keepAwake();
 });
 if (location.hash==='#sim'){ S.forcedSim = true; useSim('模擬模式：按住「往目的地走」前進。'); }
