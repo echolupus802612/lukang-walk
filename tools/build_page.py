@@ -1,8 +1,8 @@
-"""把地點資料嵌進 src/app.html → docs/index.html（GitHub Pages 從 docs/ 發布；iPhone App 也直接打包 docs/）
+"""把地點資料與分享透卡程式嵌進 src/app.html，產生 GitHub Pages 發布的 docs/index.html。
 
 用法：python -I -B tools/build_page.py <專案根目錄>
 地點 = data/lukang.json（鹿港一帶，人工整理）＋ data/taiwan.json（全台其他地方，build_taiwan.py 產生）。
-資料直接嵌在頁面裡，不另外載入：離線的 iPhone App 從本機檔案開頁面，讀不到另外的 JSON 檔。
+地點資料直接嵌在頁面裡，抽選目的地時無須再連線查詢。
 """
 import json, sys
 from pathlib import Path

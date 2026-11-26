@@ -1,4 +1,4 @@
-"""重建 App 與網頁共用的離線字型。需要 fontTools 與 Brotli，日常建置不需要執行。"""
+"""重建隨網頁提供的字型。需要 fontTools 與 Brotli，日常建置不需要執行。"""
 import json
 from pathlib import Path
 from tempfile import TemporaryDirectory

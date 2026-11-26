@@ -123,7 +123,6 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
   <div class="row" id="walkrow" hidden><button id="redraw">換個地方</button><button id="voice">語音：開</button><button id="stop">收工</button></div>
   <div class="sim" id="sim"><button id="stepTo">▲ 往目的地走</button><button id="stepRand">亂走</button><button id="turn">轉身 90°</button></div>
   <div class="foot" id="foot"></div>
-  <div class="foot" role="status" id="storageWarning" hidden></div>
   <a id="credits" class="credit" href="https://github.com/echolupus802612/lukang-walk#資料來源與授權" target="_blank" rel="noopener">資料來源</a>
 </div>
 
@@ -353,31 +352,15 @@ const ANIM = {
 for (const k in ANIM){ const im=new Image(); im.src=`sprites/${k}.webp`; }  // 先載好，換動作不閃
 const still = matchMedia('(prefers-reduced-motion: reduce)');
 const $ = id => document.getElementById(id);
-const native = window.webkit?.messageHandlers?.lukangWalk;
-const appValues = window.lukangInitialStore || {ver:2};
 function saveValues(values){
-  if (native){
-    Object.assign(appValues, values);
-    native.postMessage({action:'store', values});
-    return;
-  }
   try{for (const [key,value] of Object.entries(values)) localStorage.setItem('lkwalk_'+key,JSON.stringify(value));}catch(e){}
 }
 const store = {
   get(k,d){
-    if (native) return appValues[k] ?? d;
     try{const v=localStorage.getItem('lkwalk_'+k);return v==null?d:JSON.parse(v)}catch(e){return d}
   },
   set(k,v){saveValues({[k]:v})}
 };
-if (native){
-  $('credits').onclick=e=>{e.preventDefault();native.postMessage({action:'credits'})};
-  addEventListener('lukangNative',({detail})=>{
-    if (detail?.type!=='storeError') return;
-    $('storageWarning').textContent='這次的紀錄還沒存好，關閉 App 後可能會消失。';
-    $('storageWarning').hidden=false;
-  });
-}
 /* 足跡分兩本：實走一本、模擬一本，模擬走到的地方不會影響實際散步時的選點 */
 const rec = (k,d=[]) => store.get((S.sim?'sim_':'')+k, d);
 const recSet = (k,v) => store.set((S.sim?'sim_':'')+k, v);
@@ -465,7 +448,6 @@ function onOrient(e){
 const orientEv = 'ondeviceorientationabsolute' in window ? 'deviceorientationabsolute' : 'deviceorientation';
 let sensorSerial = 0;
 let currentSession = null;
-let receiveNative = null;
 function resetFixes(){
   S.anchor=null; S.hits=0; S.heading=null; S.lastTimestamp=0;
   S.hitFix=S.fixAt; S.behindSince=0; S.lastMoveAt=Date.now();
@@ -485,7 +467,6 @@ function updatePosition(p){
   return true;
 }
 async function keepAwake(){
-  if (native){native.postMessage({action:'awake',enabled:true});return}
   try{
     if (!navigator.wakeLock) return;
     const lock=await navigator.wakeLock.request('screen');
@@ -495,11 +476,7 @@ async function keepAwake(){
 }
 // 收工、轉模擬時把定位、指南針、螢幕常亮都關掉；下次出發重新取得（臨時定位失敗的人也能重試）
 function stopSensors(){
-  if (receiveNative) removeEventListener('lukangNative',receiveNative);
-  receiveNative=null;
-  if (native && currentSession!==null) native.postMessage({action:'stop',session:currentSession});
   currentSession=null;
-  if (native) native.postMessage({action:'awake',enabled:false});
   if (S.watch!==null){ try{ navigator.geolocation.clearWatch(S.watch); }catch(e){} S.watch=null; }
   removeEventListener(orientEv, onOrient);
   if (S.lock){ try{ S.lock.release(); }catch(e){} } S.lock=null;
@@ -508,7 +485,6 @@ function stopSensors(){
 async function startSensors(){
   const session = ++sensorSerial;
   currentSession=session;
-  S.locationFailure=null;
   resetFixes();
   return new Promise(res=>{
     let waiting=true;
@@ -516,35 +492,6 @@ async function startSensors(){
     function finish(ok){
       if (!waiting) return;
       waiting=false; clearTimeout(timer); res(ok);
-    }
-    if (native){
-      receiveNative=({detail})=>{
-        if (currentSession!==session || detail?.session!==session) return;
-        switch(detail.type){
-          case 'position':
-            if (updatePosition(detail)) finish(true);
-            break;
-          case 'heading':
-            S.heading=Number.isFinite(detail.degrees)?detail.degrees:null;
-            if (S.started && !waiting){
-              $('mode').textContent=S.heading===null?'GPS（無指南針）':'GPS 實走';
-              tick();
-            }
-            break;
-          case 'pause': resetFixes(); break;
-          case 'error':
-            if (waiting){S.locationFailure=detail.reason;finish(false);break}
-            // 途中失去權限時，改用模擬重新選一個目的地，兩本足跡各自記錄。
-            if (S.phase==='arrived'){stopSensors(); S.started=false;break}
-            reset();
-            useSim(detail.reason==='approximate'?'目前只允許大概位置，先在鹿港天后宮前模擬走走。':'定位中斷了，先在鹿港天后宮前模擬走走。');
-            pick();
-            break;
-        }
-      };
-      addEventListener('lukangNative',receiveNative);
-      native.postMessage({action:'start',session});
-      return;
     }
     if (!navigator.geolocation){finish(false);return}
     if (typeof DeviceOrientationEvent!=='undefined' && typeof DeviceOrientationEvent.requestPermission==='function'){
@@ -578,8 +525,7 @@ async function go(){
     if (!S.sim){
       if (!ok){
         S.offer=null;
-        const reason={denied:'未取得定位權限',approximate:'目前只允許大概位置'}[S.locationFailure]||'拿不到目前位置';
-        useSim(native?reason+'，先在鹿港天后宮前模擬走走。':'拿不到定位（需要 HTTPS 網址並允許定位），先在鹿港天后宮前模擬走走。');
+        useSim('拿不到定位（需要 HTTPS 網址並允許定位），先在鹿港天后宮前模擬走走。');
       }
       else if (!PLACES.some(p=>dist(S.pos,[p.lat,p.lng])<=NO_PLACE)){ S.offer=null; useSim('你附近 5 公里內還沒有收錄的地點，先在鹿港天后宮前模擬走走。'); }
       else { $('mode').textContent = S.heading==null?'GPS（無指南針）':'GPS 實走'; $('foot').textContent=''; }
@@ -624,8 +570,7 @@ function arrive(){
   saveValues({[prefix+'seen']:seen,[prefix+'recent']:recent});
   S.started=false; stopSensors();
   document.querySelector('.app').inert=true;
-  if (native) native.postMessage({action:'arrived'});
-  else try{ navigator.vibrate && navigator.vibrate([60,40,120]); }catch(e){}
+  try{ navigator.vibrate && navigator.vibrate([60,40,120]); }catch(e){}
   say('arrived');
   $('cno').textContent = `第 ${seen.length} 站`;
   const now = new Date(), pad = v => String(v).padStart(2, '0');
@@ -634,7 +579,7 @@ function arrive(){
   $('cname').textContent = t.name;
   $('ctag').textContent = TAG[t.tag] || HINT[t.cat] || '';
   $('cdesc').textContent = t.desc || '沒有留下說明的地方。站一下，看看它現在的樣子。';
-  const ph = $('cph');   // 有官方照片就放在地名下面，沒有就整塊不出現
+  const ph = $('cph');   // 有地點照片就放在地名下面，沒有就整塊不出現
   if (t.ph){ ph.src = `photos/${t.id}.webp`; ph.alt = t.name + '的照片'; ph.hidden = false; }
   else { ph.hidden = true; ph.removeAttribute('src'); }
   clearTimeout(S.cardT);
@@ -757,9 +702,8 @@ $('stop').onclick = ()=>{ say('bye'); act('bye', 3200);
 $('again').onclick = ()=>{ reset(); $('go').focus(); };
 
 /* ---------- 拍一張留念：拍照 → 做成透卡 → 用手機的分享面板傳到社群 ----------
-   照片只在這支手機上處理，不會上傳；重新繪製成圖片時，照片裡的拍攝位置等資料也一併去掉。
-   iPhone App 版還沒接上相機與原生分享，先不顯示這個按鈕。 */
-if (native || typeof renderShareCard !== 'function') $('snap').hidden = true;
+   照片只在這支手機上處理，不會上傳；重新繪製成圖片時，照片裡的拍攝位置等資料也一併去掉。 */
+if (typeof renderShareCard !== 'function') $('snap').hidden = true;
 const loadImg = src => new Promise((ok, no)=>{ const i = new Image(); i.onload = ()=>ok(i); i.onerror = no; i.src = src; });
 let shareFile = null, shareUrl = '';
 function shareMsg(text){ $('shareMsg').textContent = text; }
@@ -810,7 +754,7 @@ $('voice').onclick = ()=>{ S.voice=!S.voice; store.set('voice',S.voice); $('voic
   if(!S.voice){ try{speechSynthesis.cancel()}catch(e){} voiceEl.pause(); } };
 document.addEventListener('visibilitychange', ()=>{
   if (document.hidden){clearInterval(simT);simT=null;return}
-  if (!native && S.started && S.phase==='walking') void keepAwake();
+  if (S.started && S.phase==='walking') void keepAwake();
 });
 if (location.hash==='#sim'){ S.forcedSim = true; useSim('模擬模式：按住「往目的地走」前進。'); }
 $('sub').textContent = statLine();

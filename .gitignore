@@ -16,6 +16,8 @@ xcuserdata/
 DerivedData/
 *.xcresult/
 ios/build/
+# 行動版原始碼位於獨立儲存庫。
+/android/
 art/desc/codex_run.txt
 data/desc_tw_parts/
 art/photos/raw_tw/

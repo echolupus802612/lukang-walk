@@ -6,8 +6,7 @@ import sys
 
 
 ROOT = Path(__file__).resolve().parents[1]
-TEXT = {".md", ".html", ".csv", ".tsv", ".json", ".txt", ".swift", ".plist", ".py",
-        ".yml", ".yaml", ".strings", ".xcstrings", ".xcscheme", ".pbxproj", ".css", ".js"}
+TEXT = {".md", ".html", ".csv", ".tsv", ".json", ".txt", ".py", ".yml", ".yaml", ".css", ".js", ".xml"}
 # 對照表的左側以 Unicode 碼位表示，避免檢查程式的原始檔本身出現待替換文字。
 PROJECT_TERMS = {
     "\u8fd9": "這",

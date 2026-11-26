@@ -1,34 +1,31 @@
-# 散步吧（原型）
+# 散步吧｜網頁版
 
 出門散步吧：狼耳小嚮導替你挑一個附近的地方、替你指路，到達後才揭曉是哪裡。全台約 5,200 個地點，鹿港老街一帶是人工整理的試辦地區。
 
-- 線上試玩：https://echolupus802612.github.io/lukang-walk/ （需允許定位與動作感測；附近 5 公里內沒有收錄的地點時，自動在鹿港天后宮前進入模擬模式）
-- 模擬模式：網址加 `#sim`，按住「▲ 往目的地走」前進
+- [開始散步](https://echolupus802612.github.io/lukang-walk/)：出發時允許瀏覽器定位與方向感測。附近 5 公里內沒有收錄地點時，會改在鹿港天后宮前模擬。
+- [模擬散步](https://echolupus802612.github.io/lukang-walk/#sim)：選擇遠近後按「出門散步吧」，按住「▲ 往目的地走」前進。抵達後可拍照或選一張圖片製作分享透卡。
 
-## iPhone App
+## 網站建置與預覽
 
-在 Mac 用裝有 iOS 17 或更新 SDK 的 Xcode 開啟 `ios/LukangWalk.xcodeproj`，選擇 **LukangWalk** 方案和一台 iPhone 模擬器，按 **⌘R**。專案已附字型、地點、照片、語音與授權頁。從原始碼建置 App 可直接使用這些檔案。
+這個版本庫維護正式網站、地點資料與網站素材。Android 與 iOS 工程在獨立的 App 版本庫維護。已推出的 Android 1.5 仍使用正式網站及 `docs/` 的檔案，更新網頁時請保留網址、素材路徑與瀏覽器足跡格式。
 
-工程以 iOS 17.0 為最低部署版本。雲端編譯使用 Xcode 26.3。若 Xcode 16.4 的 iOS 18.5 模擬器啟動時回報 `libswiftWebKit.dylib` 遺失，請選擇更新的模擬器執行環境。[WebKit 問題紀錄](https://bugs.webkit.org/show_bug.cgi?id=293831)
-
-要在自己的 iPhone 上試走，在 target 的 **Signing & Capabilities → Team** 選擇自己的開發團隊，接上手機後按 **⌘R**。預設 Bundle ID 為 `io.github.echolupus802612.lukangwalk`，若簽署時顯示識別碼已被註冊，請改成團隊可用的識別碼。
-
-- **在桌前試玩**。在 **Product → Scheme → Edit Scheme → Run → Arguments** 新增 `-simulate-walk`，用 Debug 組態執行。選「近」並按「出門散步吧」，按住「▲ 往目的地走」直到地點卡出現，按「再走一趟」即可繼續。移除參數後，下一次啟動會使用手機定位。
-- **實地試走**。出發時允許「使用 App 期間」與「準確位置」。實走用 iPhone 的定位與指南針，方向不可靠時改顯示絕對方位。到達後或按「收工」會關閉感測器與螢幕常亮。實走與模擬的足跡分開存在 App。
-- **更新內容**。改動畫面或地點後執行 `python -B tools/build_page.py .`。改動照片、署名或字型授權後，執行 `python -B tools/build_ios_credits.py`。若新增介面用字或地點簡介，可用 `tools/build_fonts.py` 更新離線字型所收錄的字元。
-
-Mac 可在專案根目錄用以下命令檢查模擬器建置。
+在專案根目錄執行下列指令，再以瀏覽器開啟 [本機模擬散步](http://localhost:8000/#sim)。
 
 ```sh
-xcodebuild -project ios/LukangWalk.xcodeproj -scheme LukangWalk \
-  -configuration Debug -destination 'generic/platform=iOS Simulator' build
+python -X utf8 -B tools/check_zh_tw.py
+python -X utf8 -B tools/build_page.py .
+python -X utf8 -B tools/check_zh_tw.py
+python -m http.server 8000 --bind 127.0.0.1 --directory docs
 ```
+
+GitHub Pages 從 `main` 的 `docs/` 發布。請修改 `src/app.html` 或 `src/share_card.js` 後重新產生頁面。地點照片、字型及語音均以相對路徑載入。
 
 ## 結構
 
 | 路徑 | 內容 |
 |---|---|
-| `src/app.html` | 頁面原始碼（以 `/*DATA*/[]` 預留地點資料的插入位置） |
+| `src/app.html` | 網站畫面、選點、定位、散步與瀏覽器足跡 |
+| `src/share_card.js` | 使用者選取的照片與散步資料合成 PNG 透卡 |
 | `data/lukang.json` | 鹿港一帶 68 個地點（WGS-84，人工整理） |
 | `data/taiwan.json` | 全台其他地方的地點（鹿港老街 4.5 公里外），`tools/build_taiwan.py` 產生 |
 | `tools/list_taiwan.py` | 全台選點規則：以景點、觀光地點、公園為主，逐筆標出收或不收與理由 → `survey/全台地點列表.csv` |
@@ -50,9 +47,6 @@ xcodebuild -project ios/LukangWalk.xcodeproj -scheme LukangWalk \
 
 角色動作：idle 停著、walk 走動、point 指側邊（朝左時水平翻轉）、pointup 指前方、pull 拉扯（目標在背後）、care 關心（停太久／訊號差）、cheer 歡呼（到達）、bye 不捨（收工）。
 
-```
-python -I -B tools/build_page.py .
-```
 
 ## 資料來源與授權
 
@@ -62,6 +56,7 @@ python -I -B tools/build_page.py .
 - 交通部觀光署「景點 - 觀光資訊資料庫」（全台地點、簡介來源）、內政部「全國宗教資訊系統資料-寺廟」，政府資料開放授權條款（鹿港簡介見 `data/place_overrides.json`；全台簡介依文資局與觀光署原文濃縮，見 `data/desc_tw.json`）
 - 地點照片（`docs/photos/`）：文化部文化資產局 開放資料代表圖、交通部觀光署 觀光資訊資料庫景點圖片、維基共享資源與 Flickr 的創用 CC 照片（見下表），每張的原始網址見 `data/photos.json`（鹿港）與 `data/photos_tw.json`（全台，縮小後使用，未逐張人工核對）
 - 角色（狼耳少年）為作者自有 VTuber 形象，`docs/sprites/` 圖檔保留所有權利，不在上述開放授權內
+- 網頁使用霞鶩文楷 TC 與思源黑體 TC 的字型子集，兩者皆採 SIL Open Font License 1.1。[霞鶩文楷授權與署名](docs/fonts/WenKai-OFL.txt) · [思源黑體授權與署名](docs/fonts/Noto-OFL.txt)
 
 ### 創用 CC 授權照片
 
