@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<title>分享透卡試做</title>
+<style>
+body{margin:0;background:#2a1a16;display:flex;gap:24px;padding:24px;flex-wrap:wrap;justify-content:center}
+canvas{width:400px;height:auto;filter:drop-shadow(0 8px 20px rgba(0,0,0,.4))}
+</style>
+</head>
+<body>
+<script src="../../src/share_card.js"></script>
+<script>
+/* 試做頁：用九曲巷的原圖當「使用者拍的照片」，產生紅磚版透卡。之後正式功能直接沿用 share_card.js */
+const load = src => new Promise((ok, no) => { const i = new Image(); i.onload = () => ok(i); i.onerror = no; i.src = src; });
+(async () => {
+  for (const [fam, file, weight] of [['LXGW WenKai TC', 'walk-kai-bold.woff2', 700], ['LXGW WenKai TC', 'walk-kai.woff2', 400],
+                                     ['Noto Sans TC', 'walk-sans-bold.woff2', 700], ['Noto Sans TC', 'walk-sans.woff2', 500]]) {
+    const f = new FontFace(fam, `url(../../docs/fonts/${file})`, {weight: String(weight)}); await f.load(); document.fonts.add(f);
+  }
+  const [photo, cheer, idle] = await Promise.all([load('../photos/raw/23.jpg'), load('../../docs/sprites/cheer.webp'), load('../../docs/sprites/idle.webp')]);
+  window.cards = {};
+  for (const theme of ['brick']) {
+    const cv = renderShareCard({photo, sticker: cheer, avatar: idle, theme, name: '九曲巷', stop: 3, line: '走了 1.2 公里',
+                                place: '鹿港鎮・彰化縣', date: '2026.11.26', focusX: 0.62});
+    document.body.append(cv);
+    window.cards[theme] = cv.toDataURL('image/png');
+  }
+  window.done = true;
+})().catch(e => { window.error = String(e); window.done = true; });
+</script>
+</body>
+</html>

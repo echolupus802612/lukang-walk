@@ -16,6 +16,9 @@ ids = [p["id"] for p in places]
 assert len(ids) == len(set(ids)), "地點編號重複"
 slim = [{k: p[k] for k in ("id", "name", "lat", "lng", "cat", "tag", "desc") if p.get(k) or k in ("id", "lat", "lng")}
         for p in places]
+# 分享透卡上寫的所在地：全台地點用「鄉鎮・縣市」；鹿港資料沒有記鄉鎮（含部分福興鄉），寫「鹿港一帶・彰化縣」
+for x, p in zip(slim, places):
+    x["area"] = "・".join(v for v in (p.get("town"), p.get("city")) if v) or "鹿港一帶・彰化縣"
 # 有照片的地點標上出處代號（文＝文資局、觀＝觀光署、共＝創用 CC 照片：維基共享資源、Flickr），照片在 docs/photos/<id>.webp
 ph = {}
 for f in ("photos.json", "photos_tw.json"):
@@ -29,7 +32,11 @@ for x in slim:
         x["ph"] = "文" if "文化資產" in c else "觀" if "觀光" in c else "共"
 blob = json.dumps(slim, ensure_ascii=False, separators=(",", ":")).replace("</", "<\\/")
 html = (root / "src" / "app.html").read_text(encoding="utf-8")
-assert "/*DATA*/[]" in html
+assert "/*DATA*/[]" in html and "/*SHARE_CARD*/" in html
+# 分享透卡的繪製程式直接嵌進頁面（單一檔案，離線也能用）
+card_js = (root / "src" / "share_card.js").read_text(encoding="utf-8")
+assert "</script" not in card_js.lower()
+html = html.replace("/*SHARE_CARD*/", card_js)
 out = root / "docs" / "index.html"
 out.parent.mkdir(exist_ok=True)
 out.write_text(html.replace("/*DATA*/[]", blob), encoding="utf-8")
