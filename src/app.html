@@ -73,6 +73,12 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
 .card .tag{display:inline-block;font-size:13px;border:1px solid currentColor;border-radius:999px;padding:2px 10px;opacity:.7}
 .card p{font:400 17px/1.6 "LXGW WenKai TC",serif;text-align:start;margin:16px 0 4px}
 .card button{width:100%;margin-top:16px;background:#9a3a27;color:#fbf3e6;border:0}
+.card button.snap{background:none;color:#9a3a27;border:2px solid #9a3a27;margin-top:12px}
+/* 分享透卡預覽 */
+#sharev{z-index:6}
+.share img{display:block;width:100%;max-height:62dvh;object-fit:contain;margin:0 auto}
+.share .row button{margin-top:0}.share .row button.alt{background:none;color:#9a3a27;border:2px solid #9a3a27}
+.share .msg{font-size:13px;opacity:.75;min-height:18px;margin:10px 0 0}
 @media (prefers-reduced-motion:reduce){.card{animation:none}}
 @media (max-height:720px){
   .app:has(#bands:not([hidden])) .say:not(.on){display:none}
@@ -125,8 +131,18 @@ button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
   <div class="no" id="cno">第 1 站</div><h2 id="cname"></h2><span class="tag" id="ctag"></span>
   <img class="ph" id="cph" alt="" hidden>
   <p id="cdesc"></p>
+  <button id="snap" class="snap">拍一張留念</button>
   <button id="again">再走一趟</button>
 </div></div>
+
+<div class="veil" id="sharev"><div class="card share" role="dialog" aria-modal="true" aria-label="分享透卡">
+  <img id="shareImg" alt="">
+  <p class="msg" id="shareMsg" role="status"></p>
+  <div class="row"><button id="shareGo">分享</button><button id="shareRetake" class="alt">重拍</button><button id="shareClose" class="alt">關閉</button></div>
+</div></div>
+<input type="file" id="cam" accept="image/*" capture="environment" hidden>
+
+<script>/*SHARE_CARD*/</script>
 
 <script>
 {
@@ -229,7 +245,7 @@ function draw(pos, band){
 const S = {phase:'ready', band:1, pos:null, acc:0, heading:null, sim:false, target:null, startD:0,
   shown:0, voice:store.get('voice',true), last:{}, lastMoveAt:Date.now(), saidHalf:false, saidNear:false,
   behindSince:0, lastFarAt:0, watch:null, lock:null, act:null, actUntil:0, anim:'', animAt:0, flip:false,
-  fixAt:0, hitFix:0, hits:0, cardT:0, offer:null, forcedSim:false};
+  fixAt:0, hitFix:0, hits:0, cardT:0, offer:null, forcedSim:false, walked:0, walkFrom:null, memo:null};
 // 一次性動作（關心、不捨）：播 ms 毫秒後回到依情境決定的動作
 function act(name, ms){ S.act=name; S.actUntil=Date.now()+ms; }
 
@@ -411,6 +427,7 @@ function pick(){
   }
   try{ const pre = new Audio(); pre.preload='auto'; pre.src='voice/arrived.mp3'; }catch(e){}
   if (x.p.ph){ const im = new Image(); im.src = `photos/${x.p.id}.webp`; }   // 走路時先載好，到了直接顯示
+  S.walked = 0; S.walkFrom = S.pos;
   S.target = x.p; S.startD = x.d; S.saidHalf = S.saidNear = false; S.phase='walking'; S.pickAt = Date.now(); S.lastFarAt = Date.now();
   S.hits = 0;
   recSet('drawn', rec('drawn',0)+1);
@@ -434,6 +451,9 @@ function arrive(){
   else try{ navigator.vibrate && navigator.vibrate([60,40,120]); }catch(e){}
   say('arrived');
   $('cno').textContent = `第 ${seen.length} 站`;
+  const now = new Date(), pad = v => String(v).padStart(2, '0');
+  S.memo = {name:t.name, stop:seen.length, area:t.area || '', walked:Math.max(S.walked, S.startD),
+            date:`${now.getFullYear()}.${pad(now.getMonth()+1)}.${pad(now.getDate())}`};
   $('cname').textContent = t.name;
   $('ctag').textContent = TAG[t.tag] || HINT[t.cat] || '';
   $('cdesc').textContent = t.desc || '沒有留下說明的地方。站一下，看看它現在的樣子。';
@@ -457,6 +477,11 @@ const statLine = () => `${S.sim?'模擬：':''}出發過 ${rec('drawn',0)} 次 �
 function tick(first){
   if (S.phase!=='walking' || !S.pos || !S.target) return;
   const tp=[S.target.lat,S.target.lng], d=dist(S.pos,tp);
+  if (S.walkFrom){
+    const step = dist(S.walkFrom, S.pos);
+    if (step > 80) S.walkFrom = S.pos;
+    else if (step >= 3 && (S.sim || S.acc <= 35)){ S.walked += step; S.walkFrom = S.pos; }
+  } else S.walkFrom = S.pos;
   const [n,u]=fmt(d); $('dist').innerHTML=''; $('dist').append(n); const sm=document.createElement('small'); sm.textContent=u; $('dist').append(sm);
   const blind = S.heading==null;
   $('sub').textContent = S.acc>35 ? `定位誤差約 ${Math.round(S.acc)} 公尺`
@@ -553,6 +578,56 @@ $('stop').onclick = ()=>{ say('bye'); act('bye', 3200);
   if (!S.forcedSim){ S.sim = false; $('foot').textContent = ''; }
   reset(); $('go').textContent = '出門散步吧'; $('mode').textContent = S.sim ? '模擬行走' : '已收工'; };
 $('again').onclick = ()=>{ reset(); $('go').focus(); };
+
+/* ---------- 拍一張留念：拍照 → 做成透卡 → 用手機的分享面板傳到社群 ----------
+   照片只在這支手機上處理，不會上傳；重新繪製成圖片時，照片裡的拍攝位置等資料也一併去掉。
+   iPhone App 版還沒接上相機與原生分享，先不顯示這個按鈕。 */
+if (native || typeof renderShareCard !== 'function') $('snap').hidden = true;
+const loadImg = src => new Promise((ok, no)=>{ const i = new Image(); i.onload = ()=>ok(i); i.onerror = no; i.src = src; });
+let shareFile = null, shareUrl = '';
+function shareMsg(text){ $('shareMsg').textContent = text; }
+$('snap').onclick = ()=>{ $('cam').value = ''; $('cam').click(); };
+$('shareRetake').onclick = ()=>{ $('cam').value = ''; $('cam').click(); };
+$('shareClose').onclick = ()=>{ $('sharev').classList.remove('on'); $('snap').focus(); };
+$('cam').onchange = async ()=>{
+  const f = $('cam').files && $('cam').files[0];
+  if (!f || !S.memo) return;
+  $('sharev').classList.add('on'); $('shareGo').disabled = true; shareMsg('做成透卡中…');
+  const photoUrl = URL.createObjectURL(f);
+  try{
+    const m = S.memo, [n,u] = fmt(m.walked);
+    const [photo, sticker, avatar] = await Promise.all([loadImg(photoUrl), loadImg('sprites/cheer.webp'), loadImg('sprites/idle.webp')]);
+    const words = m.name + m.area + '散步吧小嚮導走了公里公尺第站' + m.date;
+    await Promise.all(['700 40px "LXGW WenKai TC"', '500 40px "LXGW WenKai TC"', '700 40px "Noto Sans TC"', '500 40px "Noto Sans TC"']
+      .map(font=>document.fonts.load(font, words).catch(()=>{})));
+    const cv = renderShareCard({photo, sticker, avatar, theme:'brick', name:m.name, stop:m.stop, line:`走了 ${n} ${u}`,
+                                place:m.area, date:m.date});
+    const blob = await new Promise(ok=>cv.toBlob(ok, 'image/png'));
+    if (!blob) throw new Error('toBlob');
+    shareFile = new File([blob], `散步吧_${m.name}.png`, {type:'image/png'});
+    if (shareUrl) URL.revokeObjectURL(shareUrl);
+    shareUrl = URL.createObjectURL(blob);
+    $('shareImg').src = shareUrl; $('shareImg').alt = `${m.name}的散步透卡`;
+    const canShare = !!(navigator.canShare && navigator.canShare({files:[shareFile]}));
+    $('shareGo').textContent = canShare ? '分享' : '存圖片';
+    $('shareGo').disabled = false; shareMsg(canShare ? '' : '這個瀏覽器不能直接分享，先存成圖片再上傳。');
+    $('shareGo').focus();
+  }catch(e){
+    shareMsg('這張照片讀不出來，換一張試試。');
+  }finally{ URL.revokeObjectURL(photoUrl); }
+};
+$('shareGo').onclick = async ()=>{
+  if (!shareFile) return;
+  const m = S.memo, text = `今天走到了${m.name}（第 ${m.stop} 站）#散步吧`;
+  if (navigator.canShare && navigator.canShare({files:[shareFile]})){
+    try{ await navigator.share({files:[shareFile], text}); shareMsg(''); }
+    catch(e){ if (e && e.name !== 'AbortError') shareMsg('沒有分享出去，可以再試一次。'); }
+    return;
+  }
+  const a = document.createElement('a'); a.href = shareUrl; a.download = shareFile.name;
+  document.body.append(a); a.click(); a.remove();
+  shareMsg('已存成圖片，可以到相簿或下載資料夾找它。');
+};
 $('voice').textContent = '語音：'+(S.voice?'開':'關');
 $('voice').onclick = ()=>{ S.voice=!S.voice; store.set('voice',S.voice); $('voice').textContent='語音：'+(S.voice?'開':'關');
   if(!S.voice){ try{speechSynthesis.cancel()}catch(e){} voiceEl.pause(); } };

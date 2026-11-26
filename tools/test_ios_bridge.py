@@ -218,7 +218,9 @@ class WalkBridgeTests(unittest.TestCase):
                 break
         step.dispatch_event("pointerup")
         self.page.clock.fast_forward(1800)
-        self.assertTrue(self.page.locator('[role="dialog"]').is_visible())
+        self.assertTrue(self.page.locator('#veil [role="dialog"]').is_visible())
+        # App 版尚未接上相機與原生分享，地點卡不顯示「拍一張留念」
+        self.assertFalse(self.page.locator("#snap").is_visible())
         self.assertEqual(len(self.messages("arrived")), 1)
         saved, = [v for v in self.writes() if "sim_seen" in v]
         self.assertEqual(saved["sim_seen"], saved["sim_recent"])
